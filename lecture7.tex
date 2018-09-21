@@ -1,0 +1,244 @@
+\documentclass[11pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{bm}
+
+\newcommand{\e}{\epsilon}
+\newcommand{\dl}{\delta}
+\newcommand{\dij}{\delta_{ij}}
+\newcommand{\mdij}{\delta^i_j}
+\newcommand{\1}{\bm{1}}
+\newcommand{\gd}{\dot \gamma}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\uu}[1]{\underline{\underline{#1}}}
+\newcommand{\vect}[1]{\underline{#1}} %\vect can be changed to make vectors appear bold or underlined or with arrow on top
+\newcommand{\p}[1]{\grave{#1}} %\p is for primed variables. The accent on top can be changed to \hat \tilde etc.
+
+
+\title{Lecture 7: Beyond Cartesian Tensors}
+\begin{document}
+\maketitle
+
+In general the components of a vector maybe measured parallel to the axes or perpendicular to it. This distinction leads to two equivalent representations of a vector. If the components are measured parallel to the axes, the vector is said to be contravariant. Contravariant vectors are denoted by a superscript index as $x^i$. If the components are perpendicular to the axes, it's called a covariant vector. These are written with a subscript index $x_i$. The crucial difference between these two types of vectors (two representations of a vector) lies in the transformation rules for these vectors. These can be seen as follows.
+
+\section{Transformation rules}
+Assume that we want to transform a certain vector from an old coordinate system $(x_1, x_2, x_3)$ to a new coordinate system $(\p x_1, \p x_2, \p x_3)$. The new coordinates can be expressed as some functions of the old ones. Hence we have
+\begin{align*}
+\p x_1 &\equiv \p x_1(x_1, x_2, x_3)\\
+\p x_2 &\equiv \p x_2(x_1, x_2, x_3)\\
+\p x_3 &\equiv \p x_3(x_1, x_2, x_3)
+\end{align*}
+
+Then, using chain rule, we can write the components of vector $\vect{d\p x}$ as
+
+\begin{align*}
+d\p x^1 &= \pd{\p x^1}{x^1}dx^1+\pd{\p x^1}{x^2}dx^2+\pd{\p x^1}{x^3}dx^3\\
+d\p x^2 &= \pd{\p x^2}{x^1}dx^1+\pd{\p x^2}{x^2}dx^2+\pd{\p x^2}{x^3}dx^3\\
+d\p x^3 &= \pd{\p x^3}{x^1}dx^1+\pd{\p x^3}{x^2}dx^2+\pd{\p x^3}{x^3}dx^3
+\end{align*}
+
+or, as per Einstein's summation convention, we can condense these equations as
+$$
+d\p x^i=\pd{\p x^i}{x^j}dx^j
+$$
+Therefore, in general, for any contravariant vector we get
+$$
+\p a^i=\pd{\p x^i}{x^j}a^j
+$$
+which is the transformation rule for contravariant vectors (and hence the superscript indices). More precisely, we say that vectors which transform this way are called contravariant vectors. This can be generalized to contravariant tensors as well
+$$
+\p A^{ij}=\pd{\p x^i}{x^k}\pd{\p x^j}{x^l}A^{kl}
+$$
+
+The key idea is this: Let there be a vector denoted as $\vect{a}$ in the old coordinate system and $\vect{\p a}$ in the new coordinate system. Then, for contravariant tensors, going from old coordinate representation to the new one ($\vect{a} \rightarrow \vect{\p a}$), requires \textit{differentiating the new coordinates with respect to the old ones} ($\p x$ with respect to $x$).
+
+
+There is another species of vectors which behave differently from the contravariant vectors. This difference is because the differentials of coordinates ($dx_1$ $dx_2$ $dx_3$) appear in the numerator in vectors like $\vect{dx}$, velocity vector $\vect{u}$ or acceleration vector $\vect{a}$, but they appear in the denominator for the gradient vector $\nabla \phi = (\pd{\phi}{x_1},\pd{\phi}{x_2},\pd{\phi}{x_3})$ for some scalar $\phi$. How does such a vector transform when we go from an old (unprimed) to a new (primed) coordinate system? Recall that
+\begin{align*}
+\p x_1 &\equiv \p x_1(x_1, x_2, x_3)\\
+\p x_2 &\equiv \p x_2(x_1, x_2, x_3)\\
+\p x_3 &\equiv \p x_3(x_1, x_2, x_3)
+\end{align*}
+Then, using chain rule,
+\begin{align*}
+\pd{\phi}{\p x^1} &= \pd{\phi}{x^1}\pd{x^1}{\p x^1}+\pd{\phi}{x^2}\pd{x^2}{\p x^1}+\pd{\phi}{x^3}\pd{x^3}{\p x^1}\\
+\pd{\phi}{\p x^2} &= \pd{\phi}{x^1}\pd{x^1}{\p x^2}+\pd{\phi}{x^2}\pd{x^2}{\p x^2}+\pd{\phi}{x^3}\pd{x^3}{\p x^2}\\
+\pd{\phi}{\p x^3} &= \pd{\phi}{x^1}\pd{x^1}{\p x^3}+\pd{\phi}{x^2}\pd{x^2}{\p x^3}+\pd{\phi}{x^3}\pd{x^3}{\p x^3}
+\end{align*}
+or, in index notation,
+$$
+\pd{\phi}{\p x^i} = \pd{x^j}{\p x^i}\pd{\phi}{x^j}
+$$
+
+Then, instead of $\pd{\phi}{x^j}$, if there was a general covariant vector $a$, we would get
+$$
+\p a_j = \pd{x^i}{\p x^j} a_i
+$$
+This can be generalized for a second order tensor 
+$$
+\p a_{ij} = \pd{x^k}{\p x^i}\pd{x^l}{\p x^j} a_{kl}
+$$
+In essence, for a covariant vector $\vect{a}$, going from the old to the new coordinate system requires \textit{differentiation of the old coordinates with respect to the new ones} and therein lies the key difference. Finally, we can also note the transformation rule for mixed tensors
+$$
+\grave{a}^{i}_j = \pd{x^k}{\grave{x}^i}\pd{\grave{x}^j}{x^l} a^{k}_l
+$$
+
+\section{Index contraction and the metric tensor}
+Knowing how the vectors transform under coordinate transformations, we can show an important result: \textit{Contraction of indices always occurs between a contravariant and a covariant index}. Two contravariant or two covariant indices cannot contract amongst each other.
+
+To show this, let there be a scalar $S=a^ib_i$. Being a scalar, it will be invariant to coordinate transformations. Hence we must also have $S=\p a^i\p b_i$. Let's assume that $\p a^i\p b_i=\p S$ for some $\p S$. Then, 
+$$
+\p S=\p a^i\p b_i=\pd{\p x^i}{x^k}a^k\pd{x^l}{\p x^i}b_l=\pd{x^l}{x^k}a^k b_l=\dl^l_k a^k b_l = a^kb_k = S
+$$
+Note that the key step in this process is
+$$
+\pd{\p x^i}{x^k}a^k\pd{x^l}{\p x^i}b_l=\pd{x^l}{x^k}a^k b_l
+$$
+This is only possible because one of the contracting vectors is contravariant and the other is covariant so that one of the primed coordinate can cancel the other. Hence, contractions can only occur between two different types of vectors. In general, this idea can be used to lower the indices of higher order tensors as we will soon see. Another thing to note is that $\mdij$ is, in fact, a mixed second order tensor- it has one contravariant and one covariant index.
+
+This idea allows us to define the metric tensor. To begin with, consider the expression for a short length $ds$ in Cartesian coordinate system
+$$
+ds^2= d{x_1}^2+d{x_2}^2+d{x_3}^2 
+$$
+For cylindrical coordinates $(x_1=r, x_2=\phi, x_3=z)$, the expression for $ds^2$ is given by
+$$
+ds^2= d{r}^2+r^2d{\phi}^2+d{z}^2
+$$
+
+Here $r$ is the \textit{metric factor}. It converts the coordinate differential $d\phi$ to a small distance $r d\phi$ in cylindrical coordinates. More generally, in an arbitrary coordinate system, we can write
+$$
+ds^2= h_1^2d{x_1}^2 + h_2^2d{x_2}^2 + h_3^2d{x_3}^2 
+$$
+where $h_1,h_2,h_3$ are the metric factors corresponding to each of the coordinates. Yet, this is not the most general form for $ds^2$. This is the most general form for the metric \text{in an orthogonal coordinate system}. If the coordinate system is non-orthogonal, the form for the metric is given by a more general expression
+$$
+ds^2 = g_{ij}dx^idx^j
+$$
+
+For the Cartesian coordinates, $g_{ij} = \dij$. For cylindrical coordinates, $g_{ij}$ is such that $\{g_{11} = 1(=h_1^2),g_{22} = r(=h_2^2),g_{33} = 1(=h_3^2)\}$ and the rest of the terms are $0$. The fact that $g_{ij}$ is diagonal is an artifact of the orthogonality of the coordinate system. If the coordinate system is non-orthogonal, then the off-diagonal terms can also be non-zero. How does $g_{ij}$ transform upon change of coordinates? Let there be a metric $ds^2$ defined in the $\p x$ coordinate system as
+$$
+ds^2 = \p g_{ij} d\p x^i d \p x^j
+$$
+Now, in order to migrate to the old coordinates, we impose the transformation rules for contravariant vectors ($ds^2$, being a scalar, remains invariant to coordinate transformations)
+\begin{align*}
+ds^2 &= \p g_{ij}\pd{\p x^i}{x^k}dx^k \pd{\p x^j}{x^l}dx^l\\
+\Rightarrow ds^2 &=\p g_{ij}\pd{\p x^i}{x^k}\pd{\p x^j}{x^l} dx^k dx^l
+\end{align*}
+Comparing this equation with the definition of metric in the old coordinate system $ ds^2 = g_{kl} dx^k dx^l $ we get the transformation rule for $g$ as
+$$
+g_{kl} = \pd{\p x^i}{x^k}\pd{\p x^j}{x^l} \p g_{ij}
+$$
+Similarly we can obtain the inverse transformation as
+$$
+\p g_{ij} = \pd{x^k}{\p x^i}\pd{x^l}{\p x^j}g_{kl}
+$$
+Therefore, allowing us to find the metric tensor for the new space from the knowledge of metric tensor for the old space. Specifically, if the old coordinate system is Cartesian, then $g_{kl} = \dl_{kl}$. Let's denote the Cartesian coordinates with $y_i$'s  and the new coordinate system with $x_i$'s. Then, the transformation becomes
+\begin{align*}
+g_{ij} &= \pd{y^k}{x^i}\pd{y^l}{x^j}\dl_{kl} \\
+&=\pd{y^k}{x^i}\pd{y^k}{x^j}
+\end{align*}
+This will allow us to obtain the metric tensor when we go from Cartesian to a general coordinate system. 
+
+
+Let us also define an inverse contravariant metric tensor $g^{ij}$ such that
+$$
+g_{ik}g^{kj}=\mdij
+$$
+
+This will allow us to perform operations like lowering and raising of indices i.e. to transform a covariant vector into its contravariant representation and vice versa.
+\begin{align*}
+a_i &= g_{ij}a^j\\
+a^i &= g^{ij}a_j
+\end{align*}
+
+With this formalism, we can consider a simple application.
+
+\section{The Convection-Diffusion equation}
+
+Let's say we have simple shear flow in a channel. Let's define two coordinate systems- the Cartesian coordinates which are fixed in space ($y_i$'s) and the convected coordinates which deform with the flow ($x_i$'s). Then, we have
+\begin{align*}
+u_1 &= \gd y_2\\
+u_2 &= 0 \\
+\Rightarrow y_1 &= \gd y_2 t + c_1 \\
+y_2 &= c_2 \\
+\Rightarrow c_1 &= y_1 - \gd t y_2 \\
+c_2 &= y_2
+\end{align*}
+$c_1$ and $c_2$ are in fact the convected coordinates. At $t=0$, $c_1=y_1, c_2=y_2$. For later times, $c_1$ remains $y_1$ while $c_2$ convects with the flow. Therefore, our convected coordinates become
+\begin{align*}
+x_1 &= y_1 - \gd t y_2 \\
+x_2 &= y_2
+\end{align*}
+
+Additionally, we can also find the new basis vectors ($\vect g_1,\vect g_2$) using transformation law for vectors
+\begin{align*}
+\p a_j &= \pd{x^i}{\p x^j} a_i\\
+\Rightarrow g_i &= \pd{y^j}{x^i} \vect{1}_j\\
+\Rightarrow g_1 &= \vect{1}_1\\
+ g_2 &= \gd t\vect{1}_1+\vect{1}_2
+\end{align*}
+
+Using chain rule, we can express the derivatives in the new coordinates
+\begin{align*}
+\pd{}{y_1} &= \pd{}{x^1}\\
+\pd{}{y_2} &= -\gd t \pd{}{x_1} + \pd{}{x_2} 
+\end{align*}
+
+Now, the convection-diffusion equation equation, in Cartesian coordinates, is 
+$$
+\pd{T}{t} + u_\alpha\pd{T}{y_\alpha} = \kappa \pd{^2T}{y_\alpha y_\alpha} 
+$$
+Using the expressions for shear-flow velocity profile
+$$
+\pd{T}{t} + \gd y_2 \pd{T}{y_1} = \kappa \bigg(\pd{^2T}{y_1^2}+\pd{^2T}{y_2^2}\bigg) 
+$$
+Expressing the derivatives in the new coordinates, we finally get the convection-diffusion equation in convected coordinates
+\begin{align*}
+\pd{T}{t} &= \kappa \bigg((1+(\gd t)^2)\pd{^2T}{x_1^2}+\pd{^2T}{x_2^2} - 2\gd t \pd{^2T}{x^1 \partial x^2} \bigg) \\
+\end{align*}
+
+What does this equation tell us? Notice that there is no convection term anymore. We only have the first time derivative proportional to the second order spatial derivatives which is a telltale sign of pure diffusion. Therefore, in the convected coordinates, the convection-diffusion equation appears as just the diffusion equation. But there is one important difference. The last term includes partial derivatives with respect to both $x_1$ and $x_2$. Presence of cross-derivatives is an artifact of non-orthogonality in the coordinate system. As time increases, the coefficient of this term increases in magnitude and hence the non-orthogonality in the coordinate system. 
+
+It also makes intuitive sense. Since, the coordinates move with the flow, an observer moving with the coordinates will not perceive any flow. 
+
+\subsection{Method II}
+
+In the previous section we arrived at the result using just the coordinate transformation. Now we arrive at the same result using the isotropy of metric tensor. The heat equation is given by $\pd T t = \kappa \pd {q^i}{x^i}$. Using Fourier's law ($q^i=-\kappa g^{ij} \pd {T} {x^j}$), it becomes
+\begin{align*}
+\pd{T}{t} &= \kappa \pd{}{x^i}\big(g^{ij} \pd{T}{x^j}\big)
+\end{align*}
+
+Note that heat flux is a contravariant vector. This is because its contraction with a covariant vector, $\nabla \cdot q$ is a scalar. Since gradient vector $\pd{T}{x^j}$ is obviously a covariant vector, this implies that we need an isotropic second order contravariant tensor to carry out the transformation. Hence, $g^{ij}$ is a contravariant tensor. Now all we need to do is find $g^{ij}$. 
+
+Firstly, we find the elements of the metric tensor $g_{ij}$
+\begin{align*}
+g_{ij} &= \sum^{2}_{\alpha=1} \pd{y^k}{x_i}\pd{y^k}{x^j}\\
+\Rightarrow g_{11} &= 1\\
+g_{22} &= 1 + (\gd t)^2\\
+g_{12} &= g_{21} = \gd t
+\end{align*}
+Using $g_{ik}g^{kj}=\mdij$, we can find the contravariant metric tensor $g^{ij}$. Its elements turn out to be
+\begin{align*}
+g^{11} &= 1 + (\gd t)^2\\
+g^{22} &= 1\\
+g^{12} &= g^{21} = -\gd t\\
+\end{align*}
+
+Substituting the values in the heat equation, we get exactly the same equation as before
+\begin{align*}
+\pd{T}{t} &= \kappa \bigg((1+(\gd t)^2)\pd{^2T}{x_1^2}+\pd{^2T}{x_2^2} - 2\gd t \pd{^2T}{x^1 \partial x^2} \bigg) \\
+\end{align*}
+
+However, there is a glitch in this process. In order to carry out the outer differentiation in the term $\kappa \pd{}{x^i}(g^{ij} \pd{T}{x^j})$, we need the covariant derivative. A covariant derivative is a form of differentiation that, besides considering the change in components of the vector, also accounts for change in the direction of unit vectors as we traverse a small distance in the space. It would not matter in the above example because the metric tensor $g^{ij}$ does not vary with space. Thus, at any given time, the direction of unit vectors is same at all points in the space. But for a general metric, we must use the covariant derivative to carry out the differentiation in the Fourier's law. 
+
+The above said differentiation requires us to differentiate a contravariant tensor and a covariant vector. Once we incorporate the laws for covariant derivative of the contravariant tensor and covariant derivative of the covariant vector, we can write down the heat-equation in a general, non-orthogonal coordinate system.
+
+
+\end{document}
+
+
+
+
+
+
+
+

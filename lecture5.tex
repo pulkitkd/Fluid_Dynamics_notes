@@ -1,0 +1,214 @@
+\documentclass[11pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{bm}
+
+\newcommand{\e}{\epsilon}
+\newcommand{\dl}{\delta}
+\newcommand{\dij}{\delta_{ij}}
+\newcommand{\1}{\bm{1}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\uu}[1]{\underline{\underline{#1}}}
+\newcommand{\un}[1]{\underline{#1}}
+
+\title{Lecture 5: Isotropic tensors and related integrals}
+\begin{document}
+\maketitle
+
+Our objective here is to exploit the index notation and symmetry of the problem to solve certain integrals that would have been cumbersome otherwise. These include
+
+\begin{itemize}
+  \item Integrals involving normal vectors over a sphere
+  \item Integrals in $D$ dimensions
+  \item Attraction between induced dipoles - linear approximation
+  \item Attraction between induced dipoles - general case
+  \item Moment of inertia
+\end{itemize}
+
+To begin with, we note the isotropic tensors of various orders 
+\begin{itemize}
+  \item Zeroth order - any scalar
+  \item First order - Null vector
+  \item Second order - $\dl_{ij}$
+  \item Third order - $\e_{ijk}$ (pseudo tensor)
+  \item Fourth order - constructed using $\dl_{ij}$ 
+\end{itemize}
+
+It is also possible to construct a fourth order tensor using $\e_{ijk}\e_{klm}$ where two indices have been contracted. However, it is easily shown that this can be written as a combination of $\dl$'s. Let
+
+$$\e_{ijm}\e_{mkl} = c_1\dl_{ij}\dl_{kl} + c_2\dl_{ik}\dl_{jl} + c_3\dl_{il}\dl_{jk}$$
+
+Using the fact that interchanging $i$ and $j$ changes the sign of the LHS, we get $c_1=0$. Exploiting the properties of cyclic permutations being equal gives us $c_2=-c_3$. Setting $i=j$, we can obtain $c_2=1, c_3=-1$ which finally gives us the important identity
+
+$$\e_{ijk}\e_{mkl} = \dl_{ik}\dl_{jl} - \dl_{il}\dl_{jk}$$
+
+In fact, any isotropic tensor of order $2n$ can be expressed as an \textit{n-tuple} of $\dl$'s. Such a combination will have a total of $\frac{2n!}{2^n n!}$ number of terms. All such even order tensors are true tensors while all odd order tensors are pseudo tensors because they will contain a $\e_{ijk}$.
+
+
+
+\section{Some integrals for the normal over a unit sphere}
+
+Let $\un{n}$ be a unit normal and $d\Omega$ be the solid angle given by $d\Omega = \sin\theta d\theta d\phi$ (it is a small area element of a unit sphere). Now let's evaluate the integral
+
+$$\int \un{n}\un{n}d\Omega$$
+
+We might represent the normal vector in spherical polar coordinates but that will lead to a long-winded integral. Instead, we note that the integral is a second order tensor with no special preference for any direction. Hence it must be proportional to $\dl_{ij}$
+
+$$\int n_i n_j d\Omega = c \dl_{ij}$$
+
+Contract both sides with $\dl_{ij}$. We get
+
+$$\int n_i n_i d\Omega = \int d\Omega = 3c$$
+
+Since $\int d\Omega$ is just the surface area of a unit sphere, we get $c = 4\pi / 3$. Hence,
+
+$$\int \un{n}\un{n}d\Omega = \frac{4\pi}{3} \dl_{ij}$$
+
+What about $\int n_i d\Omega$ ? Since it also doesn't't have a preferred direction, it must be isotropic. However, its a vector and we know that the only isotropic vector is the Null vector. Hence $c=0$ for this case. What about $\int n_i n_j n_k d\Omega$ ? This is a true third order tensor, but there is no true third order isotropic tensor and hence $c=0$ for this case as well. Let's evaluate
+
+$$\int n_in_jn_kn_l d\Omega$$
+
+Since, its a fourth order isotropic tensor, we must have
+$$
+\int n_in_jn_kn_l d\Omega = c_1\dl_{ij}\dl_{kl} + c_2\dl_{ik}\dl_{jl} + c_3\dl_{il}\dl_{jk}
+$$
+
+Isotropy of the left hand side dictates that $c_1=c_2=c_3=c$ and the value of $c$ can be determined by contracting both sides with $\dl_{ij}\dl_{kl}$. This gives us $c=4\pi/15$ and hence
+$$
+\int n_in_jn_kn_l d\Omega = \frac{4\pi}{15}(\dl_{ij}\dl_{kl} + \dl_{ik}\dl_{jl} + \dl_{il}\dl_{jk})
+$$
+
+\subsection{Integrals in D dimensions}
+What if we want to calculate $\int n_in_j d\Omega$ in $D$ dimensions? As before, we contract both sides with $\dl_{ij}$ and obtain
+$$
+\int d\Omega = C\cdot D
+$$
+where the LHS is the surface area of a D-dimensional hypersphere. Let's denote it as $\Omega(D)$, then $C=\Omega(D)/D$
+
+\section{Applications} 
+
+\subsection{Dipole interaction in a weak field}
+We know that the induced dipole moment is $D(DE/kT)$ where D is the intrinsic dipole moment and $(DE/kT)$ is a biasing factor that accounts for the thermal fluctuations in the orientation of the dipole. Let $\un{p}$ be the direction of the dipole vector and $D$ be its magnitude. Let $\un{1}_E$ be the direction of the electric field of the other dipole and $E$ be its magnitude. Then the probability density of the orientation of the second molecule as a function of $(\theta, \phi)$ will be
+$$
+P(\theta, \phi) \propto e^{DE(\un{p}\cdot \un{1}_E)/kT}
+$$
+
+Let the proportionality constant be $N$. Then,
+$$
+P(\theta, \phi) = N e^{DE(\un{p}\cdot \un{1}_E)/kT}
+$$
+
+Using the fact that the integral of probability density over all possible orientations must be 1, we can obtain the value of $N$. All possible orientations in this case sample all points on a unit sphere. Therefore,
+$$
+\int N e^{DE(\un{p}\cdot \un{1}_E)/kT} d\Omega = 1
+$$
+which gives
+$$
+N=\frac{1}{\int e^{DE(\un{p}\cdot \un{1}_E)/kT} d\Omega}
+$$
+
+Using this in the expression for the probability, we get
+$$
+P(\theta, \phi) = \frac{e^{DE(\un{p}\cdot \un{1}_E)/kT}}{\int e^{DE(\un{p}\cdot \un{1}_E)/kT} d\Omega}
+$$
+
+If $E=0$, we obtain $P=1/4\pi$ which is a constant. Hence the dipole has equal probability of being in any possible orientation. Now, the induced dipole moment will be the integral of intrinsic dipole moment times the probability density over all orientations - the unit sphere
+$$
+\text{\footnotesize{Induced dipole moment}} = \int \text{\footnotesize{Intrinsic dipole moment $\cdot$ probability density}}  
+$$
+Therefore, induced dipole moment $\un{P_{ind}}$
+$$
+\un{P}_{ind} = \frac{\int D \un{p}e^{DE(\un{p}\cdot \un{1}_E)/kT}d\Omega}{\int e^{DE(\un{p}\cdot \un{1}_E)/kT}d\Omega}
+$$
+
+If the field is weak, the coefficient of the exponential is small and we can use the Taylor expansion. Considering only the linear terms, we get
+$$
+\un{P}_{ind} = D\frac{\int \un{p}(1 + DE(\un{p}\cdot \un{1}_E)/kT)d\Omega}{\int (1+DE(\un{p}\cdot \un{1}_E)/kT)d\Omega}
+$$
+
+Now, using the fact that$\un{E}$ is constant and $\int n_i d\Omega = 0$, the first term in the numerator and second term in the denominator vanish, leaving us with
+$$
+\un{P}_{ind} = D\frac{\int \frac{D E}{k T} \un{1}_i(p_ip_j)d\Omega}{4\pi}
+$$
+
+which is a familiar integral resulting in the answer
+$$
+\un{P}_{ind} = \frac{1}{3}\frac{D^2 E}{k T} \un{1}_E
+$$
+
+
+\subsection{Moment of Inertia}
+
+The scalar moment of inertia is a property that depends on one's choice of the axis of rotation. The tensorial moment of inertia, however, depends only on the body (its mass and mass distribution). Let $\un{1}_p$ be the unit vector along the axis of rotation and $\un{X}$ be the position vector for some point within the volume occupied by the body. Then, scalar moment of inertia can be written as
+$$
+I = \int \rho dV (\un{X}-(\un{X}\cdot \un{1}_p)\un{1}_p)^2
+$$
+Or in index notation
+$$
+I = \un{1}_{p_i}\un{1}_{p_j} \underbrace{\int \rho dV (r^2 \dl_{ij} - x_i x_j)}_{\text{This is moment of inertia tensor}}
+$$
+
+As an example, we can write the moment of inertia tensor for a sphere as
+$$
+\int \rho dV (r^2 \dl_{ij} - x_i x_j) = C \dl_{ij}
+$$
+Contracting both sides with $\dl_{ij}$, we easily get the familiar moment of inertia of the sphere $2/5 MR^2$.
+
+Suppose we have a solid of revolution, such as a spheroid. Once we fix the coordinate system, we can define the direction of anisotropy, say $q_i$. Clearly the moment of inertia tensor will not just be proportional to $\dij$ because the body is not isotropic anymore. We must incorporate the anisotropy in our ansatz. Anisotropy is given by a direction - a vector $q_i$. In order to be proportional to a second order tensor, we must construct a second order tensor using just $q_i$, for which the simplest recipe is a dyadic product $q_i q_j$. 
+$$
+I_{ij} = \int \rho dV (r^2 \dl_{ij} - x_i x_j) = F_1 \dij + F_2 q_i q_j
+$$
+
+Here, $F_1$ and $F_2$ are functions of the aspect ratio such that if aspect ratio becomes 1, $F_2$ vanishes and we get the result for a sphere. Note that the presence of $\dij$ is necessary here. In order to solve this equation, we contract once with $\dij$ and once with $q_iq_j$ and get two equations which can be solved for $F_1$ and $F_2$. More importantly, we can recast the above expression as
+$$
+I_{ij}= \underbrace{F_1(\dij - q_iq_j)}_{\text{Axial M.o.I}}+\underbrace{(F_1 + F_2)(q_iq_j)}_{\text{Equatorial M.o.I}}
+$$
+
+Here $q_iq_j$ denotes the component of $I_{ij}$ associated with the axial moment of inertia while $\dij - q_iq_j$ denotes the equatorial component. ($\dij - q_iq_j$ can be written as $x_i - q_iq_jx_j$ which emphasizes the subtraction of component of \un{x} along \un{q} from \un{x})
+
+If instead of the spheroid, we had an ellipsoid (given by $\frac{x^2}{A^2}+\frac{y^2}{B^2}+\frac{z^2}{C^2} = 1$) which is aligned with the coordinate directions, we can write
+$$
+I_{ij} = \int \rho dV (r^2 \dl_{ij} - x_i x_j) = F_1 q_i q_j + F_2 r_i r_j + F_3 s_is_j
+$$
+ where \un{q}, \un{r}, \un{s} are the unit vectors along the axes of the ellipsoid and also along the coordinate axes. In this case we did not require $\dij$ because it comes out as a special case if $F_1=F_2=F_3=F$. In that case $I_{ij}=F( q_i q_j + r_i r_j + s_i s_j) = F(\un{1}_{1_i}\un{1}_{1_j} + \un{1}_{2_i}\un{1}_{2_j} + \un{1}_{3_i}\un{1}_{3_j}) = F\dij$
+\section{Appendix}
+
+\subsection{Area of a D-dimensional hypersphere}
+
+\subsection{Dipole interaction in strong field in D-dimensions}
+In this case, the linearization of the exponential is not a valid simplification and in general we must consider all powers in the power series expansion of the biasing factor $e^{DE(\un{p}\cdot \un{1}_E)/kT}$. To start with, we align the first dipole along a coordinate axis and consider all possible orientations of the other dipole. This eliminates the $\phi$ dependence (azimuthal dependence) of the probability density (or energy) and allows us to easily calculate the normalization constant. Then we expand the exponential whose general term consists of an integral involving $n$ normals over the unit sphere
+$$
+\int p_1 p_{i_1} p_{i_2} p_{i_3}...p_{i_{n}} d\Omega
+$$
+
+where $p_1$ denotes the direction of the first dipole. The integral is zero if $n$ is even and hence we consider only odd $n$ i.e. we take $n = 2n'+1$. Now we get an integral of $2n+2$ normals over the unit sphere. 
+$$
+\int p_1 p_{i_1} p_{i_2} p_{i_3}...p_{i_{2n+1}} d\Omega
+$$
+If we can solve the general integral over the $2n$ normals
+$$
+\int p_{i_1} p_{i_2} p_{i_3}...p_{i_{2n}} d\Omega
+$$
+then we can obtain the required result by replacing $n$ with $2n+1$. To attempt a solution by method of induction, we assume a solution for $2n-1$ normals and use to prove the case for $2n$ normals. Doing this leads us to the following integral
+$$
+\int x_{i_1} x_{i_2} x_{i_3}...x_{i_{2n-1}} n_{i_{2n}} d\Omega
+$$
+where $\un{x}=r\un{n}$ and they are both equal at the surface of the unit sphere. Writing it in this form allows us to use divergence theorem to convert this surface integral into a volume integral as follows
+$$
+\int x_{i_1} x_{i_2} x_{i_3}...x_{i_{2n-1}} n_{i_{2n}} d\Omega = \int \pd{(x_{i_1} x_{i_2} x_{i_3}...x_{i_{2n-1}})}{x_{i_{2n}}} dV
+$$
+Henceforth, we just have to apply the product rule and use the assumed form for $2n-1$ to prove the result for $2n$ normals. One critical step here is to note the application of the general form of divergence theorem. In general one can write
+$$
+\int A_{i_1 i_2...i_n j}n_j dS = \int \pd{A_{i_1 i_2...i_n j}}{x_j}dV 
+$$
+
+This identity would have helped us convert the above surface integral into volume integral. However, we note that the use of this form of divergence theorem requires that one index be contracted ($j$ in this case) but we don't have any contracting index in our surface integral. To overcome this problem consider that we fix all but indices of the surface integral. The integrand then behaves as a vector. Let that vector be $u_i$. We can write $u_i = A\dij$ where $A$ is some scalar function of $x_i$'s. If we fix one of the indices (say i) then $A\dij$ behaves as a vector. Now apply divergence theorem on $A\dij$
+$$
+\int \pd{A\dij}{x_i} dV = \int \dij \pd{A}{x_i} dV = \int \pd{A}{x_j} dV = \int A n_j dS
+$$
+In the last step, we have used the divergence theorem for a scalar field 
+$$
+\int \pd{f}{x_i} dV = \int f n_i dS
+$$
+for some scalar function $f$.
+\end{document}

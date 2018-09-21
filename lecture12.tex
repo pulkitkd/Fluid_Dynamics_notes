@@ -1,0 +1,182 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage[ddmmyyyy]{datetime} 
+\usepackage[short,nodayofweek,level,12hr]{datetime} 
+%\usepackage{cite}
+%\usepackage{wrapfig}
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\newcommand{\e}{\epsilon}
+\newcommand{\dl}{\delta}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\vect}[1]{\underline{#1}}
+\newcommand{\uvect}[1]{\hat{#1}}
+\newcommand{\1}{\vect{1}}
+\newcommand{\grad}{\nabla}
+\newcommand{\dd}[2]{\frac{d #1}{d #2}}
+\newcommand{\RA}{\Rightarrow}
+
+
+\title{Lecture 12: The Simple Pendulum and Kepler's Two Body Problem}
+\date{\displaydate{date}}
+\newdate{date}{12}{09}{2018}
+\author{}
+
+\begin{document}
+\maketitle
+\section*{Overview}
+We will look at two canonical problems from classical mechanics. For the simple pendulum we will obtain the time period when oscillations are no longer small. This will introduce us to Elliptic Integrals. For the Kepler's problem, we will derive the equation of orbits and the Kepler's laws of Planetary motion.
+
+\section{The simple pendulum}
+Using torque balance, we can obtain
+\begin{align*}
+& \dd{^2\theta}{t^2} + \frac{g}{l} \sin\theta = 0
+\end{align*}
+Non-dimensionalize the equation using the scaled time $t^* = \tau\sqrt{l/g}$. For convenience, denote $t^*$ as $t$
+\begin{align*}
+& \dd{^2\theta}{t^2} + \sin\theta = 0\\
+\RA & \dd{\theta}{\tau} \dd{^2\theta}{t^2} + \dd{\theta}{\tau} \sin\theta = 0\\
+\RA & \frac{1}{2}(\dd{\theta}{\tau})^2 - \cos\theta = \cos\theta_0 \tag{Integrating}\\
+\RA & \underbrace{\frac{1}{2}(\dd{\theta}{\tau})^2}_{Kinetic} + \underbrace{1 - \cos\theta}_{Potential} = \underbrace{1 - \cos\theta_0}_{Total Energy} \\
+\end{align*}
+We have an expression for $d\theta/dt$ from where we would like to obtain $\theta(t)$ but it turns out to be easier to express $t(\theta)$. Writing the above equation as
+\begin{align*}
+dt = \frac{1}{2}\frac{d \theta}{(\sin^2(\theta_0/2) - \sin^2(\theta/2))^{1/2}}
+\end{align*}
+we can integrate it to obtain 
+\begin{align*}
+t = \int_0^\theta \frac{d\theta}{(1-\sin^2(\theta_0/2) \sin^2(\theta/2))^{1/2}}
+\end{align*}
+The time period of the pendulum can be given by
+\begin{align*}
+T = 4\int_0^{\pi/2} \frac{d\theta}{(1-\sin^2(\theta_0/2) \sin^2(\theta/2))^{1/2}}
+\end{align*}
+If we denote the constant $k = \sin(\theta_0/2)$, then it becomes
+\begin{align*}
+T = 4\int_0^{\pi/2} \frac{d\theta}{(1-k^2\sin^2(\theta/2))^{1/2}}
+\end{align*}
+The integral in this equation is the Complete Elliptic Integral of the first kind and is denoted as
+\begin{align*}
+K(k) = \int_0^{\pi/2} \frac{d\theta}{(1-k^2\sin^2(\theta/2))^{1/2}}
+\end{align*}
+As $\theta_0 \to \pi$, $k\to 1$ and $K(k)\to \infty$. Therefore, the time period of a simple pendulum increases with amplitude and diverges to $\infty$ as amplitude becomes $\pi$. How does it diverge ? Very slowly - as log of its inverse square root. This can be seen by susbtituting $k = 1-\epsilon$ in the equation for the time period for some small $\epsilon$. Integrating then, we can show that
+\begin{align*}
+\lim_{k\to 1}K(k) = \log(\frac{\pi}{\sqrt{2\epsilon}})
+\end{align*}
+As $\epsilon \to 0$, the time period slowly diverges to $\infty$.
+
+
+\section{Kepler's two body problem}
+Let there be a mass $m_1$ at $\vect x_1$ and a mass $m_2$ at $\vect x_2$. Let $\vect r = \vect x_2 - \vect x_1$ be the distance between them. Then, from the law of gravitation, we have
+\begin{align*}
+m_1 \frac{d^2 \vect x_1}{dt^2} &= \frac{G m_1 m_2 \vect r}{r^3}\\
+m_2 \frac{d^2 \vect x_2}{dt^2} &= \frac{-G m_1 m_2 \vect r}{r^3}
+\end{align*}
+Adding the two equations, we get
+\begin{align*}
+&\frac{d^2}{dt^2} (m_1\vect x_1 + m_2\vect x_2) = 0 \\
+\Rightarrow&\frac{d}{dt} (\frac{m_1\vect x_1 + m_2\vect x_2}{m_1+m_2}) = C\\
+\Rightarrow&\frac{d\vect x_{CM}}{dt} = C
+\end{align*}
+which means that the center of mass of the two bodies is either at rest or moves with a constant velocity. Subtracting the two equations, we get
+\begin{align*}
+&\frac{d^2\vect r}{dt^2} = \frac{-G (m_1 + m_2)\vect r}{r^3}\\
+\Rightarrow&\frac{m_1m_2}{m_1 + m_2}\frac{d^2\vect r}{dt^2} = \frac{-G m_1 m_2 \vect r}{r^3}\\
+\Rightarrow&\mu\frac{d^2\vect r}{dt^2} = \frac{-G m_1 m_2 \vect r}{r^3}
+\end{align*}
+where $\mu$ is the reduced mass. This equation can be written as
+\begin{align*}
+\frac{d}{dt}(r\wedge\mu \frac{d\vect r}{dt}) &= 0
+\end{align*}
+But $\mu \frac{d\vect r}{dt}$ is infact the momentum of the body with reduced mass $\mu$. Therefore,
+\begin{align*}
+\vect r \wedge \mu \frac{d\vect r}{dt} &= \vect L = \text{constant}
+\end{align*}
+which shows that the angular momentum of a two body system remains constant. This has the crucial consequence of ensuring that the trajectories remain planar. If the trajectory wasn't planar, then the angular momentum vector would keep changing direction and $\vect L$ would not be held constant. Since we have shown that the trajector lies in a plane, we only have to determine the distance $r \equiv r(\theta)$. We can write a general vector in $(r,\theta)$  plane as
+\begin{align*}
+&\vect r = r \1_r\\
+\Rightarrow& \frac{d\vect r}{dt} = \dot{r}\1_r + r\dot\theta \1_{\theta} \tag{$\frac{d \vect 1_r}{dt} = \frac{d \vect 1_r}{d\theta}\frac{d\theta}{dt} = \dot{\theta} \vect 1_{\theta}$}\\
+\Rightarrow& \frac{d^2\vect r}{dt^2} = (\ddot{r} - r \dot{\theta}^2)\1_r + (2\dot r \dot{\theta} + r \ddot{\theta})\1_{\theta}
+\end{align*}
+The four terms on the RHS represent linear acceleration, centripetal acceleration, Coriolis acceleration and angular acceleration respectively. Now, the gravitational pull is a radial force with no angular components. This gives us two equations:
+\begin{align*}
+\ddot{r} - r \dot{\theta}^2 &= \frac{-G m_1}{r^2}\\
+2\dot r \dot{\theta} + r \ddot{\theta} &= 0
+\end{align*}
+The second equation can be simplified as $\frac{d}{dt}(r^2\dot{\theta}) = 0$, which gives us Kepler's second law of planetary motion - planets sweet equal areas in equal time. This is just a restatement of conservation of angular momentum $L = \mu \dot{\theta} r^2$. The first equation can be written as:
+\begin{align*}
+& \mu\ddot{r} - \mu \frac{r^4 \dot{\theta}^2}{r^3} = \frac{-G m_1 m_2}{r^2}\\
+\Rightarrow & \mu \ddot{r} - \frac{L^2}{\mu r^3} = \frac{-G m_1 m_2}{r^2}\\
+\Rightarrow & \mu\ddot{r} = \frac{L^2}{\mu r^3} - \frac{G m_1 m_2}{r^2}\\
+\end{align*}
+where the RHS represents the force driving the oscillations. Using $F = -dV/dr$, we can obtain the potential for this field-
+\begin{align*}
+-\dd{V}{r} &= \frac{L^2}{\mu r^3} - \frac{G m_1 m_2}{r^2}\\
+\Rightarrow V &= \frac{L^2}{2\mu r^2} - \frac{G m_1 m_2}{r} \tag{Effective Potential} \\
+\Rightarrow V &= \frac{L^2}{2 G m_1 m_2 \mu}\frac{1}{r^2} - \frac{1}{r} 
+\end{align*}
+We see that the angular momentum acts as a potential. Plotting the potential $V$ vs the radial distance $r$, we see that the curve has a minima whenever the parameter $\frac{L^2}{2 G m_1 m_2^2} < 1$. Existence of a minima implies that mass $m_2$ will be trapped in a closed orbit whenever its initial angular momentum is less than a critical value. If $L$ is too small, the orbital radius might be less than the sum of radii of the two bodies and and then the masses will just collide.
+If $L$ is greater than what is required by the forementioned criterion, then the mass $m_2$ will excape the gravitational pull of mass $m_1$ and exhibit an open orbit.
+
+It is interesting to note that if we have a central force that varies as $1/r^n$, where $n$ is any integer other than 2, then stable orbits never exist as the potential curve never has a minima in which the other body could have been trapped. Orbits would not be possible in a universe where the gravitational pull varied as any other integral exponent other than -2 (inverse sqare law $1/r^2$).
+
+In order to obtain the exact equation of the ellipse, we first obtain
+\begin{align*}
+\dd{^2r}{t^2} = -\frac{L^2}{\mu^2 r^2}\frac{d^2}{d\theta^2}\frac{1}{r}
+\end{align*}
+Substituting this in the original equations gives us an ODE in $1/r$
+\begin{align*}
+\frac{d^2}{d\theta^2}\frac{1}{r} + \frac{1}{r} = \frac{\mu}{L^2} G m_1 m_2
+\end{align*}
+The solution to the ODE is
+\begin{align*}
+& \frac{1}{r} = \frac{\mu G m_1 m_2}{L^2} + A\cos\theta\\
+\end{align*}
+which is the equation for an ellipse. If $A = 0$, $r$ is a constant and we get a circlular orbit with radius, $r=r_c=\frac{L^2}{\mu G m_1 m_2}$. If we scale the above equation with this quantity, then
+\begin{align*}
+& \frac{1}{\hat{r}} = 1 + \hat{A}\cos\theta\\
+\RA & r =\frac{1}{1 + \hat{A}\cos\theta}
+\end{align*}
+This indicates that the orbit will be a
+\begin{itemize}
+\item Circle if $\hat{A} = 0$
+\item Ellipse if $0 < \hat{A} < 1$
+\item Parabola if $\hat{A} = 1$
+\item Hyperbola if $\hat{A} > 1$
+\end{itemize}
+
+\section{Appendix}
+
+\subsection{Limit $k \to 1$ for the time period of pendulum}
+
+\subsection{Jacobi Elliptic Functions}
+
+\subsection{Phase plane analysis}
+(requires figures)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,130 @@
+\documentclass[11pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage{tabu}
+\title{Lecture 2: Definition of a fluid and the Continuum Hypothesis}
+\begin{document}
+\maketitle
+In this lecture, we want to answer 2 key questions-
+\begin{itemize}
+\item What is a fluid?
+\item When can we treat it as a continuum?
+\end{itemize}
+
+\textbf{Answer}\\
+
+A fluid is a material that cannot sustain an applied shear and we can treat it 
+as a continuum at length scales and time scales sufficiently larger than the 
+following 
+
+\begin{center}
+\begin{tabular}{ c|c|c| }
+ & Gas & Liquid \\
+\hline
+ length & $10^{-7}$ m & $10^{-10}$ m \\  
+ time & $10^{-10}$ s & $10^{-12}$ s   
+\end{tabular}
+\end{center}
+
+\rule{\textwidth}{0.8pt}
+
+\section{The definition}
+
+Let us try to understand these answers better. We have given an operational definition of fluid - that it cannot sustain shear. Solids can sustain shear because the sheared configuration of the lattice has higher intermolecular potential energy than that at the equilibrium. This increase in potential energy provides a restoring force. Absence of such a force in fluids indicates the absence of a lattice structure and hence fluids flow under shear. However, we must also consider the time for which shear is being imposed. 
+\begin{itemize}
+\item Silly-putty: It bounces off a hard surface indicating that it behaves like a solid if duration of applied shear is $~0.1$s. However, it flows if that duration is of a few hours.
+
+\item Pitch-drop: It takes nearly a decade to form a drop. The viscosity of the pitch is $~10^{7}$ Pa-s. By contrast, $\nu$ for water is just about $10^{-3}$ 
+Pa-s.
+
+\item Glaciers: Deformations occur over hundreds of years. They can flow faster if the ice at the base of the glacier changes into water due to the high 
+pressure.
+
+\item Earth: The Earth shows a solid like behaviour for processes which occur at small time scales (e.g. earthquakes) and fluid like behaviour for very slow processes (e.g. continental drift)
+\end{itemize}
+
+\textbf{P-waves and S-waves}\\
+
+The solid like behaviour of Earth allows propagation of two kinds of waves 
+during an earthquake- the P-waves and the S-waves. P-waves are longitudinal and travel faster whereas the S-waves are transverse and hence cannot travel through a fluid.
+
+In the event of an earthquake, the inability of the S-waves to travel through fluid creates a zone shielded from the S-waves. This is an important observation because it asserts that the core is in fact liquid. P-waves, however, can travel through the fluid in the inner core but their direction is changed due to refraction. This leads to a P-wave shadow zone. 
+
+Another wave that travels through the surface is the Rayleigh wave which is neither transverse not longitudinal but causes the material packets to move in closed orbits. This is quite akin to water waves.\\
+\\
+\textbf{In essence}\\
+\\
+These examples show that given enough time, everything flows under shear. 
+Whether we consider the material as a fluid or as a solid depends on the time scale of the physical process (and the intrinsic time scales of the material) under examination. 
+
+\section{The Continuum Hypothesis}
+
+The conditions under which we can treat a fluid as a continuum differ for 
+liquids and gases. We begin with gases
+
+\subsection{A qualitative picture}
+For gases, we have in mind a picture of the gas molecules represented as rigid spheres moving ballistically and undergoing elastic collisions. The speed of these gas molecules is given by 
+
+$$
+C_g \sim \bigg(\frac{\gamma k T}{m}\bigg)^{1/2} \sim 300m/s
+$$
+
+The force between molecules is attractive at large distances(universal dependence of $-1/r^6$) and strongly repulsive at very short distances(often 
+used Lennard-Jones potential given by $1/r^{12}$). Based on this potential $V(r)$, we can compare the kinetic and potential energy balances in solids, liquids and gases.
+
+For gases the kinetic energy$(=mC_g^2)$ is much greater than potential energy
+$$ 
+KE \gg PE \Rightarrow kT \gg V(r) 
+$$
+Whereas for solids 
+$$
+kT \ll V(r)
+$$
+And in liquids
+$$
+kT \sim V(r)
+$$
+
+In solids the molecules undergo oscillations about their mean positions (known as phonons) due to thermal fluctuations. Likewise, in liquids, they oscillate about their mean positions but since the kinetic and potential energy are comparable in liquids, every once in a while a molecule is able to jump over the potential well and settle into a nearby well. This random walk of the molecule leads to diffusion. At low temperatures, the molecules can no longer hop out of the well and the liquid forms an amorphous solid. 
+
+\subsection{Gases}
+
+The characteristic microscopic length for gases is the mean free path of the gas. How do we find it? Let a molecule traveling in a straight path trace a cylinder until it collides with another molecule. The length of this cylinder is the mean free path $\lambda_{MFP}$. If the no. of molecules per unit volume times the volume of the cylinder equals 1, then there must be a collision. Therefore
+$$
+\pi a^2 n \lambda_{MFP} = 1 
+$$
+$$
+\Rightarrow \lambda_{MFP} = \frac{1}{\pi a^2 n}
+$$
+
+Using the Ideal gas equation of state to estimate the molecular number density at STP ($n = 2.5 * 10^{19}/cm$ - the Loschimdt number) and the radius of the nitrogen atom($a = 3.6*10^{-10}m$), we obtain $\lambda_{MFP} \sim 100 nm$, a slight overestimate from the actual value of $70nm$. 
+
+Using $\lambda_{MFP}$ and $C_g$ we can immediately get the time between two successive collisions - $T_{MFP} = \lambda_{MFP} / C_g \sim 20 ns $
+
+Another quantity of interest that can be estimated here is the diffusive coefficient. It has the unit of $m^2/s$ or $(m/s)$ times $m$. Hence,
+$$
+D \sim C_g * \lambda_{MFP} \sim 10^{-5} m^2/s
+$$
+
+It should be borne in mind that while gas molecules undergo ballistic motions for $l \sim \lambda_{MFP}$, at lengths much larger than the mean free path, even the gases will exhibit diffusion due to the random walk of molecules.
+ 
+\subsection{Liquids}
+
+The liquid has two scales - that due to oscillations of molecules in the potential well and due to hopping of molecules out of the potential well. During one oscillation, the structure of the liquid remains nearly unchanged and thus we can treat it as a crystal for this short time. This allows us to use the idea of phonons. The phonons are of quantum origin and the energy of these oscillations is therefore of the order of $h\nu$. This implies
+$$
+h \nu \sim kT \Rightarrow \nu \sim kT/h = 10^{-13} /s
+$$
+at room temperature. Therefore the time scale becomes $\sim 0.1 ps$. The length scale is given by intermolecular separation which is in this case approximately equal to the molecular diameter $\sim 10^{-10}$. Finally, we can estimate the diffusive constant of liquids. Diffusion in liquids occurs due to hopping of molecules out of potential well. This hopping is an order of magnitude slower than the rattling. Hence, $T_{hopping}\sim 1ps$. In this time, a molecule hops into a nearby cage and hence travels a distance of the order of molecular diameter ($10^{-10}m$). Hence, its speed is nearly $10^{-10}/10^{-12} = 100m/s$. Therefore, the diffusive constant becomes
+
+$$
+D \sim 10^{-10}*100 \sim 10^{-8}m^2/s
+$$
+
+which is much less than that for a gas, as we might intuitively expect.
+
+\end{document}
+
+

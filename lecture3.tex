@@ -1,0 +1,87 @@
+\documentclass[11pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{bm}
+\title{Lecture 3: Dipole interactions and introduction to Cartesian tensors}
+\begin{document}
+\maketitle
+
+The main aim of this lecture is to understand the origin of $-1/r^6$ attractive potential. This potential arises due to dipole-dipole interactions and is responsible for cohesion amongst liquid molecules.
+
+\section{A general idea}
+We start with the derivation of potential due to a dipole and use it to obtain the energy of interaction between two dipoles for a polar liquid. We then briefly derive the same result for non-polar liquids and see that dipole interactions have identical dependence in the two cases, namely, $-1/r^6$. Finally we write down the general case where molecules may have some permanent and some instantaneous electronic polarization and define the Van der Waal's forces of attraction.
+
+\section{Dipole-dipole interactions}
+\subsection{Polar liquids}
+
+The Coulomb potential due to point charge is given by 
+$$
+V(r)=\frac{q}{4\pi\epsilon_0 r}
+$$
+
+Based on this, we can derive the potential due to a dipole at any spatial location $\bm{X}$. The result is
+$$
+V(\bm{X})\equiv V({r,\theta}) =\frac{D \cos(\theta)}{4\pi\epsilon_0 r^2} \rightarrow\text{ \footnotesize{Faster decay}}
+$$
+Where $\bm{D}=D\bm{p}$ is the dipole moment and $\theta$ is the angle between $\bm{X}$ and $\bm{p}$. Then, the inner product of $\bm{D}$ and $\bm{X}$ becomes $D r \cos(\theta)$. Hence we can write
+$$
+V({r,\theta}) =\frac{D r \cos(\theta)}{4\pi\epsilon_0 r^3}\equiv\frac{D \bm{p}\cdot\bm{X}}{4\pi\epsilon_0 r^3}
+$$
+Since potential goes like $1/r^2$ the electric field $\bm{E}$ decays as $1/r^3$. Once we have the potential due to a single dipole, we can find out the energy of a second dipole placed in the field of the first. Assuming that the field is uniform over the length of the second dipole (it is placed far enough), we can obtain this energy to be 
+$$
+E_{12} = D\bm{p}\cdot\bm{E}
+$$
+
+Now, the dipole moment of the other dipole is not yet known. Although its intrinsic moment might be $\bm{D}$, due to thermal fluctuations, it would sample all possible orientations and lead to a net zero dipole moment over time. However, the electric field of the first dipole $\bm{E}$ will cause the second dipole to have a preferential orientation. We can hence deduce that the dipole moment of the second dipole will be proportional to $E$ and of course also to $D$. Then we must construct a dimensionless variable containing $E$. This is given by the Boltzmann factor $DE/kT$. Also, since $\bm{E}$ induces the dipole moment in the second dipole, it is reasonable to assume that first effects of $\bm{E}$ will be linear in $E$. Hence, the dipole moment of the second dipole becomes $D(DE/kT)$, giving a small moment if thermal energy is large and a large moment if electric field is strong. 
+
+Finally we can obtain the force between two dipoles using expression for the electric field of a dipole. 
+$$
+\bm{F} = \underbrace{-q\bm{E}(\bm{X} - \bm{p}\delta l /2)}_{\text{force due to field at the negative charge}} + \underbrace{q\bm{E}(\bm{X} + \bm{p}\delta l /2)}_{\text{force due to field at the positive charge}}
+$$
+
+Using Taylor expansion, we see that leading order terms cancel and we get a force dependent on the gradient of $E$. 
+$$
+\bm{F} = q\delta l \bm{p}\cdot\nabla\bm{E}
+$$
+
+The dipole moment is now given by  $D(DE/kT)$ and hence
+$$
+\bm{F} = \frac{D^2E}{kT} \bm{p}\cdot\nabla\bm{E}
+$$
+$$
+\Rightarrow \bm{F} \sim  \nabla\frac{D^2\bm{E^2}}{kT} \propto \frac{1}{r^7} \text{(\hfill since $E\propto\frac{1}{r^3})$}
+$$
+and hence potential between two permanent dipoles varies as $r^{-6}$. Next, we look at non-polar liquids.
+
+\section{Non-polar liquids}
+
+In non-polar liquids molecules do not have a permanent dipole moment but the electron cloud around the nucleus has a fluctuating distribution. This causes instantaneous polarization of the molecule. The field induced by this dipole then causes polarization of the nearby constituents. Yet, we will see that the force and the potential in this case have dependence identical to the case of polar liquids. Let the induced dipole moment be $\bm{p_{ind}}$. Then
+$$
+\bm{p_{ind}} = \alpha \bm{E}
+$$
+where $\alpha$ is the polarizability of the molecule and $\bm{E}$ is the electric field of the other dipole. The force is then given by
+$$
+\bm{F} = \bm{p_{ind}}\cdot \nabla\bm{E}
+$$
+$$
+\Rightarrow \bm{F} = \alpha \bm{E} \cdot \nabla\bm{E} \propto \nabla\bm{E}^2
+$$
+Since $E\propto r^{-3}$, we again have the $1/r^{7}$ dependence of force and $1/r^{6}$ dependence of potential for interaction of two induced dipoles.
+
+In general, a molecule may have some permanent polarization and some electronic polarization due to fluctuations in the electron cloud. This will result in a permanent electric field superposed with a fluctuating field. Therefore, in general, we can write
+$$
+\bm{F} = \bm{p}\cdot \nabla\bm{E}
+$$
+$$
+\Rightarrow \bm{F} = (\bm{p}_{permanent}+\bm{p}_{eletronic})\cdot \nabla(\bm{E}_{permanent}+\bm{E}_{fluctuating})
+$$
+This gives rise to three kinds of interactions
+\begin{itemize}
+\item permanent dipoles with permanent dipoles - Keesom interactions 
+\item permanent dipoles with instantaneous electronic dipoles - Debye interactions 
+\item instantaneous dipoles with instantaneous dipoles - London interactions 
+\end{itemize}
+
+Together, these three are known as Van der Waal's forces.
+
+\end{document}

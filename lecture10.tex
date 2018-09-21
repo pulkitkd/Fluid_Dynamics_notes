@@ -1,0 +1,162 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+%\usepackage{cite}
+%\usepackage{wrapfig}
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\newcommand{\e}{\epsilon}
+\newcommand{\dl}{\delta}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\vect}[1]{\underline{#1}}
+\newcommand{\uvect}[1]{\hat{#1}}
+\newcommand{\1}{\vect{1}}
+\newcommand{\grad}{\nabla}
+
+%By changing \underline to \bold or \hat, the vector notation can be changed accordingly
+
+\title{Lecture 10: Hydrostatics}
+\author{}
+\begin{document}
+\maketitle
+
+\section*{Overview}
+The key objectives are to use the hydrostatic balance equation $\rho \vect F = \grad p$ to obtain the equilibrium shape of the free surface under a given body force $\vect F$ and describe the buoyant force on a submerged body. 
+
+
+\section{Potential}
+We know that total body force on a small volume of fluid can be written as $\int\rho \vect F dV$ and the total surface force (in hydrostatic equilibrium) is $-\int p \vect n dA$. This surface integral can be transformed to volume integral using divergence theorem for a scalar field. It gives $-\int p \vect n dA = -\int \grad p dV$. Balancing the two terms gives
+\begin{align*}
+\int&(\rho \vect F - \grad p) dV =0\\
+\Rightarrow& \rho \vect F = \grad p
+\end{align*}
+which is the governing equation for hydrostatics. Moreover, if the body forces are conservative, then the force $\vect F$ can be written as the gradient of a scalar potential as $\vect F= -\grad \Psi$. Therefore, the equation becomes:
+\begin{align*}
+\rho -\grad \Psi &= \grad p \\
+\end{align*}
+Taking curl of this equation gives
+\begin{align*}
+\grad \rho \wedge \grad \Psi &= 0
+\end{align*}
+which implies that, for hydrostatic balance, the constant pressure surfaces must be parallel to the constant potential surfaces. This is a necessary and sufficient condition for hydrostatic equilibrium. For further analysis, we need to know how $\rho$ varies with $\vect x$. But if the density is constant, the solution of $\rho \grad \Psi = \grad p$ is simply $p=p_0 - \rho \Psi$
+
+As an example of equipotential surfaces, we can consider a vessel rotating with $\Omega$. The fluid in the vessel is rotating at the same rate and we observe the system in the rotating frame. Then force per unit mass $F$ is given by
+\begin{align*}
+F &= \vect g - \Omega^2 (x^2+y^2)^{1/2}\\
+\Rightarrow \Psi &= gz - \frac{1}{2}\Omega^2(x^2+y^2)
+\end{align*}
+If the radius of the beaker is $R$, then we can scale the coordinates with $R$ and non-dimensionalize the above equations as
+\begin{align*}
+\Psi &= z - \frac{\Omega^2 R}{2g}(x^2+y^2)
+\end{align*}
+
+For a fixed value of $\Psi$ we get different paraboloids. All parallel to each other. These are the equipotential surfaces and hence also give us the shape of the free surface because the free surface has a constant pressure and hence a constant potential everywhere on it.
+
+\section{Force on a submerged particle}
+
+Let a particle of volume $V_p$ be submerged completely in a fluid of constant density $\rho_0$. If gravity is the only force, then $\vect F = \vect g$. Under these assumptions then, we have
+
+\begin{align*}
+F_B &= -\int_{V_p} p \vect n dA \\
+&= -\int \grad p dV \\
+&= -\int \rho \vect F dV \\
+&= -\rho_0 \int -\vect g dV \\
+&= \rho_0 \vect g V_p
+\end{align*}
+And so the force of buoyancy is equal to the weight of the liquid displaced. Note that we started this derivation with an integration of forces on the solid particle but in the third step we switched to an equivalent fluid blob, thus bringing in the density of fluid instead of the density of the object. The second step required us to integrate the pressure gradient over the volume of the particle. Therefore, we replaced the particle with ambient fluid and integrated the pressure gradient over the required volume.
+
+\section{Continuous density stratification}
+
+If density of the fluid varies over the length of the submerged body, then the density at the centroid of the body gives us required the buoyant force on the body. To show this, consider a fluid with density variation as
+\begin{align*}
+\rho(\vect x) = \rho(\vect x_0) + D\rho \uvect{g} \cdot (\vect x - \vect x_0)
+\end{align*}
+
+Here $D\rho$ ($> 0$) is the density gradient. It must be in the direction of pressure gradient (which is gravity here, denoted by the unit vector $\uvect g$), otherwise there will be a flow due to the baroclinic source of vorticity ($\grad p \wedge \grad \rho$ must be zero). 
+
+\begin{align*}
+F_B &= -\int_{V_p}\rho \vect{F}dV \\
+&= -\int_{V_p}\rho(\vect{x}) \vect{g} dV \\
+&= -\vect{g}\int_{V_p}\rho(\vect x_0) + D\rho \uvect{g} \cdot (\vect x - \vect x_0) dV \\
+&= -\vect{g}(V_p\rho(\vect x_0) + D\rho \uvect{g} (\int_{V_p}\vect x - \vect x_0V_p) \\
+&= -\vect{g}(V_p\rho(\vect x_0) + D\rho \uvect{g}V_p (\big(\frac{1}{V_p}\int_{V_p}\vect x dV\big) - \vect x_0) \\
+&= -\vect{g}(V_p\rho(\vect x_0) + D\rho \uvect{g}V_p (\vect x_c - \vect x_0) \\
+&= -\vect{g}V_p(\rho(\vect x_0) + D\rho \uvect{g} (\vect x_c - \vect x_0) \\
+&= -\vect{g}V_p \rho(\vect x_c) \\
+\end{align*}
+And so only the density at the centroid needs to be used while evaluating the buoyant force on a body submerged in a linearly stratified medium.
+
+\section{Centrifugal buoyancy}
+Under the action of centrifugal forces, the heavier fluids get pushed outwards and the lighter fluids get pulled towards the axis of rotation. This can be seen from the final expression for force due to centrifugal buoyancy
+\begin{align*}
+F_B = \Omega^2 V_p (\rho_p - \rho_0)r
+\end{align*} 
+
+If density of the particle $\rho_p$ is greater than the medium density $\rho_0$, then it is centrifuged out, otherwise it gets pulled inwards. This can be used in experiments to visualize vortices. 
+
+\section{Dynamics of approach to equilibrium}
+
+Let there be a fluid parcel of mass $m$ and density $\rho_1$ in a medium of density $\rho_2$ and a damping coefficient of $C$. Then force balance can be written as
+\begin{align*}
+& m\frac{d^2 \vect x_c}{t^2} = v_p \rho_1(\vect x_c)g - v_p \rho_2(\vect x_c)g - C\frac{d \vect x_c}{dt}
+\end{align*}
+If we consider only vertical motions, then after some rearrangement, this can be written as
+\begin{align*}
+V_p\rho_1\frac{d^2 z^*}{dt^2} + C\frac{d z^*}{dt} + g V_p D\rho_2 z^* &= 0
+\end{align*}
+where $z^*= z - z_c$ and $D\rho_2$ is the density gradient in the fluid medium. Comparing it with the standard equation for damped oscillations, $m\ddot{x} + c\dot{x} + \omega^2 x = 0$, we get the natural frequency of oscillations of fluid parcel as $\omega = (\frac{gD\rho_2}{\rho_1})^{1/2}$. The approach can be defined as underdamped or overdamped if the sign of $C^2-4(gV_pD\rho_2)(v_p\rho_1)$ is negative or positive respectively (this can be seen by assuming an exponential solution $e^{mz}$ and substituting in the differential equation - the condition for real roots translates to condition for overdamped oscillations).
+
+If the system is overdamped with a large damping coefficient $C\to\infty$, then we neglect the second order term in the equation and just consider the equation
+\begin{align*}
+C\frac{d z^*}{dt} + g V_p D\rho_2 z^* &= 0
+\end{align*}
+
+which has an exponentially decaying solution $z^* \propto e^{-t/\tau}$ where $\tau = \frac{g v_p D\rho_2}{C}$. Therefore, we get the overdamped solution with the appropriate time-scale.
+
+\section{Appendix}
+
+\subsection{Derivation for centrifugal buoyancy}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

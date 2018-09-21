@@ -1,0 +1,141 @@
+\documentclass[11pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{bm}
+
+\newcommand{\e}{\epsilon}
+\newcommand{\dl}{\delta}
+\newcommand{\dij}{\delta_{ij}}
+\newcommand{\1}{\bm{1}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\uu}[1]{\underline{\underline{#1}}}
+\newcommand{\un}[1]{\underline{#1}}
+
+\title{Lecture 6: Irreducible tensors and the Green's Function for the Laplacian}
+\begin{document}
+\maketitle
+This lecture includes 3 key ideas-
+\begin{itemize}
+\item Few applications of isotropy of tensors
+\item Symmetric irreducible tensors
+\item Green's function for the Laplace equation and spherical harmonics
+\end{itemize}
+
+\section{Isotropic Tensors}
+The moment of inertia tensor is a symmetric second order tensor. For a spheroid, it is given by $\un{I}_{ij} = c_1 \dij + c_2 p_ip_j$ while for an ellipsoid it is given by $\un{I}_{ij} = c_1 p_ip_j + c_2 q_iq_j + c_3 r_ir_j$. It seems that the fore-aft symmetry of the spheroid or ellipsoid rules out the cross terms i.e. since inverting $\un{p}$ to $-\un{p}$ does not change the orientation of the spheroid (or ellipsoid) hence we get the term $p_ip_j$ for spheroid (and do not get terms like $q_i r_j$ for ellipsoid). However, note that the moment of inertia tensor is itself invariant to inversions of the principal directions. Therefore, even in cases when changing the direction of anisotropy \textit{does indeed change} the orientation of the body, the moment of inertia tensor will not contain terms that can reflect this change.
+ 
+Consider an example- an elliptic cone pointing towards the positive x-axis, will point towards negative x-axis if $\un{p}$ is changed to $-\un{p}$ but still our ansatz for the moment of inertia of the cone will look exactly like the one for the ellipsoid. The ellipsoid is fore-aft symmetric whereas the cone isn't but this difference cannot lead to appreance of cross-terms in the moment of inertia tensor because $\dij$  and $x_ix_j$ (and therefore $I_{ij}$) remain invariant if $\un{p}$ is changed to $-\un{p}$.
+
+On the other hand, integrals like 
+$$
+\int x_ix_jx_k dV
+$$
+
+will indeed change if one of the principal directions is reversed. These integrals are like moments of the mass disribution also known as virial integrals.
+
+
+A second key idea about the moment of inertia tensor is as follows. If a second order tensor has three orthogonal directions where its behaviour is identical, then it must be proportional to the isotropic tensor $\dij$. As an example, consider the integral $\int x_ix_j dV$ taken over a sphere. It is immediately clear that it should be proportional to $\dij$. But the idea is that, this integral will be proportional to $\dij$ even if it is carried over a cube because a cube has three independent identical directions.
+
+\subsection{Example: Particle sedimentation}
+Assume that a small sphere (radius $= a$) is sedimenting slowly $(Re=0)$ in a fluid with viscosity $\mu$. What will be the drag force $F$ on the sphere? Stokes law states that this force is given by $F=6\pi \mu a u$. In vector form, for a general solid, this law takes the form 
+$$
+F_i = R_{ij} u_j
+$$
+where $R_{ij}$ is called the resistance tensor and it depends on the geometry of the body. For a sphere it is ofcourse isotropic but in line with our previous argument, it is isotropic for a cube as well. The scalar pre-factor relevant to a particular orientation can be exctracted from $R_{ij}$ by contracting it with $p_ip_j$ where $\un{p}$ is a unit vector denoting the orientation of the sedimenting cube. But the  isotropic tensor $\dij$ treats every $p_i$ identically and hence the scalar pre-factor will be the same for any orientation. Therefore, the drag on the cube is independent of its orientation.
+
+However, for a spheroid, orientation matters and the pre-factor differs with the orientation.
+
+\subsection{Example: Newton's law of viscosity}
+Assume a suspension where the collidal particles are spherical. Then the fourth order viscosity tensor in Newton's law of viscosity involves the integral
+$$
+\int x_ix_jx_kx_l dV = c(\dl_{ij}\dl_{kl}+\dl_{ik}\dl_{jl}+\dl_{il}\dl_{jk})
+$$
+There is only one constant and hence only one corresponding viscosity. However for a cube, consider $\dij$ to be constructed through three mutually orthogonal unit vectors $\dij = p_ip_j + q_iq_j + r_ir_j$. Constructing the fourth order isotropic tensor ($\dl_{ij}\dl_{kl}+\dl_{ik}\dl_{jl}+\dl_{il}\dl_{jk}$) using this form of $\dij$ results in two types of terms - single face terms ($q_iq_jq_kq_l$) and two-faced terms ($q_iq_jr_kr_l$). The constant multiplying the single-faced terms is different from the constant for the two-faced terms and hence a suspension of cubic particles would exhibit two distinct viscosities.
+
+
+\section{Symmetric irreducible tensors}
+
+These are symmetric tensors which vanish upon contracting with $\dij$. A symmetric irreducible tensor can be constructed from a general second order tensor by first symmetrizing it ($B_{ij}\rightarrow\frac{B_{ij}+B_{ji}}{2}$) and then enforcing that $\widetilde{B} =\frac{B_{ij}+B_{ji}}{2} + b \dij$ goes to zero when contracted with $\dij$. This gives us the value of $b$ for which $\widetilde{B}$ becomes irreducible. As an example, $\dij \widetilde{B_{ij}} = \widetilde{B_{ii}} = B_{ii} + 3b = 0 \Rightarrow b= -B_{ii}/3$. Therefore the corresponding symmetric irreducible tensor for $B_{ij}$ is
+$$
+\widetilde{B_{ij}} = \frac{B_{ij}+B_{ji}}{2} - \frac{B_{ii}}{3}\dij
+$$
+Similar procedure can also be adopted for higher order tensors.
+
+\subsection{Example: The velocity gradient tensor}
+\begin{align*}
+\tau_{ij} &= A_{ijkl}e_{kl}\\
+ &= \underbrace{c_1(\pd{u_i}{x_j}+\pd{u_j}{x_i})}_{\text{volume \textit{and} shape change}} + \underbrace{c_2\pd{u_k}{x_k}}_{\text{only volume change}}
+\end{align*}
+
+The first part contains information about shape change as well as the volumetric change of a fluid parcel. Since the trace of the tensor $\pd{u_i}{x_j}+\pd{u_j}{x_i}$ is not zero, it allows for a volumetric change. This can easily be converted to a symmetric irreducible tensor as shown above to obtain the following expression
+\begin{align*}
+\tau_{ij} &= c_1\bigg(\pd{u_i}{x_j}+\pd{u_j}{x_i}\bigg) +c_2\pd{u_k}{x_k} \\
+&=\underbrace{c_1\bigg(\pd{u_i}{x_j}+\pd{u_j}{x_i} - \frac{2}{3}\pd{u_k}{x_k}\dl_{ij}}_{\text{only shape change}}\bigg) + \underbrace{(c_2+\frac{2 c_1}{3})\pd{u_k}{x_k}\dij}_{\text{only volume change}}
+\end{align*}
+
+Now the traceless component associated with $c_1$ only deals with shape changes of a fluid element while that with $c_2+\frac{2 c_1}{3}$ deals with volumetric changes. This leads to the definition of the two types of viscosities - shear viscosity $(c_1)$ and bulk viscosity $(c_2+\frac{2 c_1}{3})$
+
+\section{Green's function for the Laplacian}
+The Green's function for an operator is its response to a point source. Hence, Green's function of the Laplacian is the solution to the differential equation
+$$
+\nabla ^2\phi = \delta(\un{x}-\un{x_0})
+$$
+
+Using basic ideas from electrostatics, we can immediately determine the Green'd function for Laplacian. Consider the statement for Gauss' Law
+$$
+\nabla \cdot \un{E} = \frac{\rho}{\epsilon_0}
+$$
+But $\un{E}=\nabla\phi$
+$$
+\Rightarrow \nabla ^2\phi = \frac{\rho}{\epsilon_0}
+$$
+Here $\rho$ is the charge density. Since we want to find the response due to a point source, we will consider the charge density due to a point charge $q$ placed at $\un{x_0}$. (The scalar delta function has units of length inverse and hence for vectors it will be 'per-unit-volume')
+\begin{align*}
+&\Rightarrow \nabla ^2\phi = \frac{q \delta(\un{x}-\un{x_0})}{\epsilon_0}\\
+&\Rightarrow \nabla ^2 (\frac{\epsilon_0\phi}{q}) = \delta(\un{x}-\un{x_0})
+\end{align*}
+But we already know the potential due to point charge which is the solution to this equation. Hence,
+\begin{align*}
+&\Rightarrow \phi = \frac{q}{4\pi\epsilon_0 r}\\
+&\Rightarrow \frac{\epsilon_0\phi}{q} = G(\un{x}|\un{x}_0) = \frac{1}{4\pi |\un{x}-\un{x}_0|}
+\end{align*}
+
+which is the Green's function for the three dimensional Laplacian. We can also assume a line charge with field $\propto 1/r$ (instead of a point charge) and similarly evaluate the 2D Green's function for Laplacian as $\propto\ln(r)$
+
+\subsection{Green's function for higher order tensors}
+
+Assume that instead of a point charge, we wish to calculate the potential due to a dipole (charges $q$ and $-q$ seperated by a distance $\epsilon$ about the center $\un{x_0}$). Then charge density is given by
+$$
+\rho = q\delta(\un{x}- (\un{x}_0+\un{p} \frac{\epsilon}{2})) - q\delta(\un{x}-(\un{x}_0-\un{p}\frac{\epsilon}{2}))
+$$
+Assuming that seperation between charges $\epsilon$ is much less than the distances at which we are observing the potential due to the dipole, we can linearize the above expression. The leading order terms cancel because at leading order $q$ and $-q$ are not seperated at all and the net effect is zero. Hence the forcing term appears at first order and we get a gradient of the delta function. The expression is
+$$
+\nabla ^2\phi_d = -D p_i\pd{}{x_i}\delta(\un{x}-\un{x}_0)
+$$
+where D is the dipole strength and $\phi_d$ is the potential due to the dipole. This equation is different from the one for the point charge because we get a gradient and a dot product with $\un{p}$ on the RHS. How can we solve this equation? We know the solution to the equation $\nabla ^2 \phi_m = \delta(\un{x})$ where $\phi_m$ is the potential due to a monopole (point charge). Let's take the gradient of this equation and then dot it with $-D\un{p}$. We get
+$$
+\frac{\partial ^2}{\partial x_j^2}\underbrace{(-Dp_i\pd{\phi_m}{x_i})}_{\phi_d} = -D p_i\pd{}{x_i}\delta(\un{x}-\un{x}_0)
+$$
+This equation is identical to the one for dipole which implies that
+$$
+\phi_d = -Dp_i\pd{\phi_m}{x_i} = -Dp_i\pd{}{x_i}\frac{1}{4\pi r} = \frac{D}{4 \pi \epsilon_0}\frac{p_i x_i}{r^3}
+$$
+Which gives us the vector solution to the Laplace equation. Similarly we can construct second and higher order tensor solutions. The key idea here is that \textit{the Gradient commutes with the Laplacian}. Therefore, if $\phi$ is a solution to Laplace equation, then so is $\nabla \phi$, $\nabla \nabla \phi$ and so on. Three such solutions are written below
+\begin{itemize}
+\item Scalar solution: $\frac{1}{r}$
+\item Vector solution: $\frac{x_i}{r^3}$
+\item Second order tensor: $\frac{\dij}{r^3} - \frac{3x_ix_j}{r^5}$
+\end{itemize}
+
+In hindsight then, we can say that since the equation for potential for a dipole involved a vector on the RHS, hence $\phi_d$ must have been proportional to $\frac{x_i}{r^3}$. Since potential is a scalar, this must be contracted with a vector. The only relevant vector here is the orientation vector of the dipole $p_i$ and hence we must have $\phi_d \propto \frac{p_ix_i}{r^3}$. Similarly scalar potential due to quadrupole can be constructed using the second order solution.
+
+All these solutions to the Laplacian are in fact symmetric irreducible tensors. To see this, note that $\nabla ^2 (1/r) = 0$ and that the gradient commutes with the Laplacian. Suppose we contract $\frac{\partial ^3}{\partial x_i \partial x_j \partial x_k} \frac{1}{r}$ with $\dij$, then it immediately results in a Laplacian and hence proves the irreducibility of the tensor solution.
+
+Using these tensor solutions, we can write a general solution to the Laplace equation as
+$$
+\phi = \frac{a_0}{r} + a^1_i\pd{}{x_i}\frac{x_i}{r^3} + a^2_{ij}\frac{\partial ^2}{\partial x_i \partial x_j}\frac{1}{r}+...
+$$
+
+\section{Appendix}
+
+\end{document}

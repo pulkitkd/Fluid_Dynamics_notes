@@ -1,0 +1,159 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage[ddmmyyyy]{datetime} 
+\usepackage[short,nodayofweek,level,12hr]{datetime} 
+%\usepackage{cite}
+%\usepackage{wrapfig}
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\newcommand{\e}{\epsilon}
+\newcommand{\dl}{\delta}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\vect}[1]{\underline{#1}}
+\newcommand{\uvect}[1]{\hat{#1}}
+\newcommand{\1}{\vect{1}}
+\newcommand{\grad}{\nabla}
+
+
+\title{Lecture 11: Self Gravitating Equilibria}
+\date{\displaydate{date}}
+\newdate{date}{10}{09}{2018}
+\author{}
+
+\begin{document}
+\maketitle
+\section*{Overview}
+
+\section{Self-gravitating equilibrium for a spherical planet}
+The gravitational potential $\Psi_G$ due to a small mass $dm$ is
+\begin{align*}
+d\Psi_G &= -\frac{G dm}{|{\vect x - \vect x_0}|}
+\end{align*}
+And hence for a body of volume $V$, the potential is 
+\begin{align*}
+\Psi_G &= -\int_V \frac{G \rho_0 dV}{|{\vect x - \vect x_0}|}
+\end{align*}
+For the potential in the exterior of a spherical body, this integral is trivial
+\begin{align*}
+\Psi_G &= -\int_V \frac{G \rho_0 dV}{|{\vect x - \vect x_0}|}\\
+&=-\frac{G \rho_0}{r} \int_V dV \\
+&=-\frac{G M}{r} 
+\end{align*}
+This gives us the familiar result that potential (and field) at an external point can be calculated by assuming the entire mass $M$ to be concentrated at the center of the body.
+
+In order to calculate the potential in the interior region of a spherical body, we must perform the integral $\int_V \frac{dV}{r} = \int_V \frac{dV}{|\vect x - \vect x_0|}$ in spherical coordinates. The result we get is
+\begin{align*}
+\Psi_G &= -2 \pi \rho_0 G (R^2 - \frac{r^2}{3})
+\end{align*}
+At $r=R$ both interior and exterior regions give the same potential, so the result seems consistent. 
+
+Since potential in the interior region is quadratic in $r$, and force is gradient of the potential, the force will be linear in $r$. Since $r = |\vect x - \vect x_0|$, it implies that the force is only a function of $\vect x$ (since the center $\vect x_0$ is fixed). The force is given by
+\begin{align*}
+F_G = -\frac{4\pi}{3}\rho_0 G\vect x
+\end{align*}
+
+This is the integral approach for obtaining the force due to a gravitating sphere. There is also a differential approach that utilises the idea of Green's function of a Laplacian. Recall that the Green's Function of a Laplacian in 3D is given by $G(\vect x) = -\frac{1}{4\pi|\vect x -\vect x_0|}$. Using the equation of the potenial, taking the Laplacian and using the Green's Function, we can obtain the same result as follows:
+\begin{align*}
+&\Psi_G = -\int_V \frac{G \rho_0 dV}{|{\vect x - \vect x_0}|}\\
+&\grad^2 \Psi_G = 4\pi G \rho_0 \int_V \grad^2(\frac{-1}{4\pi|{\vect x - \vect x_0}|}) dV\\
+&\grad^2 \Psi_G = 4\pi G \rho_0 \int_V \delta(\vect x - \vect x_0) dV \tag{\footnotesize{by defintion of Green's Function}}\\
+&\grad^2 \Psi_G = 4\pi G \rho_0  \tag{\footnotesize{by defintion of Delta Function}}\\
+&\frac{1}{r^2}\frac{d}{dr} r^2 \frac{d\Psi_G}{dr} = 4\pi G \rho_0 \\
+&r^2 \frac{d\Psi_G}{dr} =\frac{4\pi G \rho_0 r^3}{3} \\
+&\frac{d\Psi_G}{dr} =\frac{4\pi G \rho_0 r}{3} \\
+&-\vect F =\frac{4\pi}{3}G \rho_0 r \1_r \\
+&-\vect F =\frac{4\pi}{3}G \rho_0 (\vect x - \vect x_0) \\
+\end{align*}
+This is a radial(directed towards the center) harmonic force. The harmonic nature can be easily shown
+\begin{align*}
+\grad^2 \Psi_G &= 4\pi G \rho_0 \\
+\grad (\grad^2 \Psi_G) &= 0  \tag{\footnotesize{taking $\grad$ on both sides}} \\
+\grad^2 \grad \Psi_G &= 0  \tag{\footnotesize{$\grad$ and $\grad^2$ commute}}\\
+\grad^2 \vect F &= 0  \tag{\footnotesize{$F = \grad \Psi_G$ }}
+\end{align*}
+To summarize,
+\begin{itemize}
+\item Interior: $\vect F \propto r \quad V \propto r^2$
+\item Exterior: $\vect F \propto 1/r^2 \quad V \propto 1/r$
+\end{itemize}
+
+The fact that force has a linear dependence on $\vect x$ can also be seen using the fact that $\vect F$ is harmonic. Since $\grad^2 \vect F = 0$, it implies that $\vect F$ can be represented using the solution of the Laplacian. We know that if $\grad^2 \Phi = 0$, then
+\begin{align*}
+\Phi &= \underbrace{F(r)}_{\propto r^n, \frac{1}{r^{n+1}}}\quad \underbrace{G(\cos(\theta))}_{P^m_n(\cos(\theta))}\quad \underbrace{H(\phi)}_{e^{\pm i m \phi}}
+\end{align*}
+where $n$ is the order of tensor involved. The solution constructed using $r^n$ are growing harmonics and the ones constructed using $1/r^{n+1}$ are the decaying harmonics. Since the $(\theta, \phi)$ dependence is same, we can always convert a decaying harmonic to a growing harmonic by multiplying it with $r^{2n+1}$.
+
+Now we know that the vector solution to the Laplace equation is proportional to $\vect x/r^3$. This is a decaying harmonic. So we multiply it by $r^{2(1)+1} = r^3$ to get the growing harmonic $\vect x$. Therefore the force $\vect F$ will be in general proportional to a linear combination of the two solutions. But we want the field inside the gravitating body, so the the force at the center must not be singular. Therefore $\vect x/r^3$ is rejected and we get $\vect F \propto \vect x $. So $\vect F$ must be linear in $\vect x$.
+
+\subsection{Gravitation pressure}
+
+The gravitational field of a planet pulls it inwards. This causes a pressure which keeps it from shrinking to a point. This pressure can be calculated as follows
+\begin{align*}
+\grad p &= -\rho_0 \grad \Psi_G\\
+\Rightarrow p &= p_0 - \rho_0 \Psi_G \\
+\Rightarrow p &= p_0 + 2 \pi \rho_0^2 G (R^2 - r^2/3) \\
+\Rightarrow p &= \hat{p_0} - 2 \pi \rho_0^2 G r^2/3
+\end{align*}
+Pressure at the surface ($r=R$) will be extremely small (only due to the atmosphere) compared to pressure in layers inside the planet. We can assume it to be zero. Therefore, $p|_{r=R} = 0$. Using this we get,
+\begin{align*}
+\hat{p_0} &= 2 \pi \rho_0^2 G R^2/3 \\
+\Rightarrow p &= \frac{2 \pi \rho_0^2 G}{3} (R^2 - r^2)
+\end{align*}
+This is the pressure which keeps a self-gravitating body from shrinking to a point.
+
+\section{Self-gravitating equilibrium with rotation}
+The transformation between two first order tensors must be mediated by a second order tensor. For a sphere, we obtained the relation $\vect F = -\grad \Psi = C \dl_{ij}\vect x$. For a spheroid with axis along $\vect p$, this becomes $\grad \Psi = (C_1 p_ip_j + C_2 \dl_{ij})x_j$. 
+
+For the case of a rotating self-gravitating body, the eccentricity $(e)$ is a function of ratio of rate of rotation and gravity. Therefore, our aim is to find 
+\begin{align*}
+\frac{\Omega^2 R}{g} &= f(e)
+\end{align*}
+If we put $g = GM/R^2$ and $M=\rho_0 R^3$, then the equation becomes
+\begin{align*}
+\frac{\Omega^2}{\rho_0 G} &= f(e)
+\end{align*}
+This function turns out to be
+\begin{align*}
+\frac{\Omega^2}{2 \pi \rho_0 G} &= e^2(1-e^2)^{1/2}\int_0^{\infty}\frac{\lambda d\lambda}{(1+\lambda)^2(1-e^2+\lambda)}
+\end{align*}
+
+which indicates that for any given rate of rotation, there are two possible equilibrium eccentricities. For small rates of rotation (as for most planets), one of these eccentricities $e \sim 1$ which signifies a nearly flat pancake like body, while the other eccentricity $e \sim 0$ which is indicative of a nearly spherical planet.
+
+Beyond a critical rate of rotation, there do not exist any real roots i.e. centrifugal forces dominate and an equilibrium between centrifugal and gravitational forces is never established.
+
+\section{Appendix}
+
+\subsection{Constant field inside a gouged out sphere}
+(figures required)
+
+\subsection{Derivation for Self-gravitating equilibrium with rotation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+

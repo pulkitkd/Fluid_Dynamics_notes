@@ -1,0 +1,56 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\title{The Landscape}
+\begin{document}
+\maketitle
+
+Without further ado...
+
+We start by trying to \textbf{define a fluid}. We say \textit{trying} because there is in fact no clear distinction between fluids and solids. While the line is quite blurred, we will be able to characterize a substance as either fluid or solid by looking at certain length scales and time scales intrinsic to the substance. We also want to establish the length scales at which we can safely consider the fluid as a \textbf{continuum} which allows us to use the idea of \textit{fields}
+
+\hfill
+
+Once we have identified the substance as a fluid, we are ready to use the equations governing the motion of fluids. However, these equations are most conveniently dealt with in \textbf{the language of tensors} and it pays to first familiarize oneself with this language. We will also see how to utilize the symmetry of a given problem and translate it to the \textbf{symmetry of the relevant tensor}. With this background, we will proceed towards the first relevant tensor in fluid mechanics - the stress tensor.
+
+\hfill
+
+We can now analyze fluids for the cases where the stress tensor takes its simplest form and is completely identified with a single scalar - pressure. This is the study of \textbf{hydrostatics} where we study a stratified fluid under a static equilibrium of forces like gravity, centrifugal forces and surface tension. This analysis can be applied to Earth's atmosphere.
+
+\hfill
+
+Before we move on to analyze the response of the fluid to certain applied forces, we go ahead and comprehend this response first. As with many non-linear phenomena, it helps to \textbf{linearize the flow about a point} and extract information out of this linearized flow. This linearization provides us with a velocity gradient tensor which completely characterizes the flow at a given point. Specifically, it will provide us with the knowledge of the tendency of the flow to rotate, dilate or deform a small fluid parcel at the given point. We also want to be able to infer backwards - \textbf{given a specified rate of dilation or rotation of the flow, how can we construct the flow field}? 
+
+ From this local picture, we then move on to a description of the global picture. The global flow is specified using \textbf{streamlines, pathlines and streaklines}. These ideas are illustrated using \textbf{Gravity-capillary waves}.
+
+\hfill
+
+Now that we understand the response, we can ask the question - \textbf{given a certain set of forces, what will be the response of the fluid?} This is given, in principle, by the Cauchy equation and the enigmatic Navier-Stokes equations. Including rotation will lead to even more bewildering effects. But the key idea we learn here is that of \textbf{non-dimensionalization}. Scaling the variables with relevant parameters is often the first step in virtually all analyses. It greatly aids physical intuition, reduces the number of parameters in the problem and simplifies life for computational and experimental workers. 
+
+\hfill
+
+Henceforth we look at various cases in which the equations of motion can be simplified and an analytical solution is tractable, starting with \textbf{unidirectional flows} such as flows over flat plates, pipe flows and flows between cylinders. Then we move on to \textbf{nearly unidirectional flows} such as lubrication flows and small Reynolds number gravity currents. Finally we will see the only fully 3-dimensional analytical solution - the \textbf{flow past a spherical droplet (in Stokes regime)}.
+
+\hfill
+
+Having explored the flow past a spherical drop, we can use it to study the \textbf{heat and mass transfer across the drop} caused by such a flow. For the cases of large Reynolds flows, we will look at a special class of problems: problems which possess a \textbf{similarity solution}. These are the problems where a certain group of variables is important and the solution evolves so that this group of variables remains unchanged. The solution is said to go through a series of self-similar shapes. We will see its applications for laminar wakes, jets and gravity currents. We will also study the 2D aerofoil theory of generation of lift.
+
+\hfill
+
+Finally we will study \textbf{the Boundary Layer Theory} given by Prandtl and use it to plot the drag vs Reynolds number curves for streamlined and bluff bodies. This requires the study of flow separation due to acceleration of the boundary layer made earlier by Falkner and Skan. To end this chapter we will see a case where the BL theory fails and viscosity turns out to be important throughout the domain. 
+
+\hfill
+
+We will also take a few excursions. First of them being into \textbf{the non-Newtonian regime} where non-linear constitutive equations result in counter-intuitive effects. 
+
+\hfill
+
+Throughout the course we have dealt with mainly the conservation of mass and momentum. Energy consideration leads us to \textbf{the Bernoulli equation}. We will apply it to open channel flows and flows through the converging-diverging nozzles and analyze the subcritical to supercritical transitions.
+
+\hfill
+
+A study of \textbf{the simple pendulum} and phase-plane analyses is useful in gaining basic ideas of non-linear dynamics and also introduces the elliptic functions.
+
+\end{document}

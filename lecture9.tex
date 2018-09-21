@@ -1,0 +1,110 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage{cite}
+%\usepackage{wrapfig}
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\title{Lecture 8: Atmospheric Stability}
+\author{}
+
+\begin{document}
+\maketitle
+\section*{Overview}
+
+We determine the variation of density, pressure, and temperature with height in the Earth's atmosphere. Using the temperature gradient, we can classify the atmosphere as stable or unstable to vertical motions. 
+
+\section{Pressure variation}
+Due to gravity, we expect the density of air to decrease as we go higher up in the atmosphere. We want to determine the characterstic height at which density or pressure fall to $1/e$ of their surface values. Assuming the atmosphere to be thin (height of atmosphere $\ll$ diamter of the Earth) and temperature to be constant through the domain, we can write
+\begin{align*}
+\frac{dp}{dz} = \rho_a (-g)
+\end{align*}
+
+where $p$ is the pressure, $z$ is the vertical height measured from ground and $\rho_a$ is density of the air. Using the ideal gas equation of state $p=\rho_a \hat{R}_a T$, we get
+\begin{align*}
+\frac{dp}{dz} &= \frac{p(-g)}{\hat{R}_a T} \\
+\Rightarrow p &= p_0 e^{-gz/\hat{R}_a T}
+\end{align*}
+
+This gives the pressure variation with height. The characterstic length scale for this variation is $\frac{\hat{R}_a T}{g}$. Note that $\hat{R}_a$ is defined per unit mass. Taking $T=300K$, we get the characterstic height as $\sim 8.4$ km . Therefore, pressure and density drop to $1/e$ of their surface value at about 8.4 km above Earth's surfce.
+
+\section{Temperature variation}
+Pressure and density decrease exponentially under these assumptions. Even if these are relaxed, their variation is at least monotonic. But temperature varation is not monotonic throughout the atmosphere. We can though, derive an expression for the temperature variation in the Troposphere. In order to derive the temperature variation, we will consider a Lapse-Rate Atmosphere. A Lapse-Rate Atmosphere is a hypothetical neutral object that seperates stable and unstable atmosphere. 
+
+Stability of the atmosphere, in this context, refers to its susceptibility to vertical motions. Basically, we want to know the fate of a (vertically) displaced parcel of fluid. If a parcel displaced upwards experiences buoyancy and continues to go upwards, then the atmosphere is unstable. If it falls back, then the atmosphere is stable. Lapse-Rate Atmosphere is the hypothetical neutral configuration between the two.
+
+Our objective is to calculate the temperature gradient of the Lapse-Rate Atmosphere or, in other words, the rate of change of temperature of a parcel of air when it is vertically displaced in a Lapse-Rate Atmosphere. Note that a neutrally stable atmosphere does not have a uniform temperature throughout because of the pressure variation. 
+\subsection{Dry Adiabatic Lapse Rate}
+We assume the process of the parcel rising through the atmosphere to be reversible and adiabatic. Then using the first law of thermodynamics, with $\delta q=0$, we get
+\begin{align*}
+de = -\delta W = -p dV
+\end{align*}
+
+This tells us that work is done at the expense of internal energy. For ideal gas, $e\equiv e(T)$. Therefore, as a parcel rises and moves into a lower pressure region, it expands and does work. This work causes reduction in the internal energy and hence temperature drops as the parcel rises up. Further assuming air to be calorically perfect ($C_p$ and $C_v$ are independent of T), and using the adiabatic expansion relation $p \propto \rho^{\gamma}$ gives us the result
+\begin{align*}
+\frac{dT}{dz} = \frac{-g}{C_p}
+\end{align*}
+
+This comes out to be nearly $10 K/Km$. Hence temperature of the parcel falls by about $10K$ for each $1 Km$ rise in height. This is called the Dry Adiabatic Lapse Rate (DALR). Dry - because we haven't yet considered the effect of water vapour present in the air parcel. 
+
+\subsection{Moist Adiabatic Lapse Rate}
+
+In order to incorporate the effect of vapour, note that the parcel is rising into a region of lower pressure and temperature. Water tends to evaporate at low pressure and condense at low temperature. If it so happens that the fall in temperature overcompensates the effect of fall in pressure, then water will condense. This condensation will cause the release of latent heat of vaporization which will heat the air parcel. Therefore, the net cooling of the air parcel will be less than $10K/Km$ (usually varies between $4 - 9 K/Km$). This is called the Moist Adiabatic Lapse Rate (MALR). Once all the water inside the parcel condenses, the rate of cooling again approaches DALR.
+
+In order to derive an expression for it, we proceed as for the DALR, but now $\delta q \neq 0$. The parcel is getting heated due to the latent heat and therefore, $\delta q = -L dW_v$. Here $dW_v$ is the mass of water-vapour per unit mass of air and $L$ is the latent heat of water per unit mass. The negative sign denotes that it is decreasing with height. With this modification, we get the MALR as
+\begin{align*}
+\frac{dT}{dz} &= \frac{-g/C_p}{1+\frac{L}{C_v}\frac{dW_v}{dT}}\\
+\end{align*}
+
+This expression differs from the DALR only if $\frac{dW_v}{dT}$ is non-zero i.e. after the parcel becomes saturated and there is condensation. If $dT$ is more, then parcel can hold more vapour and hence $\frac{dW_v}{dT} > 0$. Therefore,
+\begin{align*}
+|MALR| &<|DALR|
+\end{align*}
+
+As parcel rises, the partial pressure of water vapour\footnote{Fraction of total pressure that is being exerted by the vapour molecules} decreases. Also the temperature, and hence the vapour pressure\footnote{Pressure required to condense the vapour molecules at a given temperature} decreases. But the vapour pressure decreases faster than the partial pressure and the parcel invariably becomes saturated.
+
+\section{Atmospheric stability}
+
+We know that the cooling rate of an unsaturated parcel is DALR. If the atmospheric cooling rate is faster than this, then a raised parcel will find itself in a cooler environment and will continue to rise. Therefore if atmospheric cooling rate is faster than DALR, then it's unstable. Similarly we can see that if the atmospheric cooling rate is slower than DALR then it's stable and atmosphere is neutral if they are equal.
+
+\subsection{Conditional Stability}
+
+Suppose the cooling rate of atmosphere is slower than DALR but more than MALR. Since it is slower than DALR, the atmosphere appears to be stable (as discussed before). But if due to some mechanism, an air parcel gets kicked high enough so that it becomes satured and the vapour inside it begins to condense, then the effective cooling rate becomes MALR. Now, the cooling rate of the parcel is slower than cooling rate of atmosphere. So an upward displaced parcel will find itself in a warmer environment and will continue to rise.
+
+\section{Appendix}
+\subsection{Derivation for DALR}
+\subsection{Derivation for MALR}
+\subsection{Equation of state for water vapour}
+Starting with the Gibbs-Duhem equation applied at the phase boundary between water and water vapour
+\begin{align*}
+&(\nu dp - s dT) = d\mu \\
+\Rightarrow &(\nu dp - s dT)_l = (\nu dp - s dT)_g \\
+\Rightarrow &\frac{dP_{v}}{dT} = \frac{s_v - s_l}{\nu_v} \quad \quad \quad \text{\footnotesize{$(\nu_l \ll \nu_v)$}} \\
+\Rightarrow &\frac{dP_{v}}{dT} = \frac{T(s_v - s_l)}{T \nu_v} \\
+\Rightarrow &\frac{dP_{v}}{dT} = \frac{L \rho_v}{T} \quad \quad (T\Delta s = L, 1/nu_v = \rho_v) \\
+\end{align*}
+Using ideal gas equation, 
+\begin{align*}
+\Rightarrow &\frac{dP_{v}}{dT} = -\frac{L p_v}{\hat{R}_v T}
+\end{align*}
+which finally gives,
+\begin{align*}
+p_v(T) = A e^{\frac{-L}{\hat{R}_v T}}
+\end{align*}
+
+This is the equation of state for water vapour.
+
+\subsection{Layers of the atmosphere}
+\begin{itemize}
+\item Troposphere - upto $\sim$ 12 km
+\item Stratosphere - (15 - 50 Km)
+\item Mesosphere - (50 - 80 Km)
+\item Thermosphere - (80 - 700 Km)
+\item Exosphere - 700 Km and upwards
+\end{itemize}
+
+
+\end{document}

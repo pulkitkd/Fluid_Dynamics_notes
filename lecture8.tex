@@ -1,0 +1,146 @@
+\documentclass[11pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+\newcommand{\e}{\epsilon}
+\newcommand{\SI}{\Sigma}
+\newcommand{\dij}{\delta_{ij}}
+\newcommand{\1}{\textbf{1}}
+\newcommand{\gd}{\dot \gamma}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\vect}[1]{\underline{#1}} %\vect can be changed to make vectors appear bold or underlined or with arrow on top
+\newcommand{\p}[1]{\grave{#1}} %\p is for primed variables. The accent on top can be changed to \hat \tilde etc.
+
+\title{Lecture 8: The Stress Tensor}
+\author{}
+\begin{document}
+\maketitle
+
+\section*{Overview}
+
+We start by introducing the two kinds of forces studied in continuum mechanics - body forces and surface forces. While body forces only vary with position and time, surface forces also depend on the orientation of the chosen surface. In order to remove the arbitrariness intoduced by orientation and describe the behaviour of surface forces in terms of intrinsic properties of the fluid, we define the quantity called the stress tensor. It is obtained by a force balance on a small fluid element in static equilibrium. Balancing torques shows that the stress tensor is symmetric. Then we look at the hydrostatic variation of pressure due to body forces and motion induced due to density stratification. 
+
+Finally, we will look at a case where the stress tensor is in fact antisymmetric due to the magnetic interactions of constituent molecules.
+
+\section{Body forces and surface forces}
+The continuum mechanics approach to fluid mechanics makes the approximation that we are operating at length scales much larger than the microscopic length scales. Any small volume of fluid that we may consider will still be large enough to contain a large number of fluid molecules so that averaging makes sense and a smooth variation of the property can be obtained. E.g. density of the fluid can be precisely written as $\rho(\vect X, t)=\sum_{i=1}^N m_i \delta(\vect X -\vect X_i(t))$ which is a highly singular function. But in practice $N$ is very large even for small volumes (check the Loschmidt Number) which allows us to consider the average quantity $\rho_{avg}=\frac{1}{V}\int \rho dV$. This gives us a smoothly varying density field. We can now define the body forces. 
+
+\subsection{Body forces}
+
+Body forces are forces that act through the bulk of the fluid and hence scale with the volume of the fluid $(\sim O(\delta l^3))$ in any small element. These are usually long ranged. If $\vect{F}$ is a body force per unit mass, then total body force on an element of volume $dV$ will be $\rho \vect F dV$. Some examples of body forces are
+\begin{itemize}
+\item gravity: $\rho \vect g$
+\item centrifugal force: $\rho \Omega^2(\vect X - (\vect X \cdot \vect\Omega)\vect\Omega)$ where $\vect\Omega$ is the axis of rotation.
+\item Lorentz force: $\vect j \wedge \vect B$ where $\vect j$ is the current density vector and $\vect B$ is the magnetic field. Since $\vect B$ is a psuedo vector, the cross product gives us a true vector - the force. 
+\end{itemize}
+
+\subsection{Surface forces}
+Surface forces arise due to the discrete structure of the fluid. Since the continuum model ignores the discrete structure, they must be accounted for the surface forces seperately. They are manifestations of momentum transport from one small volume of fluid to another, either through collisions or via dipole (Van der Wall's) interactions. In gases the main source of momentum transport is through collisions. This is called the kinetic transport. In fluids, the key contribution is due to the electrostatic dipole interactions - potential transport besides a small fraction due to kinetic transport.
+
+These interactions only take place across the surface of a small element in consideration and hence surface forces scale with area $(\sim O(\delta l^2))$
+
+\section{The stress tensor}
+Body forces are, in general, functions of $(\vect X, t)$ but surface forces also depend on the orientation of the chosen surface. If $\vect\SI$ is a surface force, then $\vect \SI \equiv \vect\SI(\vect X, \vect n, t)$ where $\vect n$ is the unit normal to the surface. But the normal is not a quantity intrinsic to the fluid and hence we want a representation of the surface forces free from such arbitrary variables. This is given by the stress tensor and we can derive it in three steps. Consider a small fluid element of characterstic length $\delta l$. Then-
+\begin{itemize}
+\item Show that $\vect\SI(\vect X, -\vect n, t) = -\vect\SI(\vect X, \vect n, t)$ using force balance on a massles surface element.
+\item Body forces scale as $\sim \delta l^3$ whereas surface forces scale as $\sim \delta l^2$. Therefore for $\lim \delta l \to 0$, only surface forces are important and the force balance only needs to account for surface forces.
+\item Show that $\SI_i(\vect n, \vect X, t) = \sigma_{ij} n_j$ using force balance on a small fluid element.
+\end{itemize}
+
+$\sigma_{ij}$ is the stress tensor which allows us to find force on any given surface by contracting it with the surface normal. Being a second order tensor, it has in general nine independent elements but using moment balance (conservation of angular momentum) it can be shown that the stress tensor is in fact symmetric and hence has only 6 independent elements.  
+
+For moment balance on a small element, we again only need to consider surface forces because they are $O(\delta l^3)$ while the body forces are $O(\delta l^4)$. Then balancing torques implies
+\begin{align*}
+&\int x_i \wedge (\sigma_{jk} n_k) dA = 0 \\
+\Rightarrow &\int \epsilon_{ijk} x_j \sigma_{kl} n_l dA = 0 \\ 
+\Rightarrow &\int \pd{}{x_l} \big(\epsilon_{ijk} x_j \sigma_{kl} \big) dV = 0 \text{\quad (\footnotesize{Divergence theorem})} \\
+\Rightarrow &\int \big(\epsilon_{ijk} \pd{x_j}{x_l} \sigma_{kl} \big) dV = 0 \\
+\Rightarrow & \epsilon_{ijk} \delta_{jl} \sigma_{kl} = 0 \\
+\Rightarrow & \epsilon_{ijk} \sigma_{kj} = 0 \\
+\end{align*}
+Since double contraction of a symmetric and an antisymmetric tensor equals zero, we have the result that stress tensor is a second order symmetric tensor. Notice that we have condsidered $\sigma_{ij}$ to be constant in space. This is justified because we are considering a small volume with $\lim \delta l \to 0$. As all properties vary smoothly, we can consider the stresses to be nearly constant in this small element.
+
+Essentially we have shown that
+\begin{itemize}
+\item $\sigma_{ij}$ is a symmetric tensor. Therefore $\sigma_{12} = \sigma_{21}$ if they are measured at the same point.
+\item $\sigma_{ij}n_jdA$ gives us force on the surface with area $dA \vect n$
+\end{itemize}
+
+The off-diagonal elemets of $\sigma_{ij}$ give us the shear stress on a face with normal in the $i^{th}$ direction and force in the $j^{th}$. The diagonal elements give us the normal stresses. However, if the fluid is isotropic and at rest, then we must have
+\begin{align*}
+\sigma_{ij} &\propto \delta_{ij} \\
+\Rightarrow\sigma_{ij} &= -p \delta_{ij} \\
+\end{align*}
+In an isotropic fluid at rest, we will only have normal stress and the force per unit area is given by $\SI_i = \sigma_{ij}n_j = -p n_i$. If we are looking at an interface with normal $\vect n$ then certainly we cannot have forces perpendicular to the interface. Therefore we remove the normal component of the stress tensor and write
+\begin{align*}
+\sigma_{ij} &= T (\delta_{ij} - n_in_j)
+\end{align*}
+where $T$ is the surface tension.
+
+\section{Hydrostatic pressure variation}
+A hydrostatic force balance of surface and body forces can be written as
+\begin{align*}
+\int \rho \vect F dV + \int \sigma_{ij} n_j dA &= 0\\
+\end{align*}
+For statics, $\sigma_{ij} = -p \delta_{ij}$. Then, using divergence theorem to convert area to volume integral, we can write
+\begin{align*}
+\pd{p}{x_i} &= \rho F_i \\
+\end{align*}
+If density is constant
+\begin{align*}
+p &= p_0 + \rho_0 g_ix_i
+\end{align*}
+If we allow density to vary, then 
+\begin{align*}
+\pd{p}{x_i} &= \rho g_i \\
+\end{align*}
+Taking the curl of the equation and noting that curl of gradient vanishes, we get
+\begin{align*}
+\epsilon_{ijk}\pd{\rho}{x_j}g_k &= 0\\
+\Rightarrow \nabla \rho \wedge \vect g &= 0
+\end{align*}
+
+Therefore hydrostatic equilibrium can be maintained as long as density gradient is parallel to gravity or lines of constant density are parallel to constant body force contours. If density variation is not parallel to gravity, then $\sigma_{ij}$ will not be isotropic and shear forces will cause motion.
+
+Density stratification also generates vorticity. While deriving the vorticity equation by taking the curl of the Navier-Stokes, we encounter the term $\nabla \wedge \nabla p/\rho$. If density is constant, the term simply vanishes. But otherwise we get
+\begin{align*}
+\frac{D\vect\omega}{Dt} = \vect\omega\cdot\vect u + \nu \nabla^2 \vect \omega + \underbrace{\frac{1}{\rho^2}\nabla\rho \wedge \nabla p}_{\substack{\text{\footnotesize{Baroclinic source}}\\ \text{\footnotesize{of vorticity}}}}
+\end{align*}
+
+This indicates that if pressure gradient is not parallel to density stratification, vorticity will be generated. This can be used to explain inertial oscillations of water in vessel (sloshing). These are essentially standing gravity waves. In lakes, similar waves generated due to wind are known as Seiches.
+
+\section{Asymmetric stress tensor}
+
+We will consider a special case of ferrofluids where torque balance shows that the stress tensor cannot be symmetric. Ferrofluids are essentially ferromagnetic particles suspended in a fluid medium. In the presence of a magnetic field, these particles will have the tendency to align with the field. The crucial difference here is that the torque due to body forces also scales as $\delta l^3$ which is the same for surface forces. 
+
+Surface forces, on a small cube of size $\delta l$, are proportional to area of its faces and hence scale as $\delta l^2$. Their moment, therefore, scales as $\delta l^3$. Body forces are proportional to volume of the cube. So they scale as $\delta l^3$ and their moments as $\delta l^4$. But in the case of ferrofluids in magnetic field, body forces scale as $\delta l^3$ and so do their couple. This is because, for gravity, when we compute couple from force, an additional $\delta l$ must be factored in. But magnetic torque is proportional to $\vect p \wedge \vect B$ and no new $\delta l$ comes in.
+
+Therefore in the moment balance, we must consider both these contributions. Let $M\vect p$ denote a magnetic dipole with magnetic moment $M$ and orientation $p$ in a magnetic field $B$. Then
+\begin{align*}
+\text{Surface couple} &\sim \text{Body couple}\\
+\Rightarrow \int\vect X \wedge (\sigma_{ij}n_j)  dA &= -\sum_{i=1}^N Mp_i \wedge B_j
+\end{align*}
+
+Since the orientations of the magnetic dipoles differ, we must use a probability density function to evaluate the RHS. Let $P(\vect p)$ denote the probability density of obtaining a dipole with an orientation $\vect p$ and $n$ be the number of particles per unit volume. Then body couple due to all the particles is given by
+\begin{align*}
+\sum_{i=1}^N Mp_i \wedge B_j &= \underbrace{\int \underbrace{dV n}_{\substack{\text{total number}\\ \text{of particles}\\ \text{in dV}}} \underbrace{P(\vect p)d\vect p}_{\substack{\text{fraction of}\\ \text{particles with}\\ \text{orientation}\\ \text{$(\vect p \pm d\vect p)$}}} \underbrace{M\vect p \wedge \vect B}_{\substack{\text{couple due to}\\ \text{one particle}}}}_{\text{Orientation averaged couple}} \\
+\end{align*}
+Substituting this expression in the force balance
+\begin{align*}
+\int\vect X \wedge (\sigma_{ij}n_j)  dA &= -\int dV n P(\vect p) d\vect p M\vect p \wedge \vect B\\
+\end{align*}
+Then using divergence theorem for the LHS as done before, we get
+\begin{align*}
+\epsilon_{ijk}\sigma_{kj} &= -\int dV n P(\vect p) d\vect p M\vect p \wedge \vect B\\
+\end{align*}
+The RHS is now a vector (say $\beta_i$) which is not zero. Therefore $\sigma_{ij}$ cannot be symmetric.
+\section*{Appendix}
+\subsection{Derivation of the stress tensor}
+\subsection{Torque balance for the stress tensor}
+\subsection{Normalization of the probability distribution}
+Let $P(\vect p)$ denote the probability density of obtaining a dipole with an orientation $\vect p$. Then, probability of obtaining a particle with orienatation between $(\theta , \theta\pm d\theta)$ and $(\phi, \phi\pm d\phi)$ is $P(\vect p)$ times the solid angle between $d\theta$ and $d\phi$ which is $P(\vect p)\sin\theta d\theta d\phi$. Therefore,
+\begin{align*}
+\int P(\vect p)\sin\theta d\theta d\phi &= 1\\
+\end{align*}
+This will determine the normalization constant for the probability distribution.
+\end{document}
