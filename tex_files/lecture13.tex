@@ -1,0 +1,150 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage[ddmmyyyy]{datetime} 
+\usepackage[short,nodayofweek,level,12hr]{datetime} 
+%\usepackage{cite}
+%\usepackage{wrapfig}
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\newcommand{\e}{\epsilon}
+\newcommand{\dl}{\delta}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\vect}[1]{\underline{#1}}
+\newcommand{\uvect}[1]{\hat{#1}}
+\newcommand{\1}{\vect{1}}
+\newcommand{\grad}{\nabla}
+\newcommand{\lc}{l_c}
+
+\title{Surface Tension}
+\date{\displaydate{date}}
+\newdate{date}{22}{09}{2018}
+\author{}
+
+\begin{document}
+\maketitle
+
+If a \textit{thin} tube is half-dipped in water, we know that water rises in the tube to a height greater than that of the surrounding fluid. But what do we mean by a thin tube? There must be a critical thickness of the tube beyond which we will expect gravity to dominate and below which surface tension will be important.
+
+Since there is a competition between gravity ($g$) and surface tension ($\Gamma$), we can obtain the critical length ($\lc$) by comparing the pressures exerted by each of these forces-
+\begin{align*}
+&\rho g \lc \sim \frac{\Gamma}{\lc}\\
+\Rightarrow &\lc \sim \bigg(\frac{\Gamma}{\rho g}\bigg)^{1/2}
+\end{align*}
+This is the length scale over which the effects of surface tension are comparable with those of gravity. At lengths much smaller than this, surface tension will dominate gravity. For water, $\Gamma = 0.07 N/m$ and hence $l_c \approx 2.7$mm. Therefore a \textit{thin} tube, for water, referes to a tube whose diameter is nearly 2.7mm or less.
+
+But why is the surface of a fluid under tension? A fluid consists of a bulk and a surface. The surface, though usually idealized as a sheet with zero thickness, is actually a few molecules thick. For a depth of the order of a few molecules near the water surface, the potential energy of the molecules is substantially higher than that in the bulk. The surface molecules are more energetic, jiggling about more rapidly, often escaping from the liquid to the air. If we wanted to calculate the total potential energy of the liquid by evaluating the potential energy per molecule in the bulk and then multiplying it by the total number of molecules, we will incur an error because potential energy for the surface molecules is much larger. This surface energy is usually incorporated by considering the surface to be an area (even though it is a volume few molecules thick). The excess energy associated with the area is proportional to the area and the coefficient of proportionality is the surface tension. 
+
+Increasing the surface area causes more molecules to move from the bulk to the surface which increases their potential energy. We know that force is a derivative of the potential energy ($F=-dU/dx$) and therefore pushing the molecules up the potential energy curve leads to a force. In order to minimize it's potential energy then, a fluid must minimize its surface area which is what we observe in nature.
+
+\section{The Young - Laplace Equation}
+The fact that surface of a fluid is under tension leads to a pressure jump between the two fluids. This can be seen by a force balance across the surface. Since the mass of a surface element is zero, the net force must be zero. Therefore, the sum of pressures acting on the two sides plus the surface tension force must add up to zero.
+\begin{align*}
+&\int(-p\vect n + p \vect n) dA + \oint \Gamma \vect t' ds = 0 
+\end{align*}
+where $\vect n$ is the normal to the surface, $\vect t$ is the tangent to the curve bounding the surface and $\vect t' = \vect n \wedge \vect t$ is a vector perpendicular to the curve. Using Stokes Theorem, this can be written as
+\begin{align*}
+&\underbrace{\bigg[(\hat p - p)- \Gamma \pd{n_k}{x_k} \bigg]n_i}_{\text{Normal force balance}} + \underbrace{(\dl_{ik} - n_in_k)\pd{\Gamma}{x_k}}_{\text{tangential force balance}} = 0
+\end{align*}
+
+If the gradient of surface tension is zero, then second term is vanishes and we get
+\begin{align*}
+&\hat p - p = \Gamma \pd{n_k}{x_k}\\
+&\hat p - p = \Gamma (\grad\cdot \vect{n})
+\end{align*}
+which is the Young-Laplace Equation. This equation gives us the pressure jump across an interface due to surface tension provided $\Gamma$ is constant everywhere. If $\Gamma$ varies with position, then the gradient of $\Gamma$ will not be zero and there will be flow due the surface tension gradient. Such flows are called Marangoni flows. 
+
+We can see a quick implementation of the Young-Laplace Equation by evaluating the pressure jump across a spherical bubble (say air bubble in water). For a sphere, the normal is given by $\vect n = x_i/r$. Hence-
+\begin{align*}
+\grad\cdot n &= \pd{}{x_i}\frac{x_i}{r}\\
+&= \frac{1}{r}\pd{x_i}{x_i} - \frac{x_i x_i}{r^3} \tag{writing $r= (x_ix_i)^{1/2}$ }\\
+&= \frac{\dl_{ii}}{r} - \frac{x_i x_i}{r^3}
+= \frac{3}{r} - \frac{1}{r}
+= \frac{2}{r}
+\end{align*}
+
+Therefore, for a spherical bubble, the pressure balance gives us
+\begin{align*}
+&\hat p - p  = \frac{2 \Gamma}{r}
+\end{align*}
+
+\section{Shape of a 2D static meniscus}
+The Young-Laplce Equation can be used to obtain the shape of a static meniscus. In this section we look at a meniscus close to a plane wall. Just next to the wall, the rise in water level is highest and it tapers off as we move away from the wall. We want to find out the functional form for the interface $z \equiv z(x)$ where $x$ is the distance from the wall and $z$ is the height of the meniscus at a given $x$. 
+
+Evaluation of the Young-Laplace Equation requires us to find the divergence of the unit normal. The normal to any surface $F(x,y) = 0$ is given by:
+\begin{align*}
+&  \vect n = \frac{\grad F}{|\grad F|}\\
+&\Rightarrow \pd{}{x_i}n_i = \pd{}{x_i}\frac{\pd{F}{x_i}}{|\grad F|}\\
+&\Rightarrow \pd{n_i}{x_i} = \frac{1}{|\grad F|}\pd{^2F}{x_i^2} - \frac{1}{|\grad F|^3}\pd{F}{x_i}\pd{F}{x_k}\pd{^2F}{x_ix_k}
+\end{align*}
+For the 2D static meniscus $z=f(x)$ and hence $F(x,z) = z-f(x) = 0$. Evaluating the necessary derivatives:
+\begin{align*}
+&\pd{F}{x} = -\pd{f}{x}\\
+&\pd{F}{z} = 1\\
+&\pd{^2F}{x\partial z} = \pd{^2f}{x^2}\\
+\end{align*}
+and substituting them in the Young-Laplace equation, we get the following:
+\begin{align*}
+&\hat p - p = -\Gamma \bigg(\frac{\pd{^2f}{x^2}}{\big(1+(\pd{f}{x})^2\big)^{3/2}} \bigg)\\
+\Rightarrow &\hat p - p = -\rho g z  = -\Gamma \bigg(\frac{\pd{^2f}{x^2}}{\big(1+(\pd{f}{x})^2\big)^{3/2}} \bigg)
+\end{align*}
+Here, $\hat p$ is the atmospheric pressure and $p$ is the pressure in the fluid at $z=0$. We can non-dimensionalize the equation by considering the length scale $l_c = \sqrt{\Gamma/\rho g}$. This leaves us with
+\begin{align*}
+& z  = \frac{\pd{^2f}{x^2}}{\big(1+(\pd{f}{x})^2\big)^{3/2}} 
+\end{align*}
+We can greatly simplify the matters if we linearize this equation. Consider the case where the slope of the meniscus is very small everywhere, i.e. $dz/dx \ll 1$. Then the equation becomes
+\begin{align*}
+& z = \pd{^2f}{x^2}
+\end{align*}
+whose solution is an exponential 
+\begin{align*}
+&z = z_0 e^{-x}
+\end{align*}
+or in dimensional terms
+\begin{align*}
+&z = z_0 e^{-x/l_c}
+\end{align*}
+which tells us that the height of the meniscus decays exponentially away from the wall with a characterstic length scale of $l_c$. Another quantity of interest here is the maximum height to which water rises along the wall. In order to find it, we must impose the contact angle boundary condition:
+\begin{align*}
+&\frac{dz}{dx} = \tan(\frac{\pi}{2} + \theta_c) \quad @ \quad z=0\\
+\Rightarrow &\frac{-z_0}{l_c} = \tan(\frac{\pi}{2} + \theta_c) \\
+\Rightarrow & z_0 =-l_c \tan(\frac{\pi}{2} + \theta_c) \\
+\Rightarrow & z_0 =l_c \cot(\theta_c) 
+\end{align*}
+This gives us the height of the meniscus at the wall. But what if $\theta_c = 0$? The height comes out to be infinity. This is obviously wrong but we must remember that linearization was only valid when slope of the meniscus was small. Since we have violated this assumption, the method is expected to give the wrong answer. In order to obtain the height of meniscus at the wall when $\theta_c = 0$, we must solve the full non-linear equation, which leads us to
+\begin{align*}
+&1-\frac{z^2}{2} = \frac{1}{(1+\frac{dz}{dx}^2)^{1/2}}
+\end{align*}
+From this, we can obtain the height at the wall to be $\sqrt 2 l_c$ when $\theta_c = 0$.
+The equation can be further solved to obtain the complete shape of the meniscus as a transcendental function $x\equiv x(z)$.
+
+\section{Appendix}
+\subsection{Force balance interpretation}
+Describe 
+\begin{align*}
+&1-\frac{z^2}{2} = \frac{1}{(1+\frac{dz}{dx}^2)^{1/2}}
+\end{align*}
+as a force balance
+
+\subsection{Solution of the non-linear equation for the 2D meniscus}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
