@@ -1,0 +1,176 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage[ddmmyyyy]{datetime} 
+\usepackage[short,nodayofweek,level,12hr]{datetime} 
+%\usepackage{cite}
+%\usepackage{wrapfig}
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\newcommand{\e}{\epsilon}
+\newcommand{\dl}{\delta}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\describe}[2]{\underbrace{#2}_{\text{#1}}}% \describe{}{} - First bracket is for description 
+%\describe{$\substack{this \\ is \\ substacking}$}{b} - To split the description over multiple lines
+\newcommand{\vect}[1]{\underline{#1}}
+\newcommand{\uvect}[1]{\hat{#1}}
+\newcommand{\1}{\vect{1}}
+\newcommand{\grad}{\nabla}
+\newcommand{\RR}{\Rightarrow}
+
+\title{Matched Asymptotics for the Axisymmetric Meniscus}
+\date{\displaydate{date}}
+\newdate{date}{23}{09}{2018}
+\author{}
+
+\begin{document}
+\maketitle
+
+\section{The Axisymmetric Meniscus}
+The setup consists of a cylinder of radius $R$ dipped halfway into a fluid of density $\rho$ and surface tension $\Gamma$ and we are required to find out the shape of the resulting meniscus under the influence of gravity and surface tension. The shape of the meniscus is denoted by $z=f(r)$. Since the problem is axisymmetric, there is no $\theta$ dependence.
+
+We know that at any $r$, the pressure of fluid over the horizontal $z=0$ is being balanced by the pull of surface tension. If pressure inside the fluid is $\hat p$ and outside it is $p$, the unit normal to the meniscus being $\vect n$, then:
+\begin{align*}
+&\hat p - p = \rho g z = \Gamma \grad \cdot \vect n
+\end{align*}
+Writing $F = z-f(r) = 0$ and the unit normal as $\vect n=\grad F/|\grad F|$, the divergence of the unit normal comes out to be:
+\begin{align*}
+&\grad\cdot n = \frac{\frac{-1}{r}\frac{d}{dr}\frac{rdf}{dr}}{\Big(1+\frac{df}{dr}^2\Big)^{1/2}} + \frac{\frac{d^2f}{dr^2}\frac{df}{dr}^2}{\Big(1+\frac{df}{dr}^2\Big)^{3/2}}
+\end{align*}
+Before proceeding, we would like to scale our equation to make it dimensionless. But, as opposed to the 2D meniscus near a flat wall, this problem has 2 length scales - $R$ and $l_c(=\sqrt{\Gamma/\rho g})$. Therefore, the solution will, in general, be a function of the non-dimensional parameter $R/l_c$ or $(R/l_c)^2=\rho g R^2/\Gamma$ which is the Bond Number $(Bo)$. If $Bo \to \infty$, the radius of the cylinder is much larger than $l_c$ and hence we approach the 2D mensicus case (as long as $r$ remains less than $R$). This is the limit in which the mensicus doesn't sense the curvature of the cylinder. 
+
+We are now interested in the opposite limit where the effects of curvature of the cylinder are prominent, $\lim Bo \ll 1$. If we now scale the lengths by $l_c = \sqrt{\Gamma/\rho g}$, The non-dimensional Young-Laplace Equation becomes:
+\begin{align*}
+& z = \frac{\frac{-1}{r}\frac{d}{dr}\frac{rdf}{dr}}{\Big(1+\frac{df}{dr}^2\Big)^{1/2}} + \frac{\frac{d^2f}{dr^2}\frac{df}{dr}^2}{\Big(1+\frac{df}{dr}^2\Big)^{3/2}}
+\end{align*}
+which looks nasty by itself, so we will solve the far-field and near-field problems separately and later patch the two solutions. 
+
+\subsection*{Far-field solution ($\lim r \gg R$)}
+
+In the far-field, the slope of the meniscus will be small and the equation becomes:
+\begin{align*}
+&z = \frac 1 r\frac{d}{dr}\frac{rdf}{dr}\\
+\Rightarrow& \frac{d^2z}{dr^2} +\frac{dz}{rdr} - z = 0 \tag{using $z=f(r)$}
+\end{align*}
+which is the modified Bessel's Equation with solutions given by:
+\begin{align*}
+\RR &z = \describe{Growing solution}{I_0(r)}, \describe{Decaying solution}{K_0(r)}
+\end{align*}
+$I's$ grow with $r$ and have a essential singularity at infinity. $K's$ decay with $r$ and have singularity at origin (which is fine with us as long as the cylinder has any finite thickness). Hence, we conclude that:
+\begin{align*}
+&z = A K_0(r/l_c) \quad \text{if} \quad r \gg R
+\end{align*}
+Thus we obtain the far-field solution. 
+
+\subsection*{Near-field solution ($\lim r \ll l_c$)}
+
+Now consider the limit, $r \ll l_c$. Here, we cannot make the linear approximation because slope near the cylinder is not small. But within this limit, it is reasonable to assume that the effect of surface tension will dominate gravity. In the full equation:
+\begin{align*}
+&  z = \frac{\frac{-1}{r}\frac{d}{dr}\frac{rdf}{dr}}{\Big(1+\frac{df}{dr}^2\Big)^{1/2}} + \frac{\frac{d^2f}{dr^2}\frac{df}{dr}^2}{\Big(1+\frac{df}{dr}^2\Big)^{3/2}}
+\end{align*}
+the term containing gravity (clearly seen if we re-dimensionalize the equation and bring out the implicit $\sqrt{\Gamma/\rho g}$ is $z$. Therefore, we neglect this term and proceed to obtain:
+\begin{align*}
+&\frac{d^2z}{dr^2} + \frac{1}{r}\frac{dz}{dr}\Big( 1 + \frac{dz}{dr}^2\Big) = 0
+\end{align*}
+This can be integrated with a little effort to give:
+\begin{align*}
+&z = D - C \log\Big[ \frac{r}{C}+\Big(\big(\frac{r}{C}\big)^2-1\Big)^{1/2}\Big] 
+\end{align*}
+%The boundary condition at the wall requires, in dimensional terms, $z=H$ at $r = R$. In non-dimensional terms $z = H/l_c$ at $r = Bo$. For convenience, we will denote the unknown $H/l_c$ as $H$ itself, keeping in mind that height is being measured in units of $l_c$. Therefore the boundary condition gives us:
+%\begin{align*}
+%& H = C \log\Big[ \frac{Bo}{C}+\Big(\big(\frac{Bo}{C}\big)^2-1\Big)^{1/2}\Big] + D\\
+%\RR& D = H - C \log\Big[ \frac{Bo}{C}+\Big(\big(\frac{Bo}{C}\big)^2-1\Big)^{1/2}\Big]
+%\end{align*}
+%Substituting this in the equation for $z$, we get:
+%\begin{align*}
+%&z = H + C (\log\Big[ \frac{r}{C}+\Big(\big(\frac{r}{C}\big)^2-1\Big)^{1/2}\Big] - \log\Big[ \frac{Bo}{C}+\Big(\big(\frac{Bo}{C}\big)^2-1\Big)^{1/2}\Big])\\
+%&z = H + C \log\Bigg[ \frac{\frac{r}{C}+\Big(\big(\frac{r}{C}\big)^2-1\Big)^{1/2}}{\frac{Bo}{C}+\Big(\big(\frac{Bo}{C}\big)^2-1\Big)^{1/2}}\Bigg]
+%\end{align*}
+%Or in dimensional terms:
+%\begin{align*}
+%&z = H + C \log\Bigg[ \frac{\frac{r}{C}+\Big(\big(\frac{r}{C}\big)^2-1\Big)^{1/2}}{\frac{R}{C}+\Big(\big(\frac{R}{C}\big)^2-1\Big)^{1/2}}\Bigg] \quad \text{if} \quad r\ll l_c
+%\end{align*}
+which is our near-field solution ($C$ and $D$ being arbitrary constants to be determined). 
+
+\subsection*{Overlap region}
+
+From the two solutions obtained above, we must construct the solution in the overlap region given by $R \ll r \ll l_c$. In order to do this, we obtain the inner limit of the outer solution and the outer limit of the inner solution and equate the two. 
+
+\begin{align*}
+&\lim_{r \ll l_c} A K_0(r/l_c) = -A (\log(r/l_c) + \gamma) \tag{\footnotesize{Inner limit of the outer solution}}\\
+&\lim_{r \gg R}  D - C \log\Big[ \frac{r}{C}+\Big(\big(\frac{r}{C}\big)^2-1\Big)^{1/2}\Big]  = D - C \log(\frac{2r}{C}) \tag{\footnotesize{outer limit of the inner solution}}
+\end{align*}
+where $\gamma$ is the Euler-Mascheroni constant. These two solutions are, in fact, the same and hence we can equate them:
+\begin{align*}
+&-A (\log(r/l_c)+\gamma) = D - C \log(\frac{2r}{C})\\
+\RR&-A\log(r/l_c) - A\gamma = D - C \log(\frac{2l_c}{C}\frac{r}{l_c})\\
+\RR&-A\log(r/l_c) - A\gamma = D - C \log(\frac{2l_c}{C}) - C\log(\frac{r}{l_c})\\
+\RR& -A\log(r/l_c) = -A\log(r/l_c) \quad \text{and} \quad - A\gamma = D - C \log(\frac{2l_c}{C})\\
+\RR& A = C \quad \text{and} \quad D = C (\log(\frac{2l_c}{C} - \gamma))
+\end{align*}
+We have three constants ($A,C,D$) and 2 equations. Third equation comes from the contact angle boundary condition. Denoting the inner solution as $z^i$, we have
+\begin{align*}
+&\frac{dz^i}{dr} = \tan(\frac{\pi}{2} + \theta_c) = -\cot(\theta_c) \quad @ \quad r=R
+\end{align*}
+which eventually yields
+\begin{align*}
+&C = R\cos\theta_c
+\end{align*}
+This gives us the significance of $C$. When $\theta_c=0$, $C=R$. Finally, we can obtain the height of the meniscus at the surface of the cylinder. Using the near field solution and expressions for $C$ and $D$, we can write:
+\begin{align*}
+&H = R\cos\theta_c\Bigg[\log\bigg(\frac{2l_c}{R(1+\sin\theta_c)} \bigg)- \gamma \Bigg]
+\end{align*}
+
+If $\theta_c = 0$, we get $H = R\log(l_c/R)$. Note that $\log(l_c/R)$ is usually an order one quantity (when $Bo \ll 1$ or $R \ll l_c$). Then the rise is of the order of $R$. This is much less than the rise for the case of flat plate where it was $\sqrt 2 l_c$, of the order of $l_c$.
+\section{Appendix}
+
+\subsection{Interpretation of the far-field meniscus using Helmholtz Equation}
+The far-field solution was obtained using
+\begin{align*}
+&z = \frac 1 r\frac{d}{dr}\frac{rdf}{dr}
+\end{align*}
+which has the form of a Helmholtz equation given by
+\begin{align*}
+&\grad^2f-k^2f=0
+\end{align*}
+where $k$ has the dimensions of inverse length scale. To make it explicit, we write the equation as
+\begin{align*}
+&\grad^2f-\frac{f}{\lambda^2}=0
+\end{align*}
+where $\lambda$ is a some characterstic length. When $r \ll \lambda$, then the second term is neglected and the equation reduces to a Laplace equation
+\begin{align*}
+&\grad^2f=0
+\end{align*}
+and hence, in this limit, $f$ will behave as a solution to the Laplacian. Specifically, if there is a point source in 3D, then $f = -1/4\pi r$ and in 2D it would be $\log(r)/2\pi$. But outside this limit, the form of the solution will be different. If $r \gg \lambda$ we observe an exponential decay of the solution. 
+
+For the equation governing the far-field meniscus 
+\begin{align*}
+&z = \frac 1 r\frac{d}{dr}\frac{rdf}{dr}\\
+\Rightarrow& \frac{d^2z}{dr^2} +\frac{dz}{rdr} - z = 0 \tag{using $z=f(r)$}\\
+\Rightarrow& \grad^2f - \frac{f}{l_c^2} = 0 \tag{dimensionalizing}
+\end{align*}
+we can similarly deduce the two types of behaviour. At length scales much greater than $l_c$, the term $\frac{dz}{rdr}$ is small and the remaining terms give the decaying exponential solution. Whereas, if we are in the regime where $r \ll l_c$, then $l_c$ is large compared to $r$ and hence the term $z$ gets neglected. The remaining terms then give the logarithmically decaying solution. The full solution, $K_0(r)$, decays exponentially for large $r$ and goes as $-\log(r)$ for small $r$. Thus it respects both the limiting cases.
+
+
+Consider a positive ion surrounded by a sphere of negative charges of radius $R$. If we want to evaluate the potential close to the charge ($r \ll R$), then the governing equation is a Laplacian and hence potential due to the point charge goes as $1/r$ within the sphere and decays exponentially $e^{-r/R}$ for $r \gg R$.
+
+
+
+
+\subsection{Calculations for the inner region}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
