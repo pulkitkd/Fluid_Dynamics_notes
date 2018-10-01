@@ -1,0 +1,230 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage[ddmmyyyy]{datetime} 
+\usepackage[short,nodayofweek,level,12hr]{datetime} 
+%\usepackage{cite}
+%\usepackage{wrapfig}
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\newcommand{\e}{\epsilon}
+\newcommand{\dl}{\delta}
+\newcommand{\dij}{\delta_{ij}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\describe}[2]{\underbrace{#2}_{\text{#1}}}% \describe{}{} - First bracket is for description 
+%\describe{$\substack{this \ is \ substacking}$}{b} - To split the description over multiple lines
+\newcommand{\vect}[1]{\underline{#1}}
+\newcommand{\vv}[1]{\underline{#1}}
+\newcommand{\vu}{\underline{u}}
+\newcommand{\uvect}[1]{\hat{#1}}
+\newcommand{\1}{\vect{1}}
+\newcommand{\grad}{\nabla}
+\newcommand{\RA}{\Rightarrow}
+\newcommand{\at}[1]{\bigg|_{#1}}
+\newcommand{\half}{\frac{1}{2}}
+
+\title{Kinematics: Local Linear Flows}
+\date{\displaydate{date}}
+\newdate{date}{24}{09}{2018}
+\author{}
+
+\begin{document}
+\maketitle
+
+\section*{Overview}
+
+A given fluid motion can be understood by looking at a local picture or at the global picture. The local picture refers to an analysis of the fluid motion at length scales much smaller than the macroscopic length scale. Looking at small length scales allows us to linearize the flow field and construct a locally linear description of the flow. The overall global flow might well be non-linear. The global flow is understood via means of streamlines, streaklines and pathlines. These two means of looking at a fluid flow will be explored in the following lectures. This lecture will focus on the local linear flows.
+
+\section{Linearity and its consequences}
+
+A local description of fluid flows requires us to operate at length scales much smaller than the macroscopic length scale. The macroscopic length scale is, roughly speaking, the length over which the fluid velocity varies substantially. Since we will be concerned with much smaller lengths than this, we can linearize the variation in velocity about any point $\vv X_0$ and consider only the linear variation of velocity with $\vv r$ i.e. $\vv u \propto \vv r$. Taylor expanding about a point $\vv X_0$ gives:
+\begin{align}
+&\vv u(\vv X_0 + \vv r) = \vv u(\vv X_0) + \pd{\vv u}{\vv r}\bigg|_{\vv X_0}\cdot \vv r + O(r^2)\\
+&\RA \dl\vu = \pd{\vv u}{\vv r}\at{\vv X_0} \vv r
+\end{align}
+
+Therefore, velocity at any point $\vv X_1 = \vv X_0 + \vv r$, is a linear function of the position. A transformation between position vector and the velocity vector must be carried out via a second order tensor which is the velocity gradient tensor in this case. 
+
+Note that, since velocity is a linear function of position, therefore, the velocity gradient tensor must be a constant independent of $\vv r$ and hence independent of $\vv X_1$. Therefore, the velocity gradient tensor is the same at all points in the flow. If the velocity gradient is the same at all the points, it implies that the variation in velocity as seen from any point is the same as seen from any other point. \textit{Therefore, in a linear flow, the flow pattern remains identical at all points and there is no intrinsic length scale to the flow}. 
+
+The fact that there is no length scale to the flow can also be seen from the dimensions of the velocity gradient $[M^0 L^0 T^{-1}]$. There is no length scale, but only a time scale which denotes the strength of the linear flow - how efficiently the flow stretches or deforms a fluid element. 
+
+\section{The velocity gradient tensor}
+
+The velocity gradient tensor can be better analyzed if we seperate out its symmetric and antisymmetric parts and then from the symmetric part, seperate out the trace and a traceless part. This gives us:
+\begin{align*}
+&\pd{u_i}{x_j} = \describe{strain-rate tensor}{\half(\pd{u_i}{x_j} + \pd{u_j}{x_i})} + \describe{vorticity tensor}{\half(\pd{u_i}{x_j} - \pd{u_j}{x_i})}\\
+\RA&\pd{u_i}{x_j} = \describe{diagonal}{\frac{e_{kk}}{3}\dij} + \describe{symmetric-traceless}{\half(\pd{u_i}{x_j} + \pd{u_j}{x_i} - \frac{e_{kk}}{3}\dij)} + \describe{anti-symmetric}{\half(\pd{u_i}{x_j} - \pd{u_j}{x_i})}\\
+\RA& \dl u_i = \pd{u_i}{x_j}r_j = \dl u^1_i + \dl u^2_i + \dl u^3_i
+\end{align*}
+Therefore we have split our linear flow into three seperate velocity fields given by:
+\begin{align*}
+&\dl u^1_i = \frac{e_{kk}}{3}\dij r_j\\
+&\dl u^2_i = \half(\pd{u_i}{x_j} + \pd{u_j}{x_i} - \frac{e_{kk}}{3}\dij) r_j\\
+&\dl u^3_i = \half(\pd{u_i}{x_j} - \pd{u_j}{x_i}) r_j
+\end{align*}
+
+Based on the velocity gradient tensor associated with each of the three fields, we can conclude the following:
+\begin{itemize}
+\item $\dl u^1_i$
+
+The velocity gradient has only diagonal terms which describe the normal strains on a fluid element. Normal forces cause expansion or contraction of a fluid element without causing shape distortion. Also, we see that $\dl u^1_i = \frac{e_{kk}}{3}\dij r_j = \frac{e_{kk}}{3}r_i$ - the flow is purely radial and causes volumetric changes without shape distortions.
+
+The constant potential surfaces for this case are spheres and hence the streamlines (being perpendicular to constant potential surfaces are radial.
+
+\item $\dl u^2_i$
+
+Since the trace of the velocity gradient is zero, there is no expansion or contraction of fluid elements under this velocity field. However, the non-zero off-diagonal elements indicate shear forces which lead to shape distortions without change in volume of the fluid element.
+Since the velocity gradient tensor for this case is symmetric, we can diagonalize it. Since it is also traceless, a general velocity gradient tensor for this type of flow will have the form:
+$$
+\pd{u^2_i}{x_j} = 
+\begin{pmatrix}
+a & 0 & 0 \\
+0 & b & 0 \\
+0 & 0 & -(a+b)
+\end{pmatrix}
+$$
+Then the  corresponding velocity becomes:
+\begin{align*}
+& u^2_i = 
+\begin{pmatrix}
+a & 0 & 0 \\
+0 & b & 0 \\
+0 & 0 & -(a+b)
+\end{pmatrix}
+r_i
+\end{align*}
+which indicates that flow goes out in directions 1 and 2 and comes in from direction 3 such that the total volume remains conserved. This is biaxial extensional flow. In 2D, we will have
+\begin{align*}
+u^2_i &= 
+\begin{pmatrix}
+a & 0\\
+0 & -a
+\end{pmatrix}
+r_i
+\end{align*}
+This is the equation for a planar extensional flow. We can analyze the flow behaviour with time as follows:
+\begin{align*}
+\RA \frac{dr_1}{dt} &= a r_1 \\
+\frac{dr_2}{dt} &= -a r_2\\
+\RA r_1 &= r_{1_0}e^{at}\\
+ r_2 &= r_{2_0}e^{-at}
+\end{align*}
+which tells us that, in a hyperbolic linear flow, fluid elements get stretched exponentially with time. Along the stretching direction, the farther an element goes, the faster it gets stretched. 
+
+The constant potential surfaces are elliptic hyperboloids (1 or 2 sheeted, depending on whether $\phi$ is positive or negative). The streamlines are hyperbolae. For planar extensional flow, they become rectangular hyperbolae.
+
+\item $\dl u^3_i$
+
+The velocity gradient here is antisymmetric. This means that the diagonal elements are zero and hence there are no volumetric changes. The velocity field can be obtained as follows:
+\begin{align*}
+\dl u^3_i &= \omega_{ji} r_j\\
+&= \half (\pd{u_i}{x_j} - \pd{u_j}{x_i})r_j\\ 
+&= \half (\dl_{il}\dl_{jm}-\dl_{im}\dl_{jl})\pd{u_l}{x_m} r_j\\
+&= \half \epsilon_{ijk}\epsilon_{klm}\pd{u_l}{x_m} r_j\\
+&= \half \vv \omega \wedge \vv r
+\end{align*}
+
+ This velocity field corresponds to solid body rotation. The angular velocity ($\Omega$) gives the vorticity ($\omega$) of the flow ($\omega = \Omega/2$). The previous two velocity fields were irrotational and therefore, we can define a scalar potential corresponding to them.
+
+\end{itemize}
+
+It should be noted that if a line element is kept in a linear flow, then it tends to align with the stretching direction (in extensional flow), rotate (in rigidly rotating flow) or translate (in a radial flow). But, in a linear flow, a line element doesn't bend because bending occurs when there is a non-linear variation of velocity along the line. For a linear flow, the velocity variation between any two points is obviously linear.
+
+\section{Linear flow and Kolmogorov scale in Turbulence}
+
+A turbulent flow consists of a broad range of length and time scales. The length scale of the smallest eddy in the flow is known as the Kolmogorov length scale ($l_k$). At lengths scales smaller than $l_k$, we again observe linear flow. Obviously, the flow no longer has a length scale but only a time scale given by the velocity gradient tensor, given by the following relation
+\begin{align*}
+&\vu = (\grad \vu) \vv r
+\end{align*}
+The velocity gradient, being that for a linear flow, doesn't vary spatially. But owing to the unsteadiness in the flow it can vary with time. Hence the linear flow at any point keeps changing randomly with time. 
+
+A charaterstic of turbulent flow is that energy is supplied to the flow at large length scales, but it is dissipated at the smallest scales - the Kolmogorov scale, where viscosity finally becomes important. Viscosity smoothens out sharp gradients quickly and hence if $|\grad\vu|$ is large, the dissipation is also large. Let energy be supplied at a rate given by $\e$. The dissipated energy per unit mass can be written as $\sim u^2/t$ (kinetic energy dissipated per unit time). Since at $l_k$, all supplied energy must be dissipated, we have:
+\begin{align*}
+&\frac{u_k^2}{t} = \frac{u_k^3}{l_k} = \e
+\end{align*}
+
+The ratio of energy supplied to energy dissipated is in fact the Reynolds number which will certainly be $O(1)$ at Kolmogorov length scale. Therefore:
+\begin{align*}
+&Re_k = \frac{l_k u_k}{\nu} \sim 1\\
+\RA&u_k \sim \frac{\nu}{l_k}
+\end{align*}
+Now we can use this expression for velocity in the energy balance to write
+\begin{align*}
+&\frac{u_k^3}{l_k} \sim \frac{\nu^3}{l_k^4} \sim \e \tag{$u_k \sim \frac{\nu}{l_k}$}\\
+\RA&l_k \sim \bigg(\frac{\nu^3}{\e}\bigg)^{1/4}
+\end{align*}
+which is the Kolmogorov scale, quite easily obtained from just an energy balance. The expression tells us that high viscosity causes a large $l_k$. But more importantly, it tells us that as we supply more and mroe energy to the system, it modifies so that smaller and smaller flow scales appear so that eventually viscosity starts to dominates. We can get an idea as to how small $l_k$ is compared to some geometric scale $L$. 
+\begin{align*}
+&\frac{L}{l_k} \sim \frac{L}{(\nu^3/\e)^{1/4}}
+\end{align*}
+In order to obtain the Reynolds number, we need macroscopic quantities (and not Kolmogorov scale quantities) in the above expression. So we substitute $\e$ in terms of macroscopic velocity scale $U$ and length $L$. As before $\e\sim U^3/L$ and hence:
+\begin{align*}
+&\frac{L}{l_k} \sim \frac{L}{(\nu^3/\e)^{1/4}} \sim \frac{L U^{3/4}}{\nu^{3/4}L^{1/4}} \sim Re^{3/4}\\
+\RA& l_k \sim L Re^{-3/4}
+\end{align*}
+Therefore, if a numerical simulation intends to resolve all length scales in a turbulent flow simulation, then this expression tells us how the grid resolution must scale with $Re$. If $Re\sim 10000$ then we have that $l_k \sim L/1000$, or we need 1000 points in each direction. In three dimensions then, this penalty will scale as $\sim Re^{-9/4}$. 
+
+This is how the smallest eddy size varies with space. If we want to capture all time scales in the flow, then we must determine the smallest time scale in the flow ($t_k$) in terms of some macroscopic time scale.
+\begin{align*}
+&t_k^{-1} = \frac{u_k}{l_k} = \frac{\nu}{l_k^2} =\frac{\nu}{L^2 Re^{-6/4}} \\ 
+\end{align*}
+If the macroscopic time is $T$ ($\sim L/U$), then we have:
+\begin{align*}
+&\frac{T}{t_k} = \frac{L \nu}{U L^2 Re^{-6/4}} = Re^{1/2}\\
+\RA& t_k = T (Re^{-1/2})
+\end{align*}
+This is how the time stepping for a turbulent simulation must scale with $Re$. Therefore, the total penalty for a turbulent simulation with $Re$ becomes $\sim Re^{1/2} + Re^{9/4} = Re^{11/4}$, which nearly $Re^3$. As Reynolds number doubles, the number of nodes nearly go up by an order of magnitude.
+
+
+\section{Appendix}
+
+\subsection{Proof that $\grad\cdot \vv u$ equals fractional rate of change of volume}
+
+\subsection{A general classification of linear flows}
+
+Any general linear flow can be constructed using a linear combination of planar extensional flow and solid body rotation as follows:
+\begin{align*}
+&\grad \vv u  = \frac{1+\alpha}{2}\describe{extensional-flow}{\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}}
++\frac{1-\alpha}{2}\describe{pure rotation}{\begin{pmatrix}
+0 & -1\\
+1 & 0
+\end{pmatrix}}
+\end{align*}
+
+As $\alpha$ is varied from $-1$ to 1, the flow changes as follows: 
+\begin{itemize}
+\item solid body rotation ($\alpha = -1$)
+\item elliptic linear flow ($ -1<\alpha <0$)
+\item simple shear flow ($ \alpha = 0$)
+\item hyperbolic linear flow ($ 0<\alpha <1$)
+\item planar extensional flow ($ \alpha = 1$)
+\end{itemize}
+
+\subsection{Some applications of linear flows}
+
+\subsubsection{Simple-shear flow}
+
+\subsubsection{Local picture of a Point-Vortex}
+
+\subsubsection{Flow between two cylinders}
+
+\subsection{2D Taylor-Green Vortex}
+\begin{align*}
+&u_1 =  A \cos(x_1)\sin(x_2)\\
+&u_2 = -A \sin(x_1)\cos(x_2)
+\end{align*}
+
+
+
+
+
+
+
+\end{document}
