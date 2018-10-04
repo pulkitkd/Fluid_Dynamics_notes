@@ -5,6 +5,5 @@ My graduate fluid mechanics course was inundated with physical ideas, intuition 
 
 
 Lecture 21 - Kinematics: Surface gravity waves
-
 Streamlines and streaklines in comoving frame and lab frame of reference
 Perturbation expansion to obtain the Stokes drift
