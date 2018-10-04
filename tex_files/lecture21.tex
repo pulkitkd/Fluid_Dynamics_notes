@@ -1,0 +1,161 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage[ddmmyyyy]{datetime} 
+\usepackage[short,nodayofweek,level,12hr]{datetime} 
+%\usepackage{cite}
+%\usepackage{wrapfig}
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\newcommand{\e}{\epsilon}
+\newcommand{\dl}{\delta}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\describe}[2]{\underbrace{#2}_{\text{#1}}}% \describe{}{} - First bracket is for description 
+%\describe{$\substack{this \ is \ substacking}$}{b} - To split the description over multiple lines
+\newcommand{\vect}[1]{\underline{#1}}
+\newcommand{\uvect}[1]{\hat{#1}}
+\newcommand{\1}{\vect{1}}
+\newcommand{\grad}{\nabla}
+\newcommand{\ux}{u_x}
+\newcommand{\uy}{u_y}
+\newcommand{\RA}{\Rightarrow}
+
+\title{Kinematics: Surface Gravity Waves}
+\date{\displaydate{date}}
+\newdate{date}{03}{10}{2018}
+\author{}
+
+\begin{document}
+\maketitle
+
+\section{Overview}
+
+We want to observe the flow induced due to a propagating surface gravity wave in the ground frame and in the comoving frame using the dispersion relation derived earlier.
+
+\section{Streamlines due to surface gravity waves}
+
+The relation between frequency ($\omega$) and wavenumber ($k$) of a surface gravity wave, as derived before is
+\begin{align*}
+&\omega^2(k) = \tanh(kH)\bigg(gk + \frac{\Gamma k^3}{\rho} \bigg) \tag{dispersion relation}
+\end{align*}
+where  $H$ is the depth of the basin and $\Gamma$ is the surface tension. To obtain the flow field, we used the irrotational flow approximation and obtained the velocity potential $\phi(x,y)$ as 
+\begin{align*}
+&\phi(x,y) =
+\end{align*}
+Using the velocity ptential we can evaluate the velocity fields
+\begin{align*}
+&\ux = \pd \phi x = \\
+&\uy = \pd \phi y = 
+\end{align*}
+We can now analyze the streamlines, starting with the comoving frame.
+
+\subsection{Analysis in the comoving frame}
+
+This is the case where fluid sweeps past us with a velocity $c$ but crest and troughs of the wave do not change postion. Note that the time dependence of velocity and potential fields comes in via the term $\cos(k x - \omega t) = \cos(k(x-ct))$, which indicates that the waveform is travelling to the right with a velocity $c$. If we change our frame of reference to one which moves with $c$ to the right, i.e. $\hat x = x- ct$, then we have $\cos(k(x-ct)) = \cos(k\hat x)$. Hence in the comoving frame, the velocity is not time dependent. The flow becomes steady and hence the streamlines and pathlines are identical. 
+The coordinate transformation is 
+\begin{align*}
+&\hat x = x-ct\\
+&\hat y = y
+\end{align*}
+The velocities are given by
+\begin{align*}
+&\ux = \\
+&\uy = 
+\end{align*}
+The equation for streamlines is given by
+\begin{align*}
+&\frac{d\hat x}{\ux} = \frac{d\hat y}{\uy}\\
+\RA&\frac{d\hat x}{d\hat y} = \frac{\ux}{\uy} = 
+\end{align*}
+In this expression, note the term proportional to $c/A\omega$ in the denominator. We know that
+\begin{align*}
+&\frac{c}{A\omega} = \frac{\omega}{k A \omega} \sim \frac{\lambda}{A} \gg 1
+\end{align*}
+since amplitube is much smaller than any other length scale in the problem and hence much smaller than the wavelength of perturbation $\lambda$. Therefore we neglect the other term in the denominator in favour of this term and obtain
+\begin{align*}
+&\frac{d\hat y}{d\hat x} = 
+\end{align*}
+This integration is over both $y$ and $x$, but if note that $\hat y + H \sim \hat y_0 + H$ where $\hat y_0$ is the mean ordinate of the fluid element about which it oscillates. Then the integration only needs to be performed over $x$. This gives
+\begin{align*}
+&\hat y = \hat y_0 + A\bigg( \frac{\sinh(k(y_0+H))}{\sinh(kH)}\bigg)\sin(k\hat x)
+\end{align*}
+which is the equation relating $\hat x$ and $\hat y$- the equation for the pathlines (and for this case, streamlines as well). If we assume that the basin depth is large compared to the wavelength ($\lim kH \to \infty$), then we get the streamlines for the deep water limit case as
+\begin{align*}
+&y= y_0 + Ae^{ky}\sin kx
+\end{align*}
+
+\subsection{Analysis in the lab frame}
+
+In this case, the fluid doesn't sweep past us, but the crests and troughs travel at speed $c$. The flow pattern will be unsteady and so pathlines will not be the same as streamlines. The derivation is straightforward. 
+As before, we write down the velocities (in lab frame)
+\begin{align*}
+&\ux = \frac{dx}{dt} = \\
+&\uy = \frac{dy}{dt} = \\
+\RA& \frac{dy}{dx} = \\
+\RA& \sinh(k(y+H))\sin(k x - \omega t) = c
+\end{align*}
+which is the equation for the streamlines. We can draw the pattern at $t=0$ and just translate it to the right for $t>0$. The streamlines in this case look markedly different from the those in the comoving frame.	Especially we see that there is vertical motion of the order of depth of the basin (or wavelength; whichever is larger). 
+
+In order to obtain the pathlines, we need an equation relating $y$ and $x$. As before we obtain it from a ratio of $dx/dt$ and $dy/dt$. This gives
+\begin{align*}
+&\frac{dy}{dx} = 
+\end{align*}
+This just gives us a point, indicating that particles just stay where they are. To investigate their motion, we need to go to next higher order approximation. Let
+\begin{align*}
+&x = x_0 + \dl x_1\\
+&y = y_0 + \dl y_1
+\end{align*}
+where $\dl x^1$ and $\dl y^1$ are $O(A)$. We can substitute this ansatz in equations for $dx/dt$ and $dy/dt$ and seperate out terms of zeroth order and terms of $O(A)$. The $O(A)$ equation gives
+\begin{align*}
+&\frac{d\dl x}{dt} = \\
+&\frac{d\dl y}{dt} = \\
+\RA& \dl x = \\
+& \dl y = \\
+\RA& \frac{\dl x^2}{\hat A^2 \cosh^2(kH)} + \frac{\dl y^2}{\hat A^2 \sinh^2(kH)} = 1
+\end{align*}
+and therefore, pathlines are ellipses with centers at $(x_0,y_0)$. In the deep water limit, these become circles. If we consider the approximation to the next order, we observe that particles in-fact do not trace closed curves and experience a net drift in the direction of the wave velocity. This is known as the Stokes' Drift.
+
+\subsection{Stokes Drift}
+
+We write a perturbation expansion for the the $x$ and $y$ coordinates of the particles
+\begin{align*}
+&x = x_0 + \dl x_1 + \dl x_2\\
+&y = y_0 + \dl y_1 + \dl y_2\\
+\end{align*}
+where the first terms are $O(H)$, the second terms are $O(A)$, third are $O(A^2)$ and so on (In non-dimensional terms, the ordering would be $O(1)$, $O(A/H)$, $O((A/H)^2)$ and so on). Substitute this ansatz in the governing equations for $\dl x$ and $\dl y$
+\begin{align*}
+&\frac{d\dl x}{dt} = \frac{d\dl x_1}{dt} + \frac{d\dl x_2}{dt} = \\
+&\frac{d\dl y}{dt} = \frac{d\dl y_1}{dt} + \frac{d\dl y_2}{dt} = 
+\end{align*}
+
+Taylor expand the RHS about ($x_0 + \dl x_1, y_0 + \dl y_1$). Cancelling off the first order solution and ignoring terms of third order, gives us the governing equation for second order perturbations - ($\dl x_2, \dl y_2$)
+\begin{align*}
+&\frac{d\dl x_2}{dt} = \\
+&\frac{d\dl y_2}{dt} = 
+\end{align*}
+The equation for $\dl x_1$ gives us the mean drift if we take an average of $\dl x_1$ over an interval of $2\pi/\omega$ i.e. the mean drift ($D$) is given by
+\begin{align*}
+&D = \int_0^{2\pi/\omega}\dl x^1 dt
+\end{align*}
+For the deep water limit, we get a simplified expression
+\begin{align*}
+&D = k\omega A^2 e^{2ky_0}
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
