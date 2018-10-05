@@ -6,6 +6,13 @@
 \usepackage{graphicx}
 %\usepackage[ddmmyyyy]{datetime} 
 \usepackage[short,nodayofweek,level,12hr]{datetime} 
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
 %\usepackage{cite}
 %\usepackage{wrapfig}
 %\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
@@ -25,6 +32,7 @@
 \newcommand{\RA}{\Rightarrow}
 \newcommand{\at}[1]{\bigg|_{#1}}
 \newcommand{\half}{\frac{1}{2}}
+
 
 \title{Kinematics: Local Linear Flows}
 \date{\displaydate{date}}
@@ -97,25 +105,38 @@ a & 0 & 0 \\
 \end{pmatrix}
 r_i
 \end{align*}
-which indicates that flow goes out in directions 1 and 2 and comes in from direction 3 such that the total volume remains conserved. This is biaxial extensional flow. In 2D, we will have
+which indicates that flow goes out in directions 1 and 2 and comes in from direction 3 such that the total volume remains conserved. This is biaxial extensional flow. The streamlines can be easily visualized in 2D where velocity gradient becomes
 \begin{align*}
-u^2_i &= 
+& u^2_i = 
 \begin{pmatrix}
 a & 0\\
 0 & -a
-\end{pmatrix}
-r_i
+\end{pmatrix}r_i\\
+\RA& {\begin{pmatrix}
+u_x\\
+u_y 
+\end{pmatrix}} = {\begin{pmatrix}
+a & 0\\
+0 & -a
+\end{pmatrix}}{\begin{pmatrix}
+x\\
+y 
+\end{pmatrix}}\\
+\RA& u_x = \frac{dx}{dt} = ax\\
+& u_y = \frac{dy}{dt} = -ay\\
+\RA& \frac{dy}{dx} = \frac{-y}{x}\\
+\RA& xy = C
 \end{align*}
-This is the equation for a planar extensional flow. We can analyze the flow behaviour with time as follows:
+and hence the streamlines for planar extensional flow are rectangular hyperbolae. Such flows have excellent stretching abilities.
+
+The extension of a fluid element with time can be analyzed as follows:
 \begin{align*}
-\RA \frac{dr_1}{dt} &= a r_1 \\
-\frac{dr_2}{dt} &= -a r_2\\
-\RA r_1 &= r_{1_0}e^{at}\\
- r_2 &= r_{2_0}e^{-at}
+\RA& \frac{dr_1}{dt} = a r_1 \\
+&\frac{dr_2}{dt} = -a r_2\\
+\RA& r_1 = r_{1_0}e^{at}\\
+& r_2 = r_{2_0}e^{-at}
 \end{align*}
 which tells us that, in a hyperbolic linear flow, fluid elements get stretched exponentially with time. Along the stretching direction, the farther an element goes, the faster it gets stretched. 
-
-The constant potential surfaces are elliptic hyperboloids (1 or 2 sheeted, depending on whether $\phi$ is positive or negative). The streamlines are hyperbolae. For planar extensional flow, they become rectangular hyperbolae.
 
 \item $\dl u^3_i$
 
@@ -133,6 +154,85 @@ The velocity gradient here is antisymmetric. This means that the diagonal elemen
 \end{itemize}
 
 It should be noted that if a line element is kept in a linear flow, then it tends to align with the stretching direction (in extensional flow), rotate (in rigidly rotating flow) or translate (in a radial flow). But, in a linear flow, a line element doesn't bend because bending occurs when there is a non-linear variation of velocity along the line. For a linear flow, the velocity variation between any two points is obviously linear.
+
+\section{A general classification of linear flows}
+
+Any general linear flow can be constructed using a linear combination of planar extensional flow and solid body rotation. In principle, one can write
+\begin{align*}
+&\grad \vv u = \lambda{\begin{pmatrix}
+1 & 0\\
+0 & -1
+\end{pmatrix}} + (1-\lambda){\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}}
+\end{align*}
+But the resulting matrix can be simplified slightly if we rotate the coordinate axes for the extensional flow by $\pi/4$ and consider the velocity gradient 
+\begin{align*}
+&\grad \vv u = {\begin{pmatrix}
+0 & a \\
+a & 0
+\end{pmatrix}}\\
+\RA& {\begin{pmatrix}
+u_x\\
+u_y 
+\end{pmatrix}} = {\begin{pmatrix}
+0 & a\\
+a & 0
+\end{pmatrix}}{\begin{pmatrix}
+x\\
+y 
+\end{pmatrix}}\\
+\RA& u_x = \frac{dx}{dt} = ay\\
+& u_y = \frac{dy}{dt} = ax\\
+\RA& \frac{dy}{dx} = \frac{x}{y}\\
+\RA& x^2 - y ^2 = C
+\end{align*}
+which gives rectangular hyperbolae with asymptotes at $\theta = \pm \pi/4$. Now to this planar extension we can add solid body rotation as follows:
+\begin{align*}
+&\grad \vv u  = \frac{1+\alpha}{2}\describe{irrotational extension}{\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}}
++\frac{1-\alpha}{2}\describe{pure rotation}{\begin{pmatrix}
+0 & -1\\
+1 & 0
+\end{pmatrix}}\\
+\RA& \grad \vv u = {\begin{pmatrix}
+0 & \alpha \\
+1 & 0
+\end{pmatrix}}
+\end{align*}
+This one-parameter matrix provides us with a family of all possible planar linear flows. This can be seen as follows
+\begin{align*}
+&\grad \vv u = {\begin{pmatrix}
+0 & \alpha \\
+1 & 0
+\end{pmatrix}}\\
+\RA& {\begin{pmatrix}
+u_x\\
+u_y 
+\end{pmatrix}} = {\begin{pmatrix}
+0 & \alpha\\
+1 & 0
+\end{pmatrix}}{\begin{pmatrix}
+x\\
+y 
+\end{pmatrix}}\\
+\RA& u_x = \frac{dx}{dt} = \alpha y\\
+& u_y = \frac{dy}{dt} = x\\
+\RA& \frac{dy}{dx} = \frac{x}{\alpha y}\\
+\RA& x^2 - \alpha y ^2 = C
+\end{align*}
+
+As $\alpha$ is varied from $-1$ to 1, the streamlines changes from ellipses to hyperbolae. \href{https://www.desmos.com/calculator/tgi3v0qbqf}{A visualization of the changing streamline pattern is given here}. Varying $\alpha$ gives us
+\begin{itemize}
+\item $\alpha = -1$: circles - solid body rotation
+\item $ -1<\alpha <0$: ellipses - elliptic linear flow
+\item $ \alpha = 0$: straight lines - simple shear flow 
+\item $0<\alpha <1$: hyperbolae - hyperbolic linear flow 
+\item $ \alpha = 1$: rectangular hyperbolae - planar extensional flow 
+\end{itemize}
 
 \section{Linear flow and Kolmogorov scale in Turbulence}
 
@@ -177,35 +277,13 @@ If the macroscopic time is $T$ ($\sim L/U$), then we have:
 &\frac{T}{t_k} = \frac{L \nu}{U L^2 Re^{-6/4}} = Re^{1/2}\\
 \RA& t_k = T (Re^{-1/2})
 \end{align*}
-This is how the time stepping for a turbulent simulation must scale with $Re$. Therefore, the total penalty for a turbulent simulation with $Re$ becomes $\sim Re^{1/2} + Re^{9/4} = Re^{11/4}$, which nearly $Re^3$. As Reynolds number doubles, the number of nodes nearly go up by an order of magnitude.
+This is how the time stepping for a turbulent simulation must scale with $Re$. Therefore, the total penalty for a turbulent simulation with $Re$ becomes $\sim Re^{1/2}  Re^{9/4} = Re^{11/4}$, which nearly $Re^3$. As Reynolds number doubles, the number of nodes nearly go up by an order of magnitude.
 
 
 \section{Appendix}
 
 \subsection{Proof that $\grad\cdot \vv u$ equals fractional rate of change of volume}
 
-\subsection{A general classification of linear flows}
-
-Any general linear flow can be constructed using a linear combination of planar extensional flow and solid body rotation as follows:
-\begin{align*}
-&\grad \vv u  = \frac{1+\alpha}{2}\describe{extensional-flow}{\begin{pmatrix}
-0 & 1\\
-1 & 0
-\end{pmatrix}}
-+\frac{1-\alpha}{2}\describe{pure rotation}{\begin{pmatrix}
-0 & -1\\
-1 & 0
-\end{pmatrix}}
-\end{align*}
-
-As $\alpha$ is varied from $-1$ to 1, the flow changes as follows: 
-\begin{itemize}
-\item solid body rotation ($\alpha = -1$)
-\item elliptic linear flow ($ -1<\alpha <0$)
-\item simple shear flow ($ \alpha = 0$)
-\item hyperbolic linear flow ($ 0<\alpha <1$)
-\item planar extensional flow ($ \alpha = 1$)
-\end{itemize}
 
 \subsection{Some applications of linear flows}
 
@@ -214,6 +292,15 @@ As $\alpha$ is varied from $-1$ to 1, the flow changes as follows:
 \subsubsection{Local picture of a Point-Vortex}
 
 \subsubsection{Flow between two cylinders}
+Let there be two concentric cylinders of radius $R_1$ and $R_2$ rotating with angular velocities $\Omega_1$ and $\Omega_2$. The flow profile between these cylinders is given by
+\begin{align*}
+&u_{\theta} = \frac{A}{r} + Br
+\end{align*}
+We will briefly examine the local flow for two cases. Note that, if fluid sweeps past a rigid boundary with 'no-slip' condition at the wall, then the local flow very close to the wall will always be simple-shear flow. Velocity will be zero at the surface and will increase linearly away from the wall.
+
+When the inner cylinder is rotating and outer cylinder is at rest ($\Omega_2 = 0$), we will have simple-shear flow at the outer cylinder. But close to the inner cylinder, $r$ is small and hence $u_{\theta} = A/r + Br \sim A/r$. This is the flow due to a point vortex with the local flow picture given by the planar extension flow. Hence, close to the inner cylinder, one has planar extensional flow. As one moves away from the inner cylinder, the term $Br$ starts to become dominant. This term is responsible for the solid body rotation type flow which contains vorticity. Addition of vorticity causes the transition from planar extension flow ($r \to R_1$) to simple shear flow ($r \to R_2$) via hyperbolic extensional flows ($R_1 \ll r \ll R_2$).
+
+When the outer cylinder is rotating and the inner cylinder is at rest ($\Omega_1 = 0$), we have simple shear flow at the inner wall. Again as we move outwards towards increasing $r$, vorticity in the flow increases and leads to the more vortical elliptic linear flows. Right at the outer wall we reach solid body rotation which is a purely vortical flow.
 
 \subsection{2D Taylor-Green Vortex}
 \begin{align*}
