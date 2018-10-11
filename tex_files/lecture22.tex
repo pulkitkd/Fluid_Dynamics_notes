@@ -1,0 +1,283 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage[ddmmyyyy]{datetime} 
+\usepackage[short,nodayofweek,level,12hr]{datetime} 
+%\usepackage{cite}
+%\usepackage{wrapfig}
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\newcommand{\e}{\epsilon}
+\newcommand{\dl}{\delta}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\describe}[2]{\underbrace{#2}_{\text{#1}}}% \describe{}{} - First bracket is for description 
+%\describe{$\substack{this \ is \ substacking}$}{b} - To split the description over multiple lines
+\newcommand{\vect}[1]{\underline{#1}}
+\newcommand{\uvect}[1]{\hat{#1}}
+\newcommand{\1}{\vect{1}}
+\newcommand{\grad}{\nabla}
+\newcommand{\RA}{\Rightarrow}
+\newcommand{\dotp}[2]{\vect{#1}\cdot\vect{#2}}
+\newcommand{\divg}[1]{\grad\cdot\vect{#1}}
+\newcommand{\vu}{\vect{u}}
+
+\title{Lecture 21: Conservation Of Mass And The Streamfunction}
+\date{\displaydate{date}}
+\newdate{date}{06}{10}{2018}
+\author{}
+
+\begin{document}
+\maketitle
+
+\section*{Overview}
+
+\section{Equation of continuity}
+
+Let there be a fixed volume $\dl V_m$ in space filled with fluid of density $\rho$. Let it be enclosed by a surface whose normal is given be $\vect n$. Then rate of change of mass inside the volume is given by
+\begin{align*}
+&\frac{d}{dt}\int \rho dV = -\int \rho (\dotp u n)dS
+\end{align*}
+Since the volume is fixed and is not a function of time, we can take the time derivative inside the integral. Also we can use the divergence theorem on the RHS to get
+\begin{align*}
+&\int (\frac{\partial\rho)}{\partial t}dV + \divg{(\rho u)} dV) = 0\\
+\RA & \frac{d\rho}{dt} + \divg{\rho u} = 0
+\end{align*}
+which is the differential statement for mass conservation also known as the equation of continuity. We can simplify this further
+\begin{align*}
+& \pd{\rho}{t} + \rho \divg u + \vect u\cdot \grad\rho = 0\\
+\RA& \pd{\rho}{t} + \rho \divg u = 0
+\end{align*}
+where $\frac{D\rho}{Dt}$ is the material derivative. This corresponds to the rate of change of $\rho$ that one would see when traveling with the fluid parcel. The above equation can be written as
+\begin{align*}
+\RA& \frac{1}{\rho}\frac{D\rho}{Dt} =- \divg u
+\end{align*} 
+But $\divg u$ as we know, is the normalized rate of change of volume $\frac{1}{\dl V_m}\frac{D\dl V_m}{Dt}$
+\begin{align*}
+\RA&\frac{1}{\rho}\frac{D\rho}{Dt} =- \frac{1}{\dl V_m}\frac{D\dl V_m}{Dt}\\
+\RA&\dl V_m\frac{D\rho}{Dt} + \rho\frac{D\dl V_m}{Dt} = 0\\
+\RA&\frac{D(\rho \dl V_m)}{Dt} = 0
+\end{align*}
+which just reinstates that mass of a fluid element doesn't change with time.
+
+In some cases, a direct solution of $\frac{1}{\rho}\frac{D\rho}{Dt} =- \divg u$ can be attempted via the method of characteristics. This amounts to solving the integral 
+\begin{align*}
+&\rho = \rho_0\exp\bigg[-\int_{t_0}^t \divg u(\vect X(t'),t')dt'\bigg]
+\end{align*}
+along a pathline.
+
+\subsection{Incompressibility}
+The general equation of continuity is 
+\begin{align*}
+&\frac{1}{\rho}\frac{D\rho}{Dt} =- \divg u.
+\end{align*}
+The incompressible limit is given by $\divg u = 0$. Therefore,
+\begin{align*}
+&\frac{1}{\rho}\frac{D\rho}{Dt} = 0
+\end{align*}
+which states that the density (or mass) of a certain \textit{material element} cannot change with \text{time}. Note that the density can still change with $\vect X$ and $t$. E.g. A salt solution may have density stratification and a sphere moving through the solution can generate an unsteady flow. Yet, this does not imply that the flow is compressible because at each point $\frac{D\rho}{Dt} = \pd{\rho}{t} + \vu\cdot\grad\rho = 0$ can still hold. So density can vary with time and space and we can still have an incompressible flow. What are then, the conditions where we can expect compressible flows? In general, we should worry about compressibility effects when $\frac{\Delta \rho}{\rho}\sim 1$ and since $P\equiv P(\rho)$, this usually translates to $\frac{\Delta P}{P} \sim 1$ i.e. the flow induced change in pressure is of the order of pressure in the medium itself. There are three broad categories where this may be observed-
+
+\begin{itemize}
+\item \textbf{High speed flows}
+
+In gas dynamics 
+\begin{align*}
+&P\sim \rho R T\sim\rho c^2 \tag{since speed of sound $c= \sqrt{\gamma RT}$}\\
+\RA&\frac{\Delta P}{P} = \frac{u^2}{c^2} = Ma \sim 1 \tag{since $\Delta P \propto u^2$}
+\end{align*}
+
+\item \textbf{Meteorology}
+
+If the length scale of observations is so large as to be comparable to the pressure scale height of the lapse rate atmosphere ($\sim 8.5 km$), then the pressure variations in the domain are large and compressibility must be accounted for.
+
+\item \textbf{Acoustics}
+
+In this case, the time scale of the flow becomes small enough to be comparable to the time scale of propagating sound wave in the medium. If the imposed frequency is $\omega$, length of domain is $L$ and speed of sound propagation is $c$, then compressibility is important if
+\begin{align*}
+&\omega \sim \frac c L\\
+\RA& \frac{\omega L}{c} \sim 1
+\end{align*}
+\end{itemize}
+
+
+\section{Reynolds Transport Theorem}
+
+The statement of Reynolds transport theorem for a flow dependent quantity $\rho$ can be written as
+\begin{align*}
+&\frac{d}{dt}\int_{V_m(t)} s dV= \int_{V_m(t)}\bigg[ \pd{s}{t}+\grad\cdot(\vu s)\bigg]
+\end{align*}
+where $V_m(t)$ is a small material volume. The quantity $s$ can be taken as $1$, $\rho$ and $\rho u$ to obtain the various conservation laws. For further discussion and for the derivation of a streamfunction,  we will focus on the law of conservation of mass - the continuity equation, given by
+\begin{align*}
+& \pd{\rho}{t} + \divg {\rho u} = 0\\
+\RA& \divg u = 0 \tag{if $\rho$ is a constant}
+\end{align*}
+In Cartesian coordinates, this becomes
+\begin{align*}
+&\pd{u_x}{x} + \pd{u_y}{y}+ \pd{u_z}{z} = 0
+\end{align*}
+The cylindrical coordinate presents slightly more non-trivial equation
+\begin{align*}
+&\frac{1}{r}\pd{(u_r r)}{r} + \frac{\partial u_\phi}{r\partial\phi} + \pd{u_z}{z} = 0
+\end{align*}
+In spherical coordinates we have
+\begin{align*}
+&\frac{1}{r^2}\pd{(r^2 u_r)}{r} + \frac{1}{r^2\sin\theta}\pd{(u_\theta\sin\theta)}{\theta} + \frac{1}{r\sin\theta}\pd{u_\phi}{\phi} = 0
+\end{align*}
+As a check, we can verify that for small polar angles ($\theta$), the spherical equations reduce to their cylindrical counterparts.
+
+
+\section{Streamfunction}
+
+A Streamfunction can be defined for 2D problems or axisymmetric problems without swirl. We first look at the 2D streamfunction ($\psi$).
+\begin{align*}
+&\pd{u_x}{x} + \pd{u_y}{y} = 0\\
+\RA& u_x = \pd{\psi}{y} \quad u_y = -\pd{\psi}{x} \tag{identically satisfies continuity}\\
+\RA& d\psi = \pd{\psi}{x}dx + \pd{\psi}{y}dy \\
+\RA& d\psi = -u_y dx + u_x dy \\
+\RA& d\psi = (u_x \frac{dy}{ds}-u_y \frac{dx}{ds})ds \\
+\end{align*}
+Now unit tangent and normal in a plane are given by
+\begin{align*}
+&\vect t = \frac{dx}{ds}, \frac{dy}{ds}\\
+&\vect n = \frac{dy}{ds}, \frac{-dx}{ds}\\
+\RA& d\psi = (\vu\cdot \vect n)ds\\
+\RA& \psi_2 - \psi_1 = \int_1^2(\vu\cdot \vect n)ds
+\end{align*}
+This shows that the difference in the value of streamfunction at two distinct points (1 and 2) gives us the flux (volumetric flow rate per unit depth) between the two points. Also since the value of $\psi$ at any point depends only on the integral over ($\vu \cdot\vect n$) and not on the path along which integral is carried out, $\psi$ is a state function. Let $C$ be some path connecting 1 to 2 and $C'$ is the path connecting 2 back to 1. Then
+\begin{align*}
+&\oint_{C+C'}(\vu\cdot \vect n)ds = 0
+\end{align*}
+This just states that flux between two points ($1$ and $2$) is same regardless of the curve across which it is evaluated. But this need not be the case if the curves $C$ and $C'$ enclose a source or sink, in which case $\psi$ becomes multivalued.
+
+Now, since $\psi_2 - \psi_1 = \int_1^2(\vu\cdot \vect n)ds$, it implies that $\psi_1=\psi_2$ if $\vu \propto \vect t$ along the curve joining 1 and 2. Therefore $\psi$ is constant along a streamline and acts as a label for the streamline. The flux per unit depth between two streamlines is simply given by the difference in the streamfunction along the two streamlines. The flux, therefore is constant between a pair of streamlines causing the flow to accelerate when streamlines are close and to retard when they are far apart.
+
+\subsection{Streamfunction in other coordinate systems}
+The streamfunction in other coordinate systems can be obtained as follows:
+\subsubsection{Polar coordinates}
+\begin{align*}
+&d\psi = (\vu \cdot \vect n)ds\\
+\RA&d\psi = (\vu \cdot -\1_\phi)dr \tag{radial velocity}\\ 
+\RA&u_\phi = -\pd{\psi}{r}
+\end{align*}
+Similarly
+\begin{align*}
+&d\psi = (\vu \cdot \1_r)rd\phi \tag{azimuthal velocity}\\ 
+\RA&u_r = \frac{1}{r}\pd{\psi}{\phi}
+\end{align*}
+
+\subsubsection{General orthogonal coordinate system}
+Arc length $ds$ is given as
+\begin{align*}
+&ds^2 = h_\xi^2d\xi^2 + h_\eta^2d\eta^2\\
+\RA& d\psi = -\vu\cdot\1_\eta h_\xi d\xi + \vu\cdot\1_\xi h_\eta d\eta\\
+\RA& u_\eta = -\frac{1}{h_\xi}\pd{\psi}{\xi}\\
+& u_\xi = \frac{1}{h_\eta}\pd{\psi}{\eta}
+\end{align*}
+This also allows us to write the general continuity equation
+\begin{align*}
+& u_\eta = -\frac{1}{h_\xi}\pd{\psi}{\xi}\\
+& u_\xi = \frac{1}{h_\eta}\pd{\psi}{\eta}\\
+\RA  -&\pd{\psi}{\xi} = h_\xi u_\eta\\
+&\pd{\psi}{\eta} = h_\eta u_\xi\\
+\RA &\pd{h_\xi u_\eta}{\eta} + \pd{h_\eta u_\xi}{\xi} = 0
+\end{align*}
+
+\subsection{The streamfunction-vorticity formulation}
+In 2D, the vorticity has only one component which lies perpendicular to the plane of velocities. Therefore, we have
+\begin{align*}
+&\vect \omega = \omega \1_z\\
+\RA& \omega = \pd{u_2}{x_1} - \pd{u_1}{x_2}\\
+\RA& \omega = -\grad\cdot\grad\psi\\
+\RA& \omega = -\grad^2\psi
+\end{align*}
+
+The vorticity equation can be obtained by taking the curl of the Navier-Stokes equation asked
+\begin{align*}
+&\pd{\vect \omega}{t} + \vu\cdot\grad\vect\omega = \omega\cdot\grad\vu + \frac{1}{Re}\grad^2\vect\omega
+\end{align*}
+
+Since vorticity has only $z$ component and velocity cannot have a gradient in this direction (due to two-dimensional nature of the flow). Therefore, the term $\vect u\cdot\vect\omega$ vanishes in the 2D case, and we get
+\begin{align*}
+&\pd{\omega}{t} + \vu\cdot\grad\omega = \frac{1}{Re}\grad^2\omega
+\end{align*}
+for the scalar $\omega = \omega\1_z$. The term $\vect\omega\cdot\grad\vu$ is responsible for vortex stretching and hence there is no stretching of vortex lines in 2D. Using the relation $\omega = -\grad^2\psi$ in this equation, we get
+\begin{align*}
+&\pd{\grad^2\psi}{t} + \vu\cdot\grad\grad^2\psi = \frac{1}{Re}\grad^2\grad^2\psi\\
+\RA &\pd{\grad^2\psi}{t} + u_x\pd{\grad^2\psi}{x} - u_y\pd{\grad^2\psi}{y} = \frac{1}{Re}\grad^4\psi\\
+\RA &\pd{\grad^2\psi}{t} + \pd{\psi}{y}\pd{\grad^2\psi}{x} - \pd{\psi}{x}\pd{\grad^2\psi}{y} = \frac{1}{Re}\grad^4\psi\\
+\end{align*}
+which is the streamfunction formulation of the Navier-Stokes equation. If we have Stokes flow, then $Re\to 0$ and the equation simplifies to\begin{align*}
+&\grad^4\psi = 0\\
+\RA& \grad^2\omega = 0
+\end{align*}
+Therefore, in 2D Stokes flow, the vorticity is harmonic (satisfies $\grad^2\omega = 0$) and the streamfunction is biharmonic (satisfies $\grad^4\psi = 0$).
+
+\subsection{Stokes streamfunction}
+A streamfunction can also exist for axisymmetric flow without a swirl. The continuity equation in cylindrical coordinates for an axisymmetric flow is
+\begin{align*}
+&\frac{1}{r}\pd{(ru_r)}{r} + \pd{u_z}{z} = 0
+\end{align*}
+This is identically satisfied if we assume
+\begin{align*}
+&u_r = \frac{1}{r}\pd{\psi_s}{z}\\
+&u_z = -\frac{1}{r}\pd{\psi_s}{r}
+\end{align*}
+where $\psi_s$ is the Stokes streamfunction. As before, the significance of streamfunction can be seen by writing
+\begin{align*}
+&d\psi_s = \pd{\psi_s}{r}dr + \pd{\psi_s}{z}dz\\
+\RA& d\psi_s = - r u_z dr + r u_r dz\\
+\RA& d\psi_s = (- r u_z \frac{dr}{ds} + r u_r \frac{dz}{ds}) \cdot ds\\
+\RA& d\psi_s = r (\vect u \cdot \vect n) ds\\
+\RA& \psi_{s_1} - \psi_{s_2} = \int_C r (\vect u \cdot \vect n) ds\\
+\RA& \psi_{s_1} - \psi_{s_2} = \frac{1}{2\pi}\int_C (\vect u \cdot \vect n)(2\pi r ds)
+\end{align*}
+which is the flux through a small cylinder of radius $r$ and length $ds$. Therefore, difference in the values of Stokes streamfunction at two points represents the volumetric flux through an axisymmetric surface between the two streamlines.
+
+The 2D streamfunction becomes multivalued if the streamlines enclose a point source of mass. The Stokes streamfunction becomes multivalued if the streamsurfaces (obtained by revolving the streamlines about the axis of symmetry) enclose a ring source of mass. 
+
+\newpage
+\section{Appendix}
+
+\subsection{Derivation of Reynolds Transport Theorem}
+\subsection{Flow fields due to cylindrically and spherically symmetric sources}
+\subsection{Streamfunction for the line source, planar extension and translating circular cylinder}
+\subsection{Stokes streamfunction in spherical coordinates}
+
+
+\end{document}
+
+%Infrequently asked questions
+\section{I.A.Q's}
+\begin{itemize}
+\item When is it possible to write $\frac{d}{dt}\int f(x) dx = \int \frac{df(x)}{dt} dx$ ?
+
+Because integrand is not a function of time.
+
+\item For a compressible fluid, the governing equations include the equations of motion (3) and the equation of state (1). When the fluid is incompressible, we get another equation - the equation of continuity (1), giving us five equations for the four unknowns ($\vu, P$). Why does this not overdetermine the system?
+
+Because equation of state is lost.
+
+\item When is the equation of continuity enough to determine the flow field?
+
+Mass conservation alone is enough to determine flow field if the boundary conditions are all specified in terms of velocities. If BC contain pressure conditions, then other conservation laws (momentum or energy) are needed. Therefore, to determine the potential flow due to a translating cylinder, continuity would suffice. But in order to obtain the flow due to a surface gravity wave, we must incorporate the Bernoulli's equation. 
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
