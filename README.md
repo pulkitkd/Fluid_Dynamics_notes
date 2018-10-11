@@ -13,3 +13,10 @@ Lecture 21 - Kinematics: Surface gravity waves
 
 Streamlines and streaklines in comoving frame and lab frame of reference. 
 Perturbation expansion to obtain the Stokes drift.
+
+Lecture 22 - Conservation of mass and the streamfunction
+
+Mass conservation and consideration of incompressiblity.
+2D Streamfunction in polar and general orthogonal system.
+Stokes streamfunction in spherical coordinate system.
+
