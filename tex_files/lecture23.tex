@@ -120,6 +120,21 @@ which is zero iff
 \end{align*}
 where $\partial S$ is the surface which bounds the domain. Therefore, the normal component of vorticity on the surface must be zero. This implies that vortex lines must either close on to themselves or continue to infinity without crossing the boundary of the domain.
 
+Another important consequence of this result is that it precludes vortex monopoles. A vortex existing at just one in the domain will not satisfy $\vect\omega\cdot\vect n = 0$ through a surface passing through that point. Hence vorticity cannot exist at just one point in the domain.
+
+\subsection{Line Vortex}
+
+A line vortex is a singular structure where entire vorticity is concentrated in an infinitesimal radius around a line. The Biot-Savart law can be specialized for the line vortex by considering the limit of $\omega \to \infty$, $dA \to 0$ while keeping the circulation $\kappa = \int \vect \omega\cdot\vect n dA$ a constant (where $d\vect A \perp \vect\omega$ is the infinitesimal area perpendicular to local vorticity). This gives us the velocity field due to the line vortex to be
+\begin{align*}
+\vect u &= \curl B = \frac{1}{4\pi}\int \frac{\vect\omega(\vect x')\wedge(\vect x-\vect x') dV}{|\vect x-\vect x'|^3}\\
+\RA\vect u &= \frac{1}{4\pi}\int dA(\vect x') dl(\vect x') \frac{|\omega(\vect x')|\vect t \wedge(\vect x-\vect x')}{|\vect x-\vect x'|^3}\\
+\RA\vect u &= \frac{\kappa}{4\pi}\int \frac{d\vect l(\vect x')\wedge(\vect x-\vect x')}{|\vect x-\vect x'|^3}\\
+\end{align*}
+Therefore, velocity due to a line vortex, at a point $\vect x$, due to a point $\vect x'$ on the line vortex, is given by
+\begin{equation*}
+\boxed{\vect u = \frac{\kappa}{4\pi}\int \frac{d\vect l(\vect x')\wedge(\vect x-\vect x')}{|\vect x-\vect x'|^3}}
+\end{equation*}
+
 \section{Appendix}
 
 \subsection{Constructing solution to the inhomogeneous problem using the Green's function}
