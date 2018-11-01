@@ -1,0 +1,164 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage[ddmmyyyy]{datetime} 
+\usepackage[short,nodayofweek,level,12hr]{datetime} 
+%\usepackage{cite}
+%\usepackage{wrapfig}
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\newcommand{\e}{\epsilon}
+\newcommand{\dl}{\delta}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\describe}[2]{\underbrace{#2}_{\text{#1}}}% \describe{}{} - First bracket is for description 
+%\describe{$\substack{this \ is \ substacking}$}{b} - To split the description over multiple lines
+\newcommand{\vect}[1]{\underline{#1}}
+\newcommand{\uvect}[1]{\hat{#1}}
+\newcommand{\1}{\vect{1}}
+\newcommand{\grad}{\nabla}
+\newcommand{\curl}[1]{\nabla\wedge\vect{#1}}
+\newcommand{\divg}[1]{\nabla\cdot\vect{#1}}
+\newcommand{\RA}{\Rightarrow}
+\newcommand{\DX}{\Delta(\vect X)}
+\newcommand{\DXp}{\Delta(\vect X')}
+\newcommand{\X}{\vect X}
+\newcommand{\Xp}{\vect X'}
+\newcommand{\smalltag}[1]{\tag{\footnotesize{#1}}}
+
+
+\title{Velocity Field From Dilatation And Vorticity Fields}
+\date{\displaydate{date}}
+\newdate{date}{10}{10}{2018}
+\author{}
+
+\begin{document}
+\maketitle
+\section*{Overview}
+
+The aim of this lecture is to construct the velocity field when the rate of dilatation and the vorticity at each point in the domain has been specified. 
+
+\section{Problem setup}
+We wish to construct the velocity field $\vect u$, when the rate of dilation and the vorticity has been specified at each point in the domain. Therefore, we have
+\begin{align*}
+\curl u &= \Delta(\vect X)\\
+\divg u &= \omega(\vect X)
+\end{align*}
+We begin by dividing the problem into three subproblems. We write
+\begin{align*}
+&\vect u = \vect u_e + \vect u_v + \vect v
+\end{align*}
+where the velocity field $\vect u_e$ is such that
+\begin{align*}
+\curl u_e &= 0\\
+\divg u_e &= \Delta(\vect X)
+\end{align*}
+whereas $\vect u_v$ is such that
+\begin{align*}
+\curl u_v &= \omega(\vect X)\\
+\divg u_v &= 0
+\end{align*}
+and finally $\vect v$ follows
+\begin{align*}
+\curl v &= 0\\
+\divg v &= 0
+\end{align*}
+Therefore, $\vect u_e$ is irrotational, $\vect u_v$ is solenoidal and $\vect v$ is irrotational incompressible (i.e. potential flow). 
+
+\section{Velocity field due to dilatation}
+Since
+\begin{align*}
+&\curl u_e = 0\\
+\RA& \vect u_e = \grad \phi_e\\
+\RA& \grad^2 \phi_e = \DX \tag{\footnotesize{using $\divg u_e = \DX$}}\\
+\RA& \phi_e (\vect X)= \int\frac{-\DXp dX'}{4\pi|\vect X - \vect X'|} \smalltag{using Green's function for the Laplacian}\\
+\RA& \vect u_e = \grad\phi_e = \int\frac{(\vect X - \vect X')}{4\pi|\vect X - \vect X'|^3}\DXp dX'\tag{\footnotesize{using $\grad 1/r = -x_i/r^3 $}}
+\end{align*}
+which just states that velocity at any point($\vect X$) is the sum of velocities induced at that point due to all other points($\vect X'$) in the domain. Note that $\vect X$ denotes the position at which velocity is being specified whereas $\vect X'$ denotes the position of the source which is inducing velocity at $\vect X$.
+
+Now assume that $r=|\vect X - \vect X'|$ is much larger than the length scale over which sources are distributed. Let's say the sources are distributed over a length scale $L \ll r$. The vector charactersing the position of source is $\vect X'$ and hence it follows that $|\vect X'|\ll|\vect X|$. Therefore $\vect X - \vect X' \sim \vect X$, which gives us
+\begin{align*}
+&\int\frac{(\vect X - \vect X')}{4\pi|\vect X - \vect X'|^3}\DXp dX' \sim  \frac{\vect X}{4\pi|\vect X|^3}\int\DXp dX'\\
+\RA& \vect u_e = \frac{\vect X}{4\pi|\vect X|^3}\int\DXp dX'
+\end{align*}
+This states that, when seen from sufficiently far away, velocity due to the source distribution is not dependent upon the specific distribution but only on the integral $\int \DXp d\vect X'$ over the entire distribution. This integral signifies the net strength of the source distribution. But what if the source is such that it has equal positive and negative contributions, such as a dipole or quadrupole? In such cases $\int \DXp d\vect X' = 0$. Then assuming $\vect X - \vect X' \sim \vect X$ is not a useful approximation and we must expand to higher orders as follows:
+\begin{align*}
+&\frac{\X - \Xp}{|\X - \Xp|^3} = \frac{\X}{|\X|^3} - \Xp\cdot\grad\frac{\X}{|\X|^3} + \frac{\Xp\Xp}{2!}:\grad\grad\frac{\X}{|\X|^3} - ...
+\end{align*}
+Substituting this in the expression for velocity, we get
+\begin{align*}
+&\vect u_e = \int\frac{(\vect X - \vect X')}{4\pi|\vect X - \vect X'|^3}\DXp dX'\\
+\RA& \vect u_e = \frac{1}{4\pi} \bigg[ \int \DXp \bigg(\frac{\X}{|\Xp|^3}\bigg) d\vect X' - \int \DXp \bigg(\Xp\cdot\grad\frac{\X}{|\X|^3}\bigg) d\vect X'+ \\ &\int \DXp \bigg(\frac{\Xp\Xp}{2!}:\grad\grad\frac{\X}{|\X|^3}\bigg) d\vect X' + ... \bigg]
+\end{align*}
+where the first term represents field due to a monopole, second is due to a dipole, third due to quadrupole and so on. This is known as the Multipole Expansion. Each of the terms in the above expansion individually satisfy the governing equations $\grad^2 \phi_e = \DX$ giving us the \textit{singular solutions} to the problem i.e. the fields due to monopole, dipole and so on.
+
+\section{Velocity field due to vorticity}
+
+The problem statement for this case is
+\begin{align*}
+&\divg{u}_v = 0\\
+&\curl{u}_v = \vect\omega(\vect x)
+\end{align*}
+The first of these equations allows us to introduce the vector potential $\vect B$ as follows
+\begin{align*}
+&\curl{B} = \vect{u}_v \\
+\RA&\grad\wedge\grad\wedge\vect B = \vect\omega(\vect x)\\
+\RA&\grad^2\vect B = -\vect\omega(\vect x)\\
+\RA&\vect B = \int \frac{\vect\omega(\vect x') d\vect x'}{4\pi |\vect x-\vect x'|} \smalltag{Using Green's function}\\
+\RA&\vect u = \curl B = \frac{1}{4\pi}\int \frac{\vect\omega(\vect x')\wedge(\vect x-\vect x') d\vect x'}{|\vect x-\vect x'|^3}
+\end{align*}
+It must be noted that in order to arrive at this result, we have imposed $\divg B = 0$. This implies
+\begin{align*}
+\divg B &= \grad\cdot\int \frac{\vect\omega(\vect x') d\vect x'}{4\pi |\vect x-\vect x'|}\\
+&= \int_{\partial S} \frac{dS(\vect x') \vect \omega \cdot \vect n}{4\pi|\vect x- \vect x'|}
+\end{align*} 
+which is zero iff
+\begin{align*}
+&\vect \omega \cdot \vect n = 0 \quad \forall \quad \vect x' \in \partial S
+\end{align*}
+where $\partial S$ is the surface which bounds the domain. Therefore, the normal component of vorticity on the surface must be zero. This implies that vortex lines must either close on to themselves or continue to infinity without crossing the boundary of the domain.
+
+\section{Appendix}
+
+\subsection{Constructing solution to the inhomogeneous problem using the Green's function}
+
+\section{References}
+\begin{itemize}
+\item An Introduction to Fluid Dynamics by G. K. Batchelor, section 2.4
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
