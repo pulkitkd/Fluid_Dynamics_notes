@@ -20,3 +20,8 @@ Mass conservation and consideration of incompressiblity.
 2D Streamfunction in polar and general orthogonal system.
 Stokes streamfunction in spherical coordinate system.
 
+Lecture 23 - Velocity field from dilation and vorticity fields
+
+Multipole expansion
+Biot-Savart Law
+
