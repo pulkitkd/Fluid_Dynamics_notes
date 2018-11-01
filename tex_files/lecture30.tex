@@ -1,0 +1,103 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage[ddmmyyyy]{datetime} 
+\usepackage[short,nodayofweek,level,12hr]{datetime} 
+%\usepackage{cite}
+%\usepackage{wrapfig}
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\newcommand{\e}{\epsilon}
+\newcommand{\dl}{\delta}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\describe}[2]{\underbrace{#2}_{\text{#1}}}% \describe{}{} - First bracket is for description 
+%\describe{$\substack{this \ is \ substacking}$}{b} - To split the description over multiple lines
+\newcommand{\vect}[1]{\underline{#1}}
+\newcommand{\uvect}[1]{\hat{#1}}
+\newcommand{\1}{\vect{1}}
+\newcommand{\grad}{\nabla}
+\newcommand{\curl}[1]{\nabla\wedge\vect{#1}}
+\newcommand{\divg}[1]{\nabla\cdot\vect{#1}}
+\newcommand{\RA}{\Rightarrow}
+\newcommand{\DX}{\Delta(\vect X)}
+\newcommand{\DXp}{\Delta(\vect X')}
+\newcommand{\X}{\vect X}
+\newcommand{\Xp}{\vect X'}
+\newcommand{\smalltag}[1]{\tag{\footnotesize{#1}}}
+
+\title{Lecture 30: Lift due to Potential Flows in 2D}
+\date{\displaydate{date}}
+\newdate{date}{01}{11}{2018}
+\author{}
+
+\begin{document}
+\maketitle
+
+\section*{overview}
+Lift on an aerofoil occurs due to a net circulation associated with the aerofoil. Potential flow theory can be used to determine the flow field and hence the lift associated with the aerofoil under a given uniform flow.
+
+\section{Flow around a circular cylinder with circulation}
+
+The complex potential for flow around a translating circular cylinder (with velocity $U$) with a given circulation ($\kappa$) is 
+\begin{align*}
+&F(z) = \describe{translation}{U\bigg( z + \frac{a^2}{z}\bigg)} - \describe{circulation}{\frac{i\kappa}{2\pi}\log z}
+\end{align*}
+Let the real part of this complex potential be the velocity potential $\Phi$
+\begin{align*}
+&\Phi  = Ur\cos\phi\bigg(1+\frac{a^2}{r^2} \bigg) + \frac{\kappa \phi}{2\pi}\\
+\RA& u_\phi\Big|_{r=a} = \frac{\kappa}{2\pi a} - U \sin\phi
+\end{align*}
+This is the velocity field in the frame of reference of the moving cylinder. Now we want to find out the stagnation points of this flow. For $\kappa = 0$, they lie at $\phi = 0, \pi$ (as can be seen from the expression for $u_\phi$). In the presence of circulation, however, the stagnation points move closer and eventually merge and move into the fluid giving rise to homoclinic-type streamlines. It must be noted that vortex opposes the uniform flow on one side of the cylinder, and strengthens it on the other side. This difference in velocities leads to a pressure gradient in accordance with Bernoulli's theorem. This is the lift force. 
+
+\section{Flow around a translating elliptic cylinder with circulation}
+
+The complex potential for this case is given by 
+\begin{align*}
+&W(\zeta) = U\bigg(\zeta e^{-i\alpha} + \frac{(a+b)^2}{4\zeta} e^{i\alpha}\bigg) - \frac{i\kappa}{2\pi} \log\zeta
+\end{align*}
+This is the potential for a circular cylinder. Using the conformal mapping
+\begin{align*}
+&\zeta = \frac{1}{2}(z+\sqrt{z^2-c^2}), \tag{$c^2 = a^2 - b^2$}
+\end{align*}
+we map it to an ellipse. This gives us the complex potential in the $t (=t_1+it_2)$ plane
+\begin{align*}
+&\tilde{w}(t) =\\
+& \frac{U}{2}\bigg(c (\cosh t + \sinh t) e^{-i\alpha} + (a+b)^2\frac{e^{i\alpha}}{c} (\cosh t - \sinh t)\bigg) - \frac{i\kappa}{2\pi}\log(\cosh t + \sinh t)
+\end{align*}
+From this potential, we can evaluate the tangential velocity at the surface of the ellipse given by $\frac{d\tilde{w}(t)}{dt}$ @ $t=t_{1_0} + it_2$
+\begin{align*}
+&\frac{d\tilde{w}(t)}{dt} = iUc\bigg(e^{t_{1_0}}\sin(t_2-\alpha) - \frac{\kappa}{2\pi c U} \bigg)
+\end{align*}
+The behaivour of stagnation points and corresponding change in the lift force as the circulation is increased from zero, is similar to the case of the sphere. When circulation is zero, the stagnation points are located at $\pi \pm \alpha$. As circulation is increased, the points move closer to each other. Consider now, a thin ellipse $t_{1_0} = 0$. Potential flow rounds the edges of such a shape with infinite velocity. As circulation is increased, one of the stagnation point eventually reaches the edge at $t_2 = 0$. Thus velocity at the trailing edge becomes finite and we get a net lift force due to the circulation associated with the thin cylinder. 
+
+
+\section{Appendix}
+\subsection{Potential flow in multiply connected domain}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
