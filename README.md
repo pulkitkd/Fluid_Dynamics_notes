@@ -6,8 +6,8 @@ My graduate fluid mechanics course was rich in analytical techniques useful in t
 Lecture 15 - Kinematics: Local Linear Flows
 
 Velocity gradient tensor. 
-Classification of linear flows.
-Linear flow in Turbulence - flow below Kolmogorov length scale.
+Classification of linear flows. 
+Linear flow in Turbulence - flow below Kolmogorov length scale. 
 
 Lecture 21 - Kinematics: Surface gravity waves
 
@@ -22,6 +22,6 @@ Stokes streamfunction in spherical coordinate system.
 
 Lecture 23 - Velocity field from dilation and vorticity fields
 
-Multipole expansion
-Biot-Savart Law
+Multipole expansion.
+Biot-Savart Law.
 
