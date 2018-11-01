@@ -1,7 +1,7 @@
 # Fluid_Dynamics_notes
 (currently being updated)
 
-My graduate fluid mechanics course was rich in analytical techniques useful in theoretical work and physical ideas needed to develop a 'feel' of the subject. This repository skims some froth from over the ocean. Several locations require figures for a more cogent explanation. Maybe in due course of time...
+Notes from a graduate course in Fluid Mechanics. There are several instances where a cogent explanation is lacking, not least due to the complete absence of diagrams. Hopefully, these issues will be resolved over time.
 
 Lecture 15 - Kinematics: Local Linear Flows
 
