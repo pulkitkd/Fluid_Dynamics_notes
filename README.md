@@ -33,3 +33,8 @@ Lecture 25 - Velocity of propagation of circular line vortex
 
 Streamlines due to a thin circular line vortex. 
 Velocity of propagation of a circular line vortex (thin vortex ring).
+
+Lecture 30 - Lift in potential flows in 2D
+
+Lift on circular cylinder in the presence of circulation.
+Lift on elliptic cylinder in the presence of circulation.
