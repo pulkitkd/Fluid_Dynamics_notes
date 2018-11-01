@@ -25,3 +25,11 @@ Lecture 23 - Velocity field from dilation and vorticity fields
 Multipole expansion.
 Biot-Savart Law.
 
+Lecture 24 - Velocity field due to line vortex
+
+Not yet written
+
+Lecture 25 - Velocity of propagation of circular line vortex
+
+Streamlines due to a thin circular line vortex. 
+Velocity of propagation of a circular line vortex (thin vortex ring).
