@@ -1,0 +1,131 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage[ddmmyyyy]{datetime} 
+\usepackage[short,nodayofweek,level,12hr]{datetime} 
+%\usepackage{cite}
+%\usepackage{wrapfig}
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\newcommand{\e}{\epsilon}
+\newcommand{\dl}{\delta}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\describe}[2]{\underbrace{#2}_{\text{#1}}}% \describe{}{} - First bracket is for description 
+%\describe{$\substack{this \ is \ substacking}$}{b} - To split the description over multiple lines
+\newcommand{\vect}[1]{\underline{#1}}
+\newcommand{\uvect}[1]{\hat{#1}}
+\newcommand{\1}{\vect{1}}
+\newcommand{\grad}{\nabla}
+\newcommand{\curl}[1]{\nabla\wedge\vect{#1}}
+\newcommand{\divg}[1]{\nabla\cdot\vect{#1}}
+\newcommand{\RA}{\Rightarrow}
+\newcommand{\DX}{\Delta(\vect X)}
+\newcommand{\DXp}{\Delta(\vect X')}
+\newcommand{\x}{\vect x}
+\newcommand{\xp}{\vect x'}
+\newcommand{\smalltag}[1]{\tag{\footnotesize{#1}}}
+\newcommand{\bcdot}{\boldsymbol{\cdot}}
+
+\title{Velocity Field due to Singular Distributions of Vorticity - The Circular Line Vortex}
+\date{\displaydate{date}}
+\newdate{date}{23}{10}{2018}
+\author{}
+
+\begin{document}
+\maketitle
+\section*{Overview}
+
+\section{Streamlines due to a circular line vortex}
+
+The expression for velocity field and streamlines of a circular line vortex was determined in the previous lecture. By considering certain special values of the streamfunction we can visualize the streamlines in the entire domain. $\psi_s = 0$ gives the streamline at $r=0$, which is just the axis of the ring. Aswe get closer to the ring, $\psi_s \to \infty$. Since, the difference between streamfunctions gives the flux, we have that there is an infinite flux of fluid passing through the ring, owing to the infinite velocity at the ring. The velocity at the axis of the ring decays as $u_z \propto 1/z^3$ for $z \gg R$.
+
+In the limit $R\to 0$, we get the velocity field due to an infinitesimal line vortex. The Stokes streamfunction for this case is given by $\psi_s \propto \frac{\sin^2\theta}{r}$, which is analogous to the Stokes streamfunction for a translating sphere. Therefore, the infinitesimal vortex ring generates a velocity field akin to a potential dipole.
+
+\subsection{Vortex stretching in axisymmetric flows without swirl}
+
+In $2D$, the inviscid incompressible vorticity equation reduces to 
+\begin{align*}
+&\frac{D\omega_3}{Dt} = 0
+\end{align*}
+assuming the motion to be in $x_1-x_2$ plane. This equation states that the vorticity ($\omega_3$) is just convected as a passive scalar. Convection implies that $\omega_\phi$ remains constant along the streamlines and therefore we can write $\omega_\phi = \psi$ (since $D\psi/Dt$ is zero by definition - streamfunction doesn't change along streamlines). More generally, we can write $\omega_\phi = f(\psi)$, for an arbitrary function $f(\psi)$.
+
+In $3D$ axisymmetric flows without swirl, the equation in the $\phi$ coordinate gives
+\begin{align*}
+&\frac{D\omega_\phi}{Dt} = \vect \omega \bcdot \grad \vect u\\
+\RA&\pd{\omega_\phi}{t} + u_r\pd{\omega_\phi}{r} + u_z\pd{\omega_\phi}{z} = \omega \1_\phi \bcdot \grad \vect u \bcdot \1_\phi
+\end{align*}
+The RHS can be simplified as
+\begin{align*}
+&\omega \1_\phi \bcdot \grad \vect u \bcdot \1_\phi = \omega_\phi \bigg( \frac{1}{r} \frac{\partial}{\partial \phi}(u_r\1_r + u_z\1_z)\bigg) \bcdot \1_\phi = \frac{u_r\omega_\phi}{r}
+\end{align*}.
+Therefore, even though $u_\phi = 0$ and the $\phi$ derivatives vanish, the $\1_{\phi \phi}$ component of the rate of strain tensor is non-zero.
+Substituting this in the above equation gives
+\begin{align*}
+&\pd{\omega_\phi}{t} + u_r\bigg(\pd{\omega_\phi}{r} + \frac{\omega_\phi}{r}\bigg)+ u_z\pd{\omega_\phi}{z} = 0\\
+\RA&\frac{D(\omega_\phi/r)}{Dt} = 0\\
+\RA&\frac{\omega_\phi}{r} = f(\psi_s)\\
+\RA&\omega_\phi = r f(\psi_s)
+\end{align*}
+where $r$ is the distance from the axis of symmetry. This demonstrates the effect of vortex stretching. Since $\omega_\phi/r$ remains constant, it implies that $\omega_\phi$ must increase in proportion to the radial distance of the fluid element from the axis. 
+
+
+\section{Motion of a circular line vortex}
+
+A circular line vortex induces a flow onto itself. We can determine the velocity of propagation of the ring if we can evaluate the velocity induced by the ring at any point on the ring itself. Let $a$ be the radius of the core of the ring and $R$ be the radius of the ring. Assuming $a/R \ll 1$ (thin ring approximation) and the circulation $\kappa = \omega_\phi \cdot \pi a^2$, we can proceed as follows.
+
+Let $\xp$ be a point on the ring and $s$ its distance from any neighbouring point along the arc-length of the ring. The key physical argument here is that the self induced flow responsible for propoagation of the ring comes mainly due to neighbouring elements of the ring and not from the diametrically opposite ones, as one might intuitively imagine. Drawing tangents at two nearby points and observing the flow induced by the corresponding elements makes this idea clear.
+
+In order to include the contribution from nearby elements, we expand about $\xp$ for small $s$
+\begin{align*}
+&\xp (s) = s\frac{d\xp}{ds}\bigg|_{s=0} + \frac{s^2}{2} \frac{d^2\xp}{ds^2}\bigg|_{s=0} + O(s^3)\\
+\RA& \xp (s) = s \vect t + \frac{s^2}{2} \frac{\vect n}{r} + O(s^3)
+\end{align*}
+Using
+\begin{align*}
+&\vect u(\x) = \frac{\kappa}{4 \pi} \oint \frac{dl(\xp) \wedge (\x - \xp)}{|\x-\xp|^3}
+\end{align*}
+where $dl(\xp) = ds(\vect t + \vect n s/R)$, $\x = a\cos\phi \vect b + a\sin\phi \vect n$ where  $\vect b$ is the binormal vector in the $(\vect t, \vect n, \vect b)$ coordinates. This allows us to conclude that the velocity induced by the circular line vortex, $\vect u(\x)$ is
+\begin{align*}
+&\vect u(\x) = \frac{\kappa}{2\pi a}(-\cos\phi \vect n + \sin\phi \vect b) + \frac{\kappa}{4\pi R} \log\bigg(\frac{R}{a}\bigg) \vect b
+\end{align*}
+which gives us the velocity of propagation of a thin vortex ring.
+
+\section{Appendix}
+\subsection{Volume entrained in a circular line vortex}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
