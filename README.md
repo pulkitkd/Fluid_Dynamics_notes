@@ -1,7 +1,7 @@
 # Fluid_Dynamics_notes
 (currently being updated)
 
-Notes from a graduate course in Fluid Mechanics. There are several instances where a cogent explanation is lacking, not least due to a complete absence of diagrams. Hopefully, these issues will be resolved over time.
+Notes from graduate course in Fluid Mechanics. There are several instances where a cogent explanation is lacking, not least due to a complete absence of diagrams. Hopefully, these issues will be resolved over time.
 
 Lecture 15 - Kinematics: Local Linear Flows
 
